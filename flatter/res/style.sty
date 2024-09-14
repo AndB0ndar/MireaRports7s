@@ -10,9 +10,21 @@
 
 \usepackage[none]{hyphenat} % no word breaks
 
+% font
+%-----------------------------------------------------------------------
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\setsansfont{Arial}
+\setmonofont{Courier New}
+%-----------------------------------------------------------------------
 
 \frenchspacing
+
+\usepackage{setspace}
+\onehalfspacing
+
 \pagestyle{plain}
+
 
 \usepackage[left=3cm, right=1.5cm, vmargin=2cm]{geometry}
 \linespread{1.5} % line spacing 1.5
@@ -20,12 +32,8 @@
 \setlength{\parindent}{1.25cm}
 \sloppy
 
-\usepackage{setspace}
-\onehalfspacing
-
 % section size
 \usepackage{titlesec}
-
 \titleformat{\chapter}[block]
   {\fontsize{18pt}{22pt}\bfseries}
   {\chaptertitlename\ \thechapter.}{0.5em}{}
@@ -40,6 +48,7 @@
 \usepackage{graphicx}
 
 \usepackage{amsmath}
+
 \usepackage{listings}
 \lstset{
 	basicstyle=\ttfamily\footnotesize,
@@ -65,10 +74,9 @@
 	breakautoindent=true,
 }
 
-\usepackage{longtable}
-
 \usepackage{pdfpages}
 
+% links
 \usepackage{hyperref}
 \hypersetup{
     colorlinks=true,
@@ -77,6 +85,7 @@
     urlcolor=blue,
 }
 
+% enumerate
 \usepackage{enumitem}
 \setlist{nosep}
 \setlist[itemize]{
@@ -114,13 +123,15 @@
 %\setlength{\abovecaptionskip}{3pt}
 %\setlength{\belowcaptionskip}{3pt}
 
+\usepackage{longtable}
+
 \newenvironment{image}{
 	\begin{figure}[h!tp]
 	\centering
 }{
 	\end{figure}
 }
-\newcommand\includegrph[2][width=0.7\textwidth]{\includegraphics[#1]{#2}}
+\newcommand\includegrph[2][width=0.8\textwidth]{\includegraphics[#1]{#2}}
 
 % new command for sections
 \newcommand\Chapter[1]{

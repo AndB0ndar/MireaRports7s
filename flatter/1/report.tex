@@ -40,19 +40,145 @@
 	\label{fig:install:platform}
 \end{image}
 
+После перехода на страницу с инструкциями по установке
+Flutter SDK требуется произвести указанные действия
+и установить Flutter SDK на рабочую машину
+и переменную окружения с путем до установленной Flutter SDK.\par
+Для установки Flutter нужно загрузить установочный архив,
+чтобы получить последнюю стабильную версию Flutter SDK (версия 3.24.3).\par
+После установки нужно извлечь файл в каталог,
+в котором мы хотим сохранить Flutter SDK (Рисунок~\ref{fig:install:unpack}).
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-14 14-29-02}
+	\caption{Установка Flutter SDK в каталог}
+	\label{fig:install:unpack}
+\end{image}
+
+Чтобы запускать команды Flutter в терминале,
+нужно добавить Flutter в переменную среды PATH
+(Рисунок~\ref{fig:install:path}).
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-14 14-34-08}
+	\caption{Добавление путь до Flatter SDK в переменную среды}
+	\label{fig:install:path}
+\end{image}
+
 \section{Установка интегрированной среды разработки Android Studio}
 
 В начале инструкций по установке Flutter SDK находится перечень предлагаемых
 для взаимодействия интегрированных сред разработки.\par
 Для выполнения практических работ предлагается использовать Android Studio,
 так как она позваляет проще взаимодействовать с Android устройствами.\par
-Для установке Android Studio воспользуемся магазином приложений Ubuntu
-(Рисунок~\ref{fig:install:android}).
+
+Установим новейшую версию Android Studio (версии 2024.1.2.12 Koala)
+с официального сайта (Рисунок~\ref{fig:android:site}).
 
 \begin{image}
-	\includegrph{Screenshot from 2024-09-07 10-01-33}
-	\caption{Установка Android Studio}
-	\label{fig:install:android}
+	\includegrph{Screenshot from 2024-09-14 15-49-53}
+	\caption{Официальный сайт Android Studio}
+	\label{fig:android:site}
+\end{image}
+
+Для установки скачиваем архив и распаковываем его в нужную директории.
+В данном случае \textit{/opt/} для общего пользования.
+После этого Android Studio будет даступно по команде:
+\texttt{./opt/android-studio/bin/studio.sh}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-14 15-00-02}
+	\caption{Установка Android Studio в системный каталог}
+	\label{fig:android:opt}
+\end{image}
+
+
+После скачивания скрипта начнем процесс установки
+(Рисунок~\ref{fig:android:sdk}).
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-14 15-00-32}
+	\caption{Установка Android SDK}
+	\label{fig:android:sdk}
+\end{image}
+
+Далее нам будет предложено выбрать нужные компоненты для установки
+(Рисунок~\ref{fig:android:sdk:components}),
+выберем их все и перейдем на следующий экран.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-14 15-00-39}
+	\caption{Установка SDK Components}
+	\label{fig:android:sdk:components}
+\end{image}
+
+Затем нам предложат проверить установку (Рисунок~\ref{fig:android:verify}),
+выберем их все и перейдем на следующий экран.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-14 15-00-54}
+	\caption{Проверка установки}
+	\label{fig:android:verify}
+\end{image}
+
+Следующим экраном является лицензионное соглашение
+(Рисунок~\ref{fig:android:license}), принимаем все условия.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-14 15-01-01}
+	\caption{Лицензионное соглашение}
+	\label{fig:android:license}
+\end{image}
+
+В результате установки Android Studio Setup Wizard
+нас встречает окно приветствия Android Studio
+(Рисунок~\ref{fig:android:start}).
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-14 15-03-26}
+	\caption{Окно Android Studio}
+	\label{fig:android:start}
+\end{image}
+
+Теперь сконфигурируем Android эмулятор для работы.
+Откроем Device Manager (Рисунок~\ref{fig:android:device:manager})
+и создадим новый эмулятор.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-14 15-07-43}
+	\caption{Device Manager}
+	\label{fig:android:device:manager}
+\end{image}
+
+В качестве устройства выберем Medium Phone
+(Рисунок~\ref{fig:android:device:manager:phone}),
+указав это название в поисковой строке.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-14 15-07-57}
+	\caption{Выбор устройства}
+	\label{fig:android:device:manager:phone}
+\end{image}
+
+В качестве образа выберем API 35
+(Рисунок~\ref{fig:android:device:manager:api}).
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-14 15-09-50}
+	\caption{Выбор образа}
+	\label{fig:android:device:manager:api}
+\end{image}
+
+После выбора 35 API мы перейдем на конечный экран
+(Рисунок~\ref{fig:android:device:manager:res}),
+с просмотром всех характеристик эмулятора.
+Здесь также можно изменить некоторые параметры в виде названия
+или внутри Advanced Settings.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-14 15-09-55}
+	\caption{Результирующий экран создания эмулятора}
+	\label{fig:android:device:manager:res}
 \end{image}
 
 \section{Установка браузера Google Chrome}
@@ -60,7 +186,7 @@
 Для корректной работы с Web платформой потребуется установленный
 на рабочей машине один из общедоступных браузеров.
 В связи с тем, что Flutter был разработан компанией Google,
-то SDK предлагает установить Google Chrome
+то SDK предлагает установить Google Chrome (версия 128.0.6613.119-1)
 для корректной работы с Web платформой (Рисунок~\ref{fig:install:chrome}).
 
 \begin{image}
@@ -71,8 +197,27 @@
 
 \section{Установка и настройка требуемых расширений для Android Studio}
 
-Когда среда разработки будет успешно установлена требуется
-установить расширение для корректной работы с Flutter SDK
+Чтобы создавать приложения для Android с помощью Flutter,
+нужно установить следующие компоненты Android.
+
+\begin{itemize}
+	\item Android SDK Build-Tools, API 35.0.1;
+	\item Android SDK Command-line Tools;
+	\item Android SDK Platform-Tools;
+	\item Android Emulator;
+\end{itemize}
+
+Чтобы установить эти компоненты нужно перейти в SDK Manager
+(Рисунок~\ref{fig:android:sdk:manager}). 
+
+\begin{image}
+	\includegrph[scale=0.4]{Screenshot from 2024-09-14 15-14-43}
+	\caption{SDK Manager}
+	\label{fig:android:sdk:manager}
+\end{image}
+
+Далее нужно установить плагин Flutter и Dart.
+Сделаем это через среду Android Studio через вкладку Plugins
 (Рисунок~\ref{fig:android:plugin}).
 
 \begin{image}
@@ -80,7 +225,6 @@
 	\caption{Flutter плагин для Android}
 	\label{fig:android:plugin}
 \end{image}
-
 
 Так же после завершения всех настроек Android Studio,
 требуется пройти процедуру, связанную с соглашением на использование
@@ -101,7 +245,7 @@ Android SDK командой \verb|flutter dockor --android-licenses|
 (Рисунок~\ref{fig:flutter:dockor}).
 
 \begin{image}
-	\includegrph{Screenshot from 2024-09-07 10-00-35}
+	\includegrph[scale=0.375]{Screenshot from 2024-09-07 10-00-35}
 	\caption{Вызов flutter dockor}
 	\label{fig:flutter:dockor}
 \end{image}
@@ -126,14 +270,21 @@ Android SDK командой \verb|flutter dockor --android-licenses|
 Если же до этого уже был открыт другой проект,
 то требуется открыть пункт меню <<File>>, в нем <<New>>
 и в нем <<New Flutter project>>.\par
-После чего среда разработки может попросить указать маршрут до Flutter SDK
+После чего среда разработки может попросить указать маршрут
+до Flutter SDK (Рисунок~\ref{fig:project:flutter})
 и после попросит заполнить данные о проекте
-(Рисунок~\ref{fig:setting:project}).
+(Рисунок~\ref{fig:project:settings}).
 
 \begin{image}
-	\includegrph{Screenshot from 2024-09-13 20-15-47}
+	\includegrph[scale=0.4]{Screenshot from 2024-09-14 15-03-40}
+	\caption{Выбор маршрута до SDK}
+	\label{fig:project:flutter}
+\end{image}
+
+\begin{image}
+	\includegrph[scale=0.4]{Screenshot from 2024-09-14 15-04-15}
 	\caption{Настройка проекта}
-	\label{fig:setting:project}
+	\label{fig:project:settings}
 \end{image}
 
 В данных о проекте находится следующая информация:
@@ -151,7 +302,14 @@ Android SDK командой \verb|flutter dockor --android-licenses|
 \end{itemize}
 
 Когда все значения установлены, можно нажимать клавишу <<Create>>
-и ожидать создание и индексации нового тестового проекта.
+и ожидать создание и индексации нового тестового проекта
+(Рисунок~\ref{fig:project}).
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-14 20-19-00}
+	\caption{Созданный проект}
+	\label{fig:project}
+\end{image}
 
 \section{Запуск проекта}
 
