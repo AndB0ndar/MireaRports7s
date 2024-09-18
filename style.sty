@@ -56,14 +56,19 @@
 % for graphics
 \usepackage{graphicx}
 \newcommand{\rref}[1]{(Рисунок~\ref{#1})}
+\newcommand{\rdref}[2]{(Рисуноки~\ref{#1}\,-\,\ref{#2})}
 \newcommand{\tref}[1]{(Таблица~\ref{#1})}
+\newcommand{\tdref}[2]{(Таблици~\ref{#1}\,-\,\ref{#2})}
 \newenvironment{image}{
 	\begin{figure}[h!tp]
 	\centering
 }{
 	\end{figure}
 }
-\newcommand\includegrph[2][width=0.6\textwidth]{\includegraphics[#1]{#2}}
+\newcommand\includegrph[2][width=0.8\textwidth]{\includegraphics[#1]{#2}}
+
+\usepackage{amsmath} % more flexibility equations (use in title!!!)
+\usepackage{pdfpages} % include pdf
 
 % listings
 \usepackage{listings}
@@ -90,9 +95,6 @@
     extendedchars=true,
 	breakautoindent=true,
 }
-
-\usepackage{amsmath} % more flexibility equations (use in title!!!)
-\usepackage{pdfpages} % include pdf
 
 % ----------------------------------------------------------------------------
 % HYPERREF SETTINGS

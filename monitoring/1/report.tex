@@ -1,62 +1,226 @@
 \section*{ЦЕЛЬ ПРАКТИЧЕСКОЙ РАБОТЫ}
 \addcontentsline{toc}{section}{ЦЕЛЬ ПРАКТИЧЕСКОЙ РАБОТЫ}
 
-План практической работы:
-\begin{itemize}
-	\item Установка фреймворка Flutter
-		и окружения для языка программирования Dart;
-	\item Установка интегрированной среды разработки Android Studio;
-	\item Установка браузера Google Chrome;
-	\item Установка и настройка требуемых расширений для Android Studio;
-	\item Проверка корректности настройки системы;
-	\item Создание проекта
-	\item Запуск его на трех платформах:
-		Android (эмулятор или реальное устройство), Windows и Web.
-\end{itemize}
+Zabbix --- это универсальный инструмент мониторинга, способный
+отслеживать динамику работы серверов и сетевого оборудования, быстро
+реагировать на внештатные ситуации и предупреждать возможные проблемы
+с нагрузкой.
+Система мониторинга Zabbix может собирать статистику в
+указанной рабочей среде и действовать в определенных случаях заданным
+образом.
+Zabbix бесплатен.
+Zabbix написан и распространяется под лицензией
+GPL General Public License версии 2.
+Это означает, что его исходный код
+свободно распространяется и доступен для неограниченного круга лиц
+
+\textbf{Цель работы} --- познакомится с системой мониторинга
+инфраструктуры Zabbix.
 
 \clearpage
 
 \section*{ВЫПОЛНЕНИЕ ПРАКТИЧЕСКОЙ РАБОТЫ}
 \addcontentsline{toc}{section}{ВЫПОЛНЕНИЕ ПРАКТИЧЕСКОЙ РАБОТЫ}
-\section{Установка фреймворка Flutter и окружения для языка программирования Dart}
-При создании распределенных или клиент-серверных приложений
-требуется визуализировать сетевую инфраструктуру программной системы.\par
+
+\section{Описание используемого программного обеспечения
+и сетевая топология его развертывания}
+
+Для выполнения практической работы был создан \texttt{docker-compose} файл.
+В нутри него определена сеть \texttt{zabbix-net} для видимости контейнеров
+между собой.
+
+\lstinputlisting{1/src/docker-compose.yml}
+
+Zabbix server развернут в контейнере \texttt{zabbix-server-pgsql}
+Также для него потребуется создать контейнер с базой данных, она
+развернута в контейнере \texttt{postgres-server}.\par
+Агент развернут в контейнере \texttt{zabbix-agent}.
+Но для проведения проверочного тестирования образ был модифицирован утилитами
+в \texttt{Dockerfile}.
+
+\lstinputlisting{1/src/Dockerfile}
+
+Также создан контейнер \texttt{zabbix-web-nginx-pgsql} для создания
+удобного web-интерфейса к данным Zabbix server.
+
+\section{Настройка системы мониторинга и описание собираемых параметров.
+Описание параметров мониторинга и целей, на которое оно направлено.}
+
+\subsection{Настройка хост-машины с Zabbix agent и создание дашборд}
+
+Настроим соединение с агентом, выбрав адрес DNS и порт \rref{fig:host-conf}.
 
 \begin{image}
-	%\includegrph{Screenshot from 2023-05-24 13-20-11}
-	\caption{Диаграмма компонентов}
-	\label{fig:deployments}
+    \includegrph{Screenshot from 2024-09-11 19-16-43}
+    \caption{Соединение с агентом}
+    \label{fig:host-conf}
+\end{image}
+
+На главном экране видим успешное соединение \rref{fig:main-dash-board}.
+
+\begin{image}
+    \includegrph{Screenshot from 2024-09-11 19-16-57}
+    \caption{Успешное соединение}
+    \label{fig:main-dash-board}
+\end{image}
+
+Добавим метрики чтения с диска и записи
+(Рисунки \ref{fig:read-conf}-\ref{fig:write-conf}).
+
+\begin{image}
+    \includegrph{Screenshot from 2024-09-11 19-17-31}
+    \caption{Чтение с диска}
+    \label{fig:read-conf}
+\end{image}
+
+\begin{image}
+    \includegrph{Screenshot from 2024-09-11 19-17-37}
+    \caption{Запись на диск}
+    \label{fig:write-conf}
+\end{image}
+
+Далее создадим дашборд с графиком cpu.
+Выбираем вид статистики и ее название,
+а также хост и его метрики \rref{fig:cpu}.
+
+\begin{image}
+    \includegrph{Screenshot from 2024-09-11 18-55-20}
+    \caption{Создание графика cpu}
+    \label{fig:cpu}
+\end{image}
+
+Повторяем аналогичные действия для всех нужных нам параметров.
+И получаем итоговый дашборд.
+
+\begin{image}
+    \includegrph{Screenshot from 2024-09-11 19-17-57}
+    \caption{Итоговый дашборд}
+    \label{fig:all:dash-board}
+\end{image}
+
+\subsection{Статисткика на исследуемой машине}
+
+Подключаемся к необходимому контейнеру с помощью команды
+\texttt{docker exec -ti zabbix-agent bash} и запускаем команды.
+Вместо iotop был запущен iostat.
+
+\begin{image}
+    \includegrph{Screenshot from 2024-09-16 15-21-37}
+    \caption{htop}
+    \label{fig:htop}
+\end{image}
+
+\begin{image}
+    \includegrph{Screenshot from 2024-09-16 15-22-11}
+    \caption{iostat}
+    \label{fig:iostat}
+\end{image}
+
+\section{Симуляция нагрузки на систему.
+Анализ полученных в ходе работы результатов.}
+
+Для теста cpu была запущенна команда
+(Рисунки~\ref{fig:test:cpu}\,-\,\ref{fig:test:cpu:zab}):
+\begin{lstlisting}[language=bash]
+stress-ng --cpu 16 --cpu-method matrixprod --metrics --timeout 60
+\end{lstlisting}
+
+\begin{image}
+    \includegrph{test_cpu_htop}
+    \caption{cpu в контейнере}
+    \label{fig:test:cpu}
+\end{image}
+
+\begin{image}
+    \includegrph{test_cpu}
+    \caption{cpu в zabbix}
+    \label{fig:test:cpu:zab}
 \end{image}
 
 
-\section{Установка интегрированной среды разработки Android Studio}
-\section{Установка браузера Google Chrome}
-\section{Установка и настройка требуемых расширений для Android Studio}
-\section{Проверка корректности настройки системы}
-\section{Создание проекта}
-\section{Запуск его на трех платформах: Android (эмулятор или реальное устройство), Windows и Web}
-\section{Создание диаграммы развертывания}
+Для теста ram была запущенна команда
+(Рисунки~\ref{fig:test:ram}\,-\,\ref{fig:test:ram:zab}):
+\begin{lstlisting}[language=bash]
+stress-ng --sequential 0 --class memory --timeout 60s --metrics-brief
+\end{lstlisting}
+
+\begin{image}
+    \includegrph{test_ram_htop}
+    \caption{ram в контейнере}
+    \label{fig:test:ram}
+\end{image}
+
+\begin{image}
+    \includegrph{test_ram}
+    \caption{ram в zabbix}
+    \label{fig:test:ram:zab}
+\end{image}
+
+Для теста disk была запущенна команда
+(Рисунки~\ref{fig:test:io}\,-\,\ref{fig:test:io:zab}):
+\begin{lstlisting}[language=bash]
+stress-ng --sequential 0 --class io --timeout 60s --metrics-brief
+\end{lstlisting}
+
+\begin{image}
+    \includegrph{test_io_htop}
+    \caption{disk в контейнере}
+    \label{fig:test:io}
+\end{image}
+
+\begin{image}
+    \includegrph{test_io}
+    \caption{disk в zabbix}
+    \label{fig:test:io:zab}
+\end{image}
 
 \clearpage
 
-\section*{Ответы на вопросы}
-\addcontentsline{toc}{section}{Ответы на вопросы}
-
-\begin{description}
-	\item [Какова роль диаграмм развертывания в проектировании
-		информационных систем?]
-		\textbf{Диаграмма развертывания (deployment diagram)} предназначена
-	\item [Какие группы специалистов участвуют в разработке диаграмм
-		развертывания?]
-		Разработчики диаграммы:
-		\begin{itemize}
-			\item Системные аналитики;
-		\end{itemize}
-\end{description}
+\section*{\LARGE Вывод}
+\addcontentsline{toc}{section}{Вывод}
+В ходе работы были настроены контейнеры с помощью docker-compose,
+на одном из которых установлен Zabbix server
+и подключеннный к нему контейнер с базой данных PostgreSQL,
+а на другом --- Zabbix agent. Также контейнер c nginx для web-интерфейса.
+Агент передавал метрики на сервер,
+на котором через web-интерфейс был создан дашборд с основными показателями:
+утилизация CPU, RAM, диска, и время операций чтения/записи.\par
+Для локального мониторинга на исследуемой машине использовались htop и iotop.
+Проведены стресс-тесты на CPU, RAM и диск с помощью stress-ng.
+Сравнение локальных метрик с данными Zabbix показало их соответствие
+и корректную работу системы мониторинга.
 
 \clearpage
 
-\section*{ВЫВОД}
-\addcontentsline{toc}{section}{ВЫВОД}
-Мы создали диаграмму развертывания.\par
+\section{Ответы на контрольные вопросы}
+\subsection{Мониторинг SLA}
+SLA (Service Level Agreement) — это соглашение о предоставлении сервиса с определённым уровнем качества между провайдером и клиентом. Мониторинг SLA включает:
+- Отслеживание фактических показателей сервиса в сравнении с SLO.
+- Выявление нарушений SLA (например, время простоя, превышение допустимого времени отклика).
+- Генерация отчетов о соответствии SLA для предоставления клиентам или руководству.
 
+\subsection{Развертывание системы в случае с безагентским мониторингом}
+Безагентский мониторинг в Zabbix означает, что для сбора данных не требуется установка агента на устройстве. Вместо этого используется:
+- SNMP (Simple Network Management Protocol) — для мониторинга сетевых устройств.
+- IPMI (Intelligent Platform Management Interface) — для мониторинга оборудования серверов.
+- HTTP-запросы — для проверки веб-приложений и API.
+- SSH и Telnet — для подключения к серверам и выполнения команд.
+
+Безагентский мониторинг упрощает внедрение, особенно при работе с устройствами, на которые невозможно установить агенты.
+
+\subsection{Понятие метрики (показателя) в инфраструктуре. SLI}
+Метрика или Service Level Indicator (SLI) — это количественный показатель, который используется для измерения производительности и доступности ИТ-инфраструктуры. Это конкретная метрика, отражающая уровень качества услуги (например, время отклика, процент успешных запросов, время простоя). SLI представляет собой измерение фактического состояния системы, которое помогает отслеживать и оценивать её работу.
+
+Примеры SLI:
+- Время отклика на запросы.
+- Доступность системы (например, процент времени без простоев).
+- Пропускная способность сети.
+
+\subsection{Понятие критерия при мониторинге инфраструктуры. SLO}
+Service Level Objective (SLO) — это целевое значение метрики, к которому стремится система. Это соглашение или внутренняя цель между бизнесом и ИТ, которая определяет минимальный приемлемый уровень сервиса для определённого времени.
+
+Примеры SLO:
+- Доступность системы на уровне 99.9% в месяц.
+- Среднее время отклика веб-сервера не более 200 мс.
+
+SLO помогает устанавливать реалистичные ожидания и определять, когда система не справляется с поддержанием необходимого качества.
