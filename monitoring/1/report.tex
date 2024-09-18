@@ -119,8 +119,8 @@ Zabbix server развернут в контейнере \texttt{zabbix-server-p
 \section{Симуляция нагрузки на систему.
 Анализ полученных в ходе работы результатов.}
 
-Для теста cpu была запущенна команда
-(Рисунки~\ref{fig:test:cpu}\,-\,\ref{fig:test:cpu:zab}):
+Для теста cpu была запущенна команда \rdref{fig:test:cpu}{fig:test:cpu:zab}.
+
 \begin{lstlisting}[language=bash]
 stress-ng --cpu 16 --cpu-method matrixprod --metrics --timeout 60
 \end{lstlisting}
@@ -138,8 +138,8 @@ stress-ng --cpu 16 --cpu-method matrixprod --metrics --timeout 60
 \end{image}
 
 
-Для теста ram была запущенна команда
-(Рисунки~\ref{fig:test:ram}\,-\,\ref{fig:test:ram:zab}):
+Для теста ram была запущенна команда \rdref{fig:test:ram}{fig:test:ram:zab}.
+
 \begin{lstlisting}[language=bash]
 stress-ng --sequential 0 --class memory --timeout 60s --metrics-brief
 \end{lstlisting}
@@ -156,8 +156,8 @@ stress-ng --sequential 0 --class memory --timeout 60s --metrics-brief
     \label{fig:test:ram:zab}
 \end{image}
 
-Для теста disk была запущенна команда
-(Рисунки~\ref{fig:test:io}\,-\,\ref{fig:test:io:zab}):
+Для теста disk была запущенна команда \rdref{fig:test:io}{fig:test:io:zab}.
+
 \begin{lstlisting}[language=bash]
 stress-ng --sequential 0 --class io --timeout 60s --metrics-brief
 \end{lstlisting}
@@ -173,6 +173,25 @@ stress-ng --sequential 0 --class io --timeout 60s --metrics-brief
     \caption{disk в zabbix}
     \label{fig:test:io:zab}
 \end{image}
+
+\break
+
+Исходя из получаем результатов запущенных тестов можно заметить, что
+утилита htop предоставляет данные в реальном времени,
+показывая список процессов, использование CPU, памяти, свопа
+и другие системные метрики на уровне конкретной машины.
+Она позволяет фильтровать процессы и управлять ими,
+что делает её удобной для диагностики и решения проблем "здесь и сейчас".
+Этот инструмент идеально подходит для ситуаций,
+когда нужно быстро оценить состояние системы
+и принять меры на локальном уровне.\par
+В отличие от htop, Zabbix --- это полноценная система мониторинга,
+которая собирает и отображает данные за длительные периоды.
+Zabbix позволяет строить графики для различных метрик,
+отслеживать тренды и анализировать изменения производительности систем и сетей.
+Этот инструмент особенно полезен в крупных инфраструктурах,
+где необходимо контролировать множество серверов и устройств,
+а также настраивать оповещения на основе предустановленных триггеров.
 
 \clearpage
 

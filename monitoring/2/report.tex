@@ -1,0 +1,328 @@
+\section*{ЦЕЛЬ ПРАКТИЧЕСКОЙ РАБОТЫ}
+\addcontentsline{toc}{section}{ЦЕЛЬ ПРАКТИЧЕСКОЙ РАБОТЫ}
+
+Prometheus --- это система мониторинга и сбора метрик,
+разработанная для обеспечения надежности и производительности приложений.
+Она использует модель временных рядов для хранения данных
+и поддерживает язык запросов PromQL для анализа метрик.
+
+Ключевые особенности:
+
+\begin{itemize}
+	\item Сбор метрик: Регулярный пулл данных с различных источников.
+	\item PromQL: Язык для создания запросов и анализа метрик.
+	\item Гибкость: Масштабируемая и интегрируемая
+		с инструментами визуализации, такими как Grafana.
+	\item Алертинг: Настройка оповещений через Alertmanager
+		для мониторинга критических состояний.
+\end{itemize}
+
+Prometheus помогает эффективно отслеживать состояние систем
+и принимать меры для их оптимизации и поддержания.
+
+\textbf{Цель работы} --- познакомится с системой мониторинга
+и сбора метрик Prometheus.
+
+\clearpage
+
+\section*{ВЫПОЛНЕНИЕ ПРАКТИЧЕСКОЙ РАБОТЫ}
+\addcontentsline{toc}{section}{ВЫПОЛНЕНИЕ ПРАКТИЧЕСКОЙ РАБОТЫ}
+
+\section{Описание тестового стенда,
+	листинги Dockerfile, docker-compose.yml, prometheus.yml,
+	исходного кода web-приложения}
+
+\subsection{Web-приложение на FastAPI с метриками Prometheus}
+
+Создал новый Python-проект и установил нужные библиотеки:
+\texttt{fastapi}, \texttt{uvicorn}, \texttt{prometheus-fastapi-instrumentator}.
+
+\lstinputlisting[
+	language=Python, caption=\leftline{Код приложения}
+	]{2/src/main.py}
+
+Это простейшее FastAPI-приложение с одним маршрутом \texttt{"/"} 
+и встроенным сбором метрик Prometheus через библиотеку
+\texttt{prometheus-fastapi-instrumentator}.
+
+\subsection{Dockerfile}
+
+Создал файл Dockerfile для сборки контейнера с приложением.
+
+\lstinputlisting[caption=\leftline{Dockerfile}]{2/src/Dockerfile}
+
+\subsection{prometheus.yml}
+
+Создал файл \texttt{prometheus.yml},
+в котором будут указаны адреса FastAPI-приложения и cAdvisor.
+
+\lstinputlisting[caption=\leftline{prometheus.yml}]{2/src/prometheus.yml}
+
+В нем указаны:
+
+\begin{itemize}
+	\item \textbf{fastapi-app}: адрес FastAPI-приложения,
+		которое собирает метрики на \texttt{/metrics};
+	\item \textbf{cadvisor}: адрес cAdvisor,
+		который собирает метрики о контейнерах;
+	\item \textbf{scrape\_interval}: интервал сбора метрик 15 секунд.
+\end{itemize}
+
+\subsection{docker-compose.yml}
+
+Для запуска 4 контейнеров (Web-приложение, cAdvisor, Prometheus и Grafana)
+с помощью Docker Compose, нужно создать\texttt{docker-compose.yml} 
+с конфигурацией для всех указанных сервисов.
+
+\lstinputlisting[
+	caption=\leftline{docker-compose.yml}
+	]{2/src/docker-compose.yml}
+
+Стоит отметить следующий особенности конфигурации:
+
+\begin{itemize}
+	\item К \textbf{cAdvisor (cadvisor)} монтируются системные директории
+		для сбора данных о контейнерах и хосте;
+	\item В \textbf{Prometheus (prometheus)}
+		используется внешний файл конфигурации prometheus.yml,
+		который был описан ранее;
+	\item Для \textbf{Grafana (grafana)}
+		создается постоянный том \texttt{grafana-storage}
+		для хранения данных Grafana;
+	\item Для всех контейнеров установлено ограничение на cpu и ram.
+\end{itemize}
+
+\subsection{Запуск контейнеров}
+
+Для запуска контейнеров используется команда \verb|docker-compose up --build|.
+После запуска будут доступны следующие сервисы:
+
+\begin{itemize}
+	\item FastAPI Web-приложение: \url{http://0.0.0.0:8000/hello};
+	\item cAdvisor: \url{http://0.0.0.0:8080};
+	\item Prometheus: \url{http://0.0.0.0:9090};
+	\item Grafana: \url{http://0.0.0.0:3000}.
+\end{itemize}
+
+
+\section{Скриншоты настроенного дашборда,
+	параметры проведения нагрузочного тестирования}
+
+\subsection{Grafana Dashboard}
+
+После того, как Grafana запущена, нужно добавить Prometheus
+в качестве источника данных \rdref{fig:data-source:add}{fig:prometheus:create}.
+
+\begin{image}
+    \includegrph{Screenshot from 2024-09-18 18-01-27}
+    \caption{Добавление Data Source}
+    \label{fig:data-source:add}
+\end{image}
+
+\begin{image}
+    \includegrph{Screenshot from 2024-09-18 19-00-02}
+    \caption{Настройка Prometheus}
+    \label{fig:prometheus:create}
+\end{image}
+
+Теперь можно создать дашборд с нужными графиками.\par
+Первый график будет отображать количество HTTP-запросов,
+поступивших на веб-приложение \rref{fig:graph:requests}.
+Для него используется метрика \verb|http_requests_total|.
+
+\begin{image}
+    \includegrph{Screenshot from 2024-09-18 19-02-11}
+    \caption{График с количеством HTTP-запросов}
+    \label{fig:graph:requests}
+\end{image}
+
+Вторым создадим график показывающий утилизацию CPU контейнера
+с веб-приложением, данные будут браться из cAdvisor \rref{fig:graph:cpu}.
+Для него используется метрика \verb|container_cpu_usage_seconds_total| 
+для контейнера с названием \verb|2_webapp_1|
+и возвращающая среднюю загрузку CPU за последнию минуту.
+
+\begin{image}
+    \includegrph{Screenshot from 2024-09-18 19-03-49}
+    \caption{График с утилизацией CPU контейнера с веб-приложением}
+    \label{fig:graph:cpu}
+\end{image}
+
+Последний график будет отображать утилизацию оперативной памяти контейнера
+с веб-приложением, данные также будут браться из cAdvisor \rref{fig:graph:ram}.
+Для него используется метрика \verb|container_memory_usage_bytes| 
+для контейнера с названием \verb|2_webapp_1|.
+Также значение дважды делится на 1024, чтобы перевести байты в мегабайты.
+
+\begin{image}
+    \includegrph{Screenshot from 2024-09-18 19-23-36}
+    \caption{График с утилизацией RAM контейнера с веб-приложением}
+    \label{fig:graph:ram}
+\end{image}
+
+После добавления всех графиков,
+сохраняем и дашборд с графиками теперь доступен для мониторинга запросов,
+использования CPU и RAM контейнера с веб-приложением.
+
+\begin{image}
+    \includegrph{Screenshot from 2024-09-18 19-24-07}
+    \caption{Полученый дашборд}
+    \label{fig:dashboard}
+\end{image}
+
+\subsection{Docker stats}
+
+Для независимого контроля утилизации ресурсов контейнеров,
+включая контейнер с web-приложением, можно использовать команду
+\texttt{docker stats} или \texttt{docker stats 2\_webapp\_1}
+для конкретного контейнера.
+Эта команда в реальном времени выводит статистику
+по каждому запущенному контейнеру \rref{fig:docker:stats}.
+
+\begin{image}
+    \includegrph{Screenshot from 2024-09-18 19-07-19}
+    \caption{Полученый дашборд}
+    \label{fig:docker:stats}
+\end{image}
+
+Вывод команды \texttt{docker stats} включает:
+
+\begin{itemize}
+	\item CPU --- процент использования CPU контейнером.
+	\item MEM USAGE / LIMIT --- объем используемой памяти и ее лимит.
+	\item MEM --- процент использования памяти от доступного лимита.
+	\item NET I/O --- количество данных, переданных и полученных по сети.
+	\item BLOCK I/O --- количество операций ввода-вывода с диском.
+	\item PIDS --- количество процессов в контейнере.
+\end{itemize}
+
+\section{Проведение нагрузочного тестирования, анализ полученных результатов}
+
+Для проведения нагрузочного тестирования web-приложения
+и определения максимума запросов который приложение может обработать до отказа
+будет используется Apache JMeter.
+
+\subsection{Установка Apache JMeter}
+
+Для установки приложения Apache JMeter в Ubuntu воспользуемся командой
+\texttt{sudo apt install jmeter} \rref{fig:jmeter:install}.
+
+\begin{image}
+    \includegrph{Screenshot from 2024-09-18 19-13-38}
+    \caption{Установка Apache JMeter}
+    \label{fig:jmeter:install}
+\end{image}
+
+\subsection{Настройка теста в JMeter}
+
+В начале нужно создать группу потоков.
+В нем настраиваем следующие параметры \rref{fig:jmeter:thread:group}:
+
+\begin{itemize}
+	\item \textbf{Number of Threads (Users)}:
+		количество виртуальных пользователей;
+	\item \textbf{Ramp-Up Period (in seconds)}: время,
+		за которое все потоки запустятся;
+	\item \textbf{Loop Count}: количество итераций для каждого потока.
+\end{itemize}
+
+\begin{image}
+    \includegrph{Screenshot from 2024-09-18 19-15-28}
+    \caption{Настройка группы потоков}
+    \label{fig:jmeter:thread:group}
+\end{image}
+
+Далее нужно добавить HTTP-запроса. В нем указываем 
+URL web-приложения, порт и путь к странице \rref{fig:jmeter:http}.
+
+\begin{image}
+    \includegrph{Screenshot from 2024-09-18 19-16-24}
+    \caption{Настройка HTTP-запроса}
+    \label{fig:jmeter:http}
+\end{image}
+
+Также нужены:
+
+\begin{itemize}
+	\item \texttt{HTTP Header Manager} для установки заголовков запроса.
+		В нем добавим заголовок Content-Type: application/json;
+	\item \texttt{Listener} для визуализации результатов тестирования.
+\end{itemize}
+
+\subsection{Анализ результатов}
+
+Максимальное количество запросов, которое приложение смогло обработать
+до отказа, составило \textbf{241815} запросов.
+При этом нагрузка на CPU контейнера
+с веб-приложением достигла значения \textbf{0.5 CPU},
+что свидетельствует о полном использовании доступных ресурсов процессора.\par
+После достижения данного уровня нагрузки приложение перестало отвечать
+на запросы и метрики перестали передаваться в Prometheus.
+
+\begin{image}
+    \includegrph{Screenshot from 2024-09-18 19-42-39}
+    \caption{Результаты тестирования}
+    \label{fig:run}
+\end{image}
+
+\clearpage
+
+\section*{\LARGE ВЫВОД}
+\addcontentsline{toc}{section}{ВЫВОД}
+
+В ходе практической работы было проведено нагрузочное тестирование
+веб-приложения, реализованного на FastAPI,
+с использованием Apache JMeter для измерения производительности
+и Prometheus/Grafana для мониторинга метрик системы.\par
+В ходе тестирования, было достигнут предельный уровнь нагрузки на приложение,
+после которого оно перестало отвечать на запросы
+и метрики перестали передаваться в Prometheus.
+
+\clearpage
+
+\section{Ответы на контрольные вопросы}
+
+\subsection{Возможности системы мониторинга Prometheus}
+
+Prometheus --- система мониторинга и сбора метрик,
+предоставляющая следующие возможности:
+
+\begin{itemize}
+	\item Сбор метрик с различных источников
+		(приложения, экспортеры, системы);
+	\item Модель данных на основе временных рядов,
+		где каждая метрика хранится с меткой времени;
+	\item Высокая масштабируемость для мониторинга больших инфраструктур;
+	\item Язык запросов PromQL для анализа метрик и генерации графиков;
+	\item Алертинг с интеграцией с системами уведомлений;
+	\item Pushgateway для обработки данных из краткоживущих приложений.
+\end{itemize}
+
+\subsection{Понятие скрейпинга и его применение в системах мониторинга}
+
+Скрейпинг --- это процесс регулярного опроса
+и сбора данных с источников метрик (например, веб-приложений или экспортеров).
+В Prometheus скрейпинг используется для периодического извлечения метрик
+с указанных целей (например, через \texttt{/metrics} у приложений).
+Это позволяет получать данные для анализа производительности
+и здоровья систем в реальном времени.
+
+\subsection{Инструментирование приложений для Prometheus}
+
+Инструментирование --- это процесс добавления в приложение кода
+для сбора метрик, таких как количество запросов, время ответа,
+использование ресурсов и т.д. Для этого используются библиотеки
+(например, Prometheus FastAPI Instrumentator для FastAPI).
+Инструментированные приложения публикуют метрики на доступном endpoint
+(например, \texttt{/metrics}), откуда Prometheus их скрейпит.
+
+\subsection{Использование готовых экспортеров приложений для Prometheus}
+
+Готовые экспортеры --- это специальные программы,
+которые преобразуют данные сторонних приложений и сервисов в формат,
+понятный Prometheus.
+Например, node\_exporter собирает системные метрики (CPU, память),
+а mysql\_exporter --- метрики MySQL.
+Использование экспортеров облегчает мониторинг сервисов
+без необходимости глубокого инструментирования.
+
