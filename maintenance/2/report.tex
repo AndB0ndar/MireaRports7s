@@ -1,3 +1,226 @@
+\section{Настройка сетевой подсистемы рабочей станции}
+
+\subsection{Имя компьютера и флаги доступа}
+
+В свойствах системы (\textbf{Панель управления \rarrow Система})
+гостевой машины задайте имя компьютера --- ваши инициалы латинскими буквами
+\rref{fig:name}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-11 16-35-50}
+	\caption{Имя компьютера}
+	\label{fig:name}
+\end{image}
+
+Гостевой компьютер входит в рабочуюю группу \textbf{WORKGROUP}.
+
+В Панели управления (\textbf{Панель управления
+\rarrow Оформление и персонализация \rarrow Параметры папок \rarrow Вид})
+проверьте, что снят флажок <<Использовать мастер общего доступа>>
+\rref{fig:flag:master:share}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-11 16-37-52}
+	\caption{Мастер общего доступа}
+	\label{fig:flag:master:share}
+\end{image}
+
+В свойствах брандмауэра (\textbf{Панель управления \rarrow Система
+\rarrow Брандмауэр Windows
+\rarrow Разрешить запуск программы или компонента через брандмауэр Windows})
+проверьте, что стоит флажок <<Общий доступ к файлам и принтерам>>.
+\rref{fig:flag:share:file}
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-11 16-41-10}
+	\caption{Общий доступ к файлам и принтерам}
+	\label{fig:flag:share:file}
+\end{image}
+
+\section{IP адрес}
+
+Настроим локальную сеть в VirtualBox \rref{fig:host:only:net}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-15 19-38-46}
+	\caption{Создание локальной сети сеть}
+	\label{fig:host:only:net}
+\end{image}
+
+Далее добавимь виртуальную машину в сеть \rref{fig:add:net:adapter}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-15 19-41-25}
+	\caption{Добавление адаптера}
+	\label{fig:add:net:adapter}
+\end{image}
+
+В свойствах сетевого подключения гостевой машины (в панели управления)
+проверьте, что для сетевого адаптера виртуальной станции установлено
+автоназначение параметров TCP/IPv4 \rref{fig:spec:net:connection}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-22 19-12-44}
+	\caption{Свойства сетевого подключения}
+	\label{fig:spec:net:connection}
+\end{image}
+
+За это отвечает протокол \textit{TCP/IPv4}.
+
+В командной строке (\texttt{cmd.exe}) с помощью утилиты \texttt{ipconfig}
+отобразите IPv4-параметры (192.168.1.101) и MAC-адрес сетевого интерфейса
+виртуального компьютера \rref{fig:ipconfig}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-15 19-43-06}
+	\caption{Вывод ipconfig}
+	\label{fig:ipconfig}
+\end{image}
+
+Выведем ip адреса хост-машины \rref{fig:host:ip}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-15 19-43-15}
+	\caption{Вывод hostname}
+	\label{fig:host:ip}
+\end{image}
+
+\subsection{Эхо-запрос}
+
+Настроим возможность отправки эхо-запроса к гостевой машине.
+Откроем \textbf{Дополнительные параметры} в \textbf{Брандмауэр Windows}
+\rref{fig:firewall:setting}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-15 20-16-06}
+	\caption{Дополнительные параметры брандмауэра}
+	\label{fig:firewall:setting}
+\end{image}
+
+Далее добавим правило для входящий подключений ICMP
+\rdref{fig:icmp:1}{fig:icmp:9}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-15 20-16-17}
+	\caption{Создание правила ICMP, часть 1}
+	\label{fig:icmp:1}
+\end{image}
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-15 20-16-22}
+	\caption{Создание правила ICMP, часть 2}
+	\label{fig:icmp:2}
+\end{image}
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-15 20-16-48}
+	\caption{Создание правила ICMP, часть 3}
+	\label{fig:icmp:3}
+\end{image}
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-15 20-17-39}
+	\caption{Создание правила ICMP, часть 4}
+	\label{fig:icmp:4}
+\end{image}
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-15 20-18-05}
+	\caption{Создание правила ICMP, часть 5}
+	\label{fig:icmp:5}
+\end{image}
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-15 20-18-22}
+	\caption{Создание правила ICMP, часть 6}
+	\label{fig:icmp:6}
+\end{image}
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-15 20-18-34}
+	\caption{Создание правила ICMP, часть 7}
+	\label{fig:icmp:7}
+\end{image}
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-15 20-21-15}
+	\caption{Создание правила ICMP, часть 8}
+	\label{fig:icmp:8}
+\end{image}
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-15 20-21-43}
+	\caption{Активатия правила}
+	\label{fig:icmp:9}
+\end{image}
+
+С помощью утилиты ping в командной строке на хост-компьютере
+проверим наличие в сети виртуального компьютера по его IPv4-адресу
+\rref{fig:ping}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-15 20-22-38}
+	\caption{Отправка эхо-запроса}
+	\label{fig:ping}
+\end{image}
+
+\subsection{Видимость виртуального компьютера по его DNS-имени}
+
+С помощью ключа \texttt{-a} утилиты \texttt{ping} проверим видимость
+виртуального компьютера по его DNS-имени \rref{fig:ping:dns}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-22 19-37-15}
+	\caption{Отправка эхо-запроса с флагом \texttt{a}}
+	\label{fig:ping:dns}
+\end{image}
+
+\subsection{Схема компьютерной сети}
+
+\begin{tikzpicture}[
+    box/.style={draw
+		, rounded corners
+		, align=center
+		, minimum width=3cm, minimum height=1cm
+		},
+    net/.style={align=center}
+]
+	% Host
+	\node[box] (host) {Host Computer\\192.168.56.1\\Mask: 255.255.255.0};
+
+	% Guest
+	\node[box, right=5cm of host] (guest) {Guest Computer\\192.168.56.101\\Mask: 255.255.255.0};
+
+	% DHCP Server
+	\node[box, below=2cm of host] (dhcp) {DHCP Server\\192.168.56.100\\Mask: 255.255.255.0};
+
+	% DNS Server
+	\node[box, above=2cm of host] (dns) {DNS Server\\8.8.8.8};
+
+	% Arrows connecting
+	\draw[->] (host) -- node[net, above] {Virtual Network} (guest);
+	\draw[->] (host) -- node[net, left] {DHCP Request} (dhcp);
+	\draw[->] (guest) -- node[net, right] {DHCP Response} (dhcp);
+	\draw[->] (guest) -- node[net, below right] {Internet Access} (host);
+	\draw[->] (host) -- node[net, above] {DNS Server} (dns);
+\end{tikzpicture}
+
+\section{Администрирование локальных пользователей и групп}
+
+\subsection{Общие ресурсы по умолчанию}
+
+В консоли управления гостевой машины
+(\textbf{Панель управления \rarrow Администрирование
+\rarrow Управление компьютером})
+в разделе <<Общие папки>> \rarrow <<Общие ресурсы>>
+просмотрите и зафиксируйте в отчёте,
+какие папки предоставлены в сетевой доступ по умолчанию.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-16 17-11-34}
+	\caption{Каталоги в сетевом доступе по умолчанию}
+	\label{fig:net:share:dir}
+\end{image}
 
 Административные общие папки (шары, ресурсы) в Windows используются
 для удаленного доступа и управление компьютером.
@@ -14,11 +237,14 @@ Windows по-умолчанию создает следующие админис
 		в виде административных общих ресурсов (\verb|D$| , \verb|E$| и т.д.);
 	\item \verb|Print$| --- публикуется, если вы открыли общий доступ
 		к принтеру (используется, чтобы открыть доступ к каталогу
-		с драйверами принтеров \texttt{C:\Windows\system32\spool\drivers});
+		с драйверами принтеров \verb|C:\Windows\system32\spool\drivers|);
 	\item \verb|FAX$| --- используется для общего доступа к факс-серверу.
 \end{itemize}
 
-\subsection{Установка Guest Additions на гостевой машине}
+
+Чтобы отобразить на хост-компьютере содержимое какой либо
+директории гостевой машины. Для начала нужно установить 
+VM VirtualBox Extension Pack.\par
 Guest Additions --- это набор драйверов
 и утилит для лучшей интеграции между хостом и гостевой ОС.
 
@@ -30,4 +256,271 @@ Guest Additions --- это набор драйверов
 		и установите Guest Additions. Следуйте инструкциям по установке.
 	\item После завершения установки перезагрузите виртуальную машину.
 \end{itemize}
+
+Перейдем в VirtualBox \textbf{<<Devices>>
+\rarrow <<Insert Guest Additions CD image...>>}.
+Далее в CD-дисководе гостевой машины появится инсталятор
+\rref{fig:cd:installator}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-16 18-39-47}
+	\caption{CD-дисковод}
+	\label{fig:cd:installator}
+\end{image}
+
+Нажмем на него и произведем установку
+\rdref{fig:cd:install:1}{fig:cd:install:6}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-16 18-39-55}
+	\caption{Установка Guest Additions CD image, часть 1}
+	\label{fig:cd:install:1}
+\end{image}
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-16 18-40-06}
+	\caption{Установка Guest Additions CD image, часть 2}
+	\label{fig:cd:install:2}
+\end{image}
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-16 18-40-11}
+	\caption{Установка Guest Additions CD image, часть 3}
+	\label{fig:cd:install:3}
+\end{image}
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-16 18-40-15}
+	\caption{Установка Guest Additions CD image, часть 4}
+	\label{fig:cd:install:4}
+\end{image}
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-16 18-41-06}
+	\caption{Установка Guest Additions CD image, часть 5}
+	\label{fig:cd:install:5}
+\end{image}
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-16 18-42-24}
+	\caption{Установка Guest Additions CD image, часть 6}
+	\label{fig:cd:install:6}
+\end{image}
+
+Далее можем через VirtualBox создать общую директорию \rref{fig:shared:dir}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-16 18-47-21}
+	\caption{Создание общей директории в VirtualBox}
+	\label{fig:shared:dir}
+\end{image}
+
+Чтобы проверить директории, создадим в ней файл \rref{fig:shared:dir:file}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-16 18-56-37}
+	\caption{Создание файла в общей директории}
+	\label{fig:shared:dir:file}
+\end{image}
+
+Теперь откроем гостевую машину и увидим рядом с диском \texttt{C:}
+подключенную общую директорию, в которой лежит созданный ранее файл
+\rref{fig:shared:dir:file:win}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-16 18-56-58}
+	\caption{Общая директория в гостевой машине}
+	\label{fig:shared:dir:file:win}
+\end{image}
+
+\subsection{Общая директория}
+
+Создадим на гостевом диске \texttt{С:} каталог \texttt{Install},
+с помощью контекстного меню предоставьте общий доступ
+к этому каталогу для группы <<Все>> (кнопка <<Разрешения>>)
+с правом только на чтение \rref{fig:dir:inst:r}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-16 19-05-50}
+	\caption{Устанавливаем права только на чтение}
+	\label{fig:dir:inst:r}
+\end{image}
+
+Подключим этот каталог в хостовой машине. Перейдем в \textbf{Other Location}
+в поле \textbf{Connect to Sertver} введем
+\texttt{smb://192.168.56.101/install/}.
+Далее потребуется ввести логин и пароль пользователя в гостевой машне
+\rref{fig:dir:inst:open}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-16 19-00-46}
+	\caption{Подключение каталога install}
+	\label{fig:dir:inst:open}
+\end{image}
+
+В проводнике хост-компьютера попробуем создать
+в общем каталоге Install каталог
+\rdref{fig:dir:inst:r:create:folder}{fig:dir:inst:r:create:folder:error}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-16 19-09-25}
+	\caption{Создание каталога в Install}
+	\label{fig:dir:inst:r:create:folder}
+\end{image}
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-16 19-09-36}
+	\caption{Ошибка при создании каталога}
+	\label{fig:dir:inst:r:create:folder:error}
+\end{image}
+
+\textit{У нас это не получится сделать,
+так как ранее мы установили права только на чтение.}
+
+Вернитесь в настройки общего доступа папки Install на гостевой машине
+и добавьте группе <<Все>> право на изменение содержимого этой папки
+\rref{fig:dir:inst:rw}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-16 19-10-17}
+	\caption{Установка прав на чтение и запись}
+	\label{fig:dir:inst:rw}
+\end{image}
+
+После этого каталог успешно создается \rref{fig:dir:inst:rw:create:folder}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-16 19-11-27}
+	\caption{Успешное создание каталога в Install}
+	\label{fig:dir:inst:rw:create:folder}
+\end{image}
+
+Далее в настройках сетевого доступа директории Install
+установим для <<Все>> права только для чтения \rref{fig:dir:inst:r:2}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-16 19-21-21}
+	\caption{Удаление прав на запись у Install}
+	\label{fig:dir:inst:r:2}
+\end{image}
+
+Теперь при попытке удалить созданную ранее директрию в Install
+возникает ошибка \rref{fig:dir:inst:r:2:error}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-16 19-22-46}
+	\caption{Попытка удать каталог из Install без прав на запись}
+	\label{fig:dir:inst:r:2:error}
+\end{image}
+
+\subsection{Безопасность каталока Install}
+
+Откройте вкладку <<Безопасность>> в свойствах папки Install
+\rref{fig:dir:satery}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-17 20-11-41}
+	\caption{Свойство <<Безопасность>> каталога Install}
+	\label{fig:dir:satery}
+\end{image}
+
+\textit{Свойства <<Безопасность>> у каталога в Windows
+позволяют настроить параметры доступа к нему.}
+
+Если одному и тому же пользователю (или группе) дать разные права доступа
+к одному и тому же ресурсу во вкладках <<Доступ>> и <<Безопасность>>
+приоритетнее будут настройки безопасности.\par
+Для проверки приоритета зададим во вкладке <<Безопасность>>
+отнимем все права доступа для пользователя \textbf{BAR},
+а во вкладке <<Доступ>> додим доступ для чтения и записи
+\rdref{fig:dir:prop:satery}{fig:dir:prop}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-17 20-13-59}
+	\caption{Вкладка <<Безопасность>>}
+	\label{fig:dir:prop:satery}
+\end{image}
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-17 20-14-26}
+	\caption{Вкладка <<Доступ>>}
+	\label{fig:dir:prop}
+\end{image}
+
+В результате у нас пропал доспуп к каталогку\texttt{Install}
+на хостовой машине \rref{fig:dir:install:error}.
+Это подтверждает, что права безопасности приоритетнее.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-17 20-15-07}
+	\caption{Отсутствие доступа к каталогу Install}
+	\label{fig:dir:install:error}
+\end{image}
+
+\section{Настройка подключения к сети Интернет}
+
+Проверим наличие подключения к сети Интернет у гостевого компьютера,
+открыв на нём во встроенном браузере Internet Explorer
+ресурс \url{http://lib.ru} \rref{fig:lib}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-17 20-25-51}
+	\caption{Провера наличия подключения к сети Интернет}
+	\label{fig:lib}
+\end{image}
+
+\subsection{netstat}
+
+Не закрывая браузер, с помощью консольной утилиты
+\texttt{netstat} проанализируйте действующие сетевые подключения виртуального
+компьютера \rref{fig:netstat}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-17 20-25-51}
+	\caption{Вывод команды netstat}
+	\label{fig:netstat}
+\end{image}
+
+\subsection{tracert}
+
+С помощью консольной утилиты \texttt{tracert} определите путь
+и количество хопов (15 штук) до узла \url{http://lib.ru}
+\rref{fig:tracert}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-17 20-33-41}
+	\caption{Вывод команды tracert}
+	\label{fig:tracert}
+\end{image}
+
+Cреднее время перемещения IP-пакетов от нашей гостевой станции
+до указанного узла составляет 7 наносекунд.
+
+
+Протестируйте Интернет-подключение виртуального компьютера с помощью сайта
+\url{http://speedtest.net/} \rref{fig:speedtest}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-17 20-35-26}
+	\caption{Вывод сайте speedtest}
+	\label{fig:speedtest}
+\end{image}
+
+\subsection{speedtest}
+
+По выводу speedtest можем определить:
+
+\begin{itemize}
+	\item время прохождения ping --- 7 наносекунд;
+	\item скорость входящего и исходящего трафика
+		составляет 45.88 и 42.43 Мб/с соответственно;
+	\item публичный IP-адрес подключения -- 109.252.46.67.
+\end{itemize}
+
+
+
+
+\section{Удалённое управление рабочей станцией}
+
+
 
