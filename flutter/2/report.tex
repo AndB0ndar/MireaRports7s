@@ -74,7 +74,7 @@
 и как либо корректировать файл \texttt{pubspec.lock}.
 
 \begin{image}
-	\includegrph{Screenshot from 2024-09-15 15-25-33}
+	\includegrph[scale=0.33]{Screenshot from 2024-09-15 15-25-33}
 	\caption{Файл pubspec.lock}
 	\label{fig:pubspec:lock}
 \end{image}
@@ -87,7 +87,7 @@
 но при этом комплексную структуру \rref{fig:pubspec:yaml}.
 
 \begin{image}
-	\includegrph{Screenshot from 2024-09-13 21-14-50}
+	\includegrph[scale=0.53]{Screenshot from 2024-09-13 21-14-50}
 	\caption{Файл pubspec.yaml}
 	\label{fig:pubspec:yaml}
 \end{image}
@@ -188,12 +188,12 @@
 для удобного ее конфигурации.
 
 \begin{image}
-	\includegrph{Screenshot from 2024-09-15 15-28-48}
+	\includegrph[scale=0.5]{Screenshot from 2024-09-15 15-28-48}
 	\caption{Виджет Scaffold}
 	\label{fig:widget:scaffold}
 \end{image}
 
-В атрибут \texttt{AppBarзадается Widget} верхней шапки приложения.
+В атрибуте \texttt{AppBar} задатеся верхняя шапка приложения.
 Атрибут \texttt{FloatingActionButton} используется для конфигурации клавиши,
 отображаемой поверх всего экрана.
 По умолчанию она находится в нижнем правом углу.
@@ -201,9 +201,16 @@
 В нем как-раз устанавливается все те Widget-ы,
 которые разработчик хочет использовать на странице.
 
-\section{Корректировка в страницы проекта}
+\section{Исправление страницы проекта}
 
-Изменим код созданный по умолчанию.\par
+Изменим код в странице созданной по умолчанию \rref{fig:page:code:new}.
+
+\begin{image}
+	\includegrph[scale=0.4]{Screenshot from 2024-09-20 21-42-00}
+	\caption{Изменный код домашней страницы}
+	\label{fig:page:code:new}
+\end{image}
+
 Удалены переменные и методы,
 связанные с подсчётом нажатий на кнопку
 (такие как \texttt{\_counter} и метод \texttt{\_incrementCounter}).
@@ -213,9 +220,10 @@
 три строки текста:
 
 \begin{itemize}
-	\item "Бондарь Андрей Ренатович" --- с жирным шрифтом и размером текста 24.
-	\item "ИКБО-06-21" --- размер текста 20.
-	\item "21И1874" --- также размер текста 20.
+	\item <<Бондарь Андрей Ренатович>> --- с жирным шрифтом
+		и размером текста 24.
+	\item <<ИКБО-06-21>> --- размер текста 20.
+	\item <<21И1874>> --- также размер текста 20.
 \end{itemize}
 
 Надписи созданы с помощью виджетов \texttt{Text},
@@ -226,7 +234,7 @@
 Новая страница отображена на рисунке~\ref{fig:page:new}.
 
 \begin{image}
-	\includegrph{Screenshot from 2024-09-15 16-38-08}
+	\includegrph[scale=0.37]{Screenshot from 2024-09-15 16-38-08}
 	\caption{Новая страница}
 	\label{fig:page:new}
 \end{image}
