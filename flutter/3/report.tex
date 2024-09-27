@@ -1,0 +1,813 @@
+\section*{ЦЕЛЬ ПРАКТИЧЕСКОЙ РАБОТЫ}
+\addcontentsline{toc}{section}{ЦЕЛЬ ПРАКТИЧЕСКОЙ РАБОТЫ}
+
+План практической работы:
+\begin{itemize}
+	\item Знакомство с основным перечнем часто применяемых виджетов:
+		Text, Button, Column, Row, Container, SizedBox, Padding
+	\item Создание собственных Widget-ов на основе StatelessWidget
+	\item Создание собственных Widget-ов на основе StatefulWidget
+	\item Выполнение практической работы \No\,3;
+\end{itemize}
+
+\clearpage
+
+\section*{ВЫПОЛНЕНИЕ ПРАКТИЧЕСКОЙ РАБОТЫ}
+\addcontentsline{toc}{section}{ВЫПОЛНЕНИЕ ПРАКТИЧЕСКОЙ РАБОТЫ}
+
+\section{Часто применяемые виджеты}
+
+\subsection{Text}
+
+Данный Widget используется для отображения текстовой информации
+на экране приложения. В качестве обязательного параметра \texttt{Widget Text} 
+требует строку или строковое значение, которое он будет отображать на экране.
+В качестве не обязательных параметров Widget \texttt{Text} имеет
+в своей сигнатуре: \texttt{style} --- описание стиля выводимого на экран стиля,
+\texttt{textAlign} --- используется
+для выравнивания текста относительно контейнера и т.д.
+
+Пример использования продемонстрирован
+на рисунках~\ref{fig:text:button} и \ref{fig:text:button:show}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-27 19-57-15}
+	\caption{Использование Widget-ов Text и Button}
+	\label{fig:text:button}
+\end{image}
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-27 21-25-09}
+	\caption{Отображение Widget-ов Text и Button}
+	\label{fig:text:button:show}
+\end{image}
+
+\subsection{Button}
+
+В фреймворке Flutter есть множество различных кнопок на выбор разработчику,
+однако базисной кнопкой является Widget --- \texttt{ElevatedButton}.
+Данный Widget создает интерактивную область,
+на которую может нажать пользователь,
+с возможностью различным образом менять ее содержание и внешний вид.
+Сигнатура Widget-а \texttt{ElevatedButton} достаточно проста
+и удобна в своем взаимодействии.
+Widget имеет 2 обязательных параметра: \texttt{onPressed}
+--- обработчик нажатия на кнопку пользователем
+и \texttt{child} --- содержимое интерактивной зоны кнопки.
+Так как \texttt{child} принимает, по сути, в себя любой другой Widget,
+то ограничения на содержимое интерактивной зоной ограничены только размерами
+экрана и фантазией разработчика.
+Остальные параметры в сигнатуре Widget-а \texttt{ElevatedButton}
+имеют опциональный характер, к примеру:
+метод \texttt{onLongPress} позволяет задать обработку длинного нажатия
+пользователя на интерактивную зону, однако если логика обработки не задана,
+то кнопка просто будет пропускать длинное нажатие,
+или если не задать собственный стиль интерактивной зоны
+в параметр \texttt{style}, то кнопка автоматически будет обернута
+в базовое представление интерактивной зоны темой приложения.
+
+Пример использования был продемонстрирован
+на рисунках~\ref{fig:text:button} и \ref{fig:text:button:show}.
+
+\subsection{Column}
+
+Для расположения нескольких элементов используются разные контейнеры.
+Контейнер \texttt{Column} располагает элементы вертикально, в виде столбика.
+\texttt{Column} занимает все доступное место на экране,
+поэтому если доступна вся высота экрана,
+контейнер будет размещён по всей высоте.
+Так же стоит учитывать, что Widget \texttt{Column} не поддерживает прокрутку.
+Поэтому если необходимо обеспечить доступ к виджетам,
+которые выходят за пределы видимо пространства,
+то вместо \texttt{Column} лучше использовать другой контейнер, например,
+\texttt{ListView}.
+Сигнатура Widget-а Column имеет следующие параметры:
+\texttt{mainAxisAlignment}: задает выравнивание по вертикали,
+\texttt{mainAxisSize}: задает пространство,
+занимаемое виджетом по основной оси,
+\texttt{crossAxisAlignment}: задает выравнивание по горизонтали,
+а \texttt{children} устанавливает набор вложенных элементов.
+
+Пример использования продемонстрирован
+на рисунках~\ref{fig:row:col} и \ref{fig:row:col:show}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-27 21-04-13}
+	\caption{Использование Widget-ов Column и Row}
+	\label{fig:row:col}
+\end{image}
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-27 21-27-21}
+	\caption{Отображение Widget-ов Column и Row}
+	\label{fig:row:col:show}
+\end{image}
+
+\subsection{Row}
+
+Для размещения элементов не по вертикали, а по горизонтали,
+вместо \texttt{Column} используется Widget \texttt{Row}.
+Его основные свойства абсолютно аналогичны Widget-у \texttt{Column}.
+\texttt{Row} так же занимает все свободное горизонтальное пространство,
+если ему не установлена другая логика параметром \texttt{mainAxisSize},
+а так же не имеет прокрутку,
+что соответственно обязует вместить все содержимое в выделенную область.
+Сигнатура Widget-а \texttt{Row} так же схожа
+с сигнатурой Widget-а \texttt{Column},
+за исключением векторов указания:
+\texttt{mainAxisAlignment}: задает выравнивание по горизонтали,
+\texttt{mainAxisSize}: задает пространство, занимаемое виджетом по горизонтали,
+\texttt{crossAxisAlignment}: задает выравнивание по вертикали,
+а \texttt{children} задает набор вложенных элементов.
+
+Пример использования продемонстрирован
+на рисунках~\ref{fig:row:sizebox} и \ref{fig:row:sizebox:show}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-27 21-06-54}
+	\caption{Использование Widget-ов Row и SizedBox}
+	\label{fig:row:sizebox}
+\end{image}
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-27 21-30-01}
+	\caption{Использование Widget-ов Row и SizedBox}
+	\label{fig:row:sizebox:show}
+\end{image}
+
+\subsection{SizedBox}
+
+Widget \texttt{SizedBox} используется
+для создания контейнера определенного размера.
+Сигнатура Widget-а \texttt{SizedBox} содержит в себе параметры \texttt{width}
+и \texttt{height}, которыми задаются ширина и высота контейнера соответственно.
+Так же, так как Widget \texttt{SizedBox} является контейнером,
+в него можно положить контент, указав его в параметре \texttt{child}.
+Widget \texttt{SizedBox} часто используется
+для создания пустых пространств между несколькими Widget-ами
+в других контейнерах, таких как \texttt{Column} или \texttt{Row}.
+
+Пример использования был продемонстрирован
+на рисунках~\ref{fig:row:sizebox} и \ref{fig:row:sizebox:show}.
+
+\subsection{Padding}
+
+Иногда, для реализации отступов у элемента недостаточно использования
+Widget-а \texttt{SizedBox}, к примеру,
+когда необходимо произвести отступ не по направлению контейнера
+или отступ должен быть равный по одной или сразу двум осям.
+Для решения таких задач используется Widget \texttt{Padding}.
+Он позволяет обернуть контент,
+указываемый в параметре \texttt{child} в контейнер
+и сделать требуемый отступ внутри него.
+Правила настройки отступа задаются
+в параметре \texttt{padding} объектом класса \texttt{EdgeInsets}.
+Данный класс имеет разные конструкторы,
+позволяющие просто и быстро создавать требуемые правила отступа, к примеру:
+\texttt{all} --- позволяет установить единое значение отступа
+по всем направлениям,
+symmetric – позволяет установить равное значение по одной из осей,
+\texttt{horizontal} --- по горизонтали
+и \texttt{vertical} --- по вертикали,
+а \texttt{only} --- позволяет задать конкретный отступ
+для каждой отдельной стороны.
+
+Пример использования был продемонстрирован
+на рисунках~\ref{fig:row:col} и \ref{fig:row:col:show}.
+
+\subsection{Container}
+
+Widget Container представляет такой элемент,
+который может содержать только один вложенный элемент,
+но при этом предоставляет дополнительные возможности по настройке фона,
+позиционирования и размера вложенных виджетов.
+По сути, Widget \texttt{Container} объединяет возможности других виджетов,
+таких как Widget-ы \texttt{SizedBox}, \texttt{Padding} и многие другие.
+В связи с расширенным перечнем функционала Widget-а \texttt{Container}
+так же имеет большой перечень параметров.
+В связи с тем, что ряд параметров были рассмотрены в Widget-ах ранее,
+повторно рассматриваться они не будут.
+Однако, из расширенного функционала Widget-а \texttt{Container} вытекает
+и его минус, использование \texttt{Container} обусловлено только в ситуации,
+если конкретного Widget-а с необходимым функционалом недостаточно.
+То есть если нужно одному элементу одновременно задать размеры, отступ,
+фон и еще дополнительные параметры, то использование конкретных Widget-ов
+для достижения резултата приведет к большой веренице и вложенности,
+поэтому в данной ситуации правильнее будет использовать \texttt{Container}.
+
+Пример использования продемонстрирован
+на рисунках~\ref{fig:container} и~\ref{fig:container:show}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-27 21-13-33}
+	\caption{Использование Widget-а Container}
+	\label{fig:container}
+\end{image}
+
+Для этого примера изменили код, продемонстированный
+на рисунке~\ref{fig:row:sizebox}.
+Каждый текстовый виджет обернут в \texttt{Container}.
+Добавлены внутренние отступы с помощью свойства \texttt{padding}.
+Использована \texttt{BoxDecoration} для добавления рамки
+и скругления углов у контейнеров.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-27 21-13-17}
+	\caption{Отображение Widget-а Container}
+	\label{fig:container:show}
+\end{image}
+
+\section{Собственные Widget-ы на основе StatelessWidget}
+
+Хоть фреймвокр Flutter имеет достаточный перечень библиотечных Widget-ов,
+позволяющих создавать различные экранные формы,
+не всегда удобно всю верстку держать в одном месте.
+Часто необходимо делить верстку на отдельные компоненты не только
+для удобства чтения, но,
+например и для дальнейшей возможности переиспользования.
+Из этого возникает ситуация,
+что в каком-то месте у нас должна храниться часть верстки с ее параметрами
+и иногда логикой.
+Для ее решения разработчик может создавать собственные
+Widget-ы на основе исходных Widget-ов в фреймворке Flutter.\par
+В фреймворке Flutter имеются 3 базовых Widget-а:
+\texttt{Stateless}, \texttt{Stateful} и \texttt{Inherited}.
+Для визуализации чего-либо на экране используются первые два:
+\texttt{Stateless} и \texttt{Stateful} Widget-ы.
+Для начала мы ознакомимся с логикой работы \texttt{Stateless} Widget.
+Его жизненный цикл достаточно прост.
+Когда объект данного Widget-а создается и добавляется на экран,
+для его отрисовки вызывается метод \texttt{build},
+который в качестве результата своего вызова возвращает контент,
+заложенный в данный Widget.
+Пример реализации собственного\texttt{Stateless} Widget-а 
+предоставляется разработчику сразу при создании стартового проекта
+\rref{fig:stateless}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-27 21-19-57}
+	\caption{Использование Widget-а StatelessWidget}
+	\label{fig:stateless}
+\end{image}
+
+\section{Собственные Widget-ы на основе StatefulWidget}
+
+Иногда, требуется при взаимодействии пользователя
+с экраном менять отображаемый на экране Widget.
+К сожалению, сделать это такой Widget
+на основе \texttt{Stateless} Widget невозможно,
+так он не имеет состояния и не может быть перестроен,
+только уничтожен и создан заново.
+Однако для этого подходит Stateful Widget.\par
+В отличии от \texttt{Stateless} Widget,
+Stateful Widget имеет собственное состояние
+и может перерисовываться на его основе.
+При создании Widget-а на основе \texttt{Stateful} Widget
+требуется создать класс Widget-а и класс его State-а.
+Класс Widget-а хранит только конфигурацию создаваемого элемента,
+когда класс State-а хранит в себе всю необходимую информацию
+для отрисовки контента на экране.\par
+Класс \texttt{State} имеет собственный жизненный цикл
+и последовательность обновления собственной информации.
+Набор методов жизненного цикла класса \texttt{State},
+а так же последовательность их переключения отображена
+на рисунке~\ref{fig:state:life}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-27 20-38-20}
+	\caption{Жизненный цикл класса State и последовательность переключений}
+	\label{fig:state:life}
+\end{image}
+
+При создании объекта класса \texttt{State}
+сразу же вызывается метод инициализации
+всех внутренних значений состояния --- \texttt{initState}.
+В рамках данного метода производится основная инициализация полей класса.
+Данный метод вызывается только один раз при создании Widget-а.
+Для изменения данных в State-е требуется вызвать
+метод State-а --- \texttt{setState},
+передавая ему в качестве аргумента функцию,
+меняющую значения в объекте \texttt{State}.
+При вызове данной функции Widget все так же останется на экране,
+однако его \texttt{State} будет перестроен
+и отображение контента на экране смениться.
+При изменении конфигурации самого Widget-а
+или же зависимостей, которые используются в отображении Widget-а,
+происходит обновление отображения на основании новых данных.
+При обновлении конфигурации Widget-а вызывается метод \texttt{didUpdateWidget},
+внутрь которого приходит конфигурация старого Widget-а и новая конфигурация.
+При обновлении внешних зависимостей Widget-а
+вызывается метод \texttt{didChangeDependencies},
+в котором можно произвести обновление отображения с учетом новых данных.
+Подробнее с сигнатурой и способом работы собственных\texttt{Stateful} 
+Widget-ов можно в стартовом проекте.
+Пример изображен на рисунке~\ref{fig:stateful}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-27 21-18-52}
+	\caption{Использование Widget-а StatefulWidget}
+	\label{fig:stateful}
+\end{image}
+
+\clearpage
+
+\section{Реализованное приложение}
+
+Создадим приложение из 5 различных экранов.
+Они будут логически объединены темой <<Task Tracker>>.
+Каждый из которых будет отвечать за разные аспекты работы с задачами:
+
+\begin{itemize}
+	\item \textbf{Экран <<list>>}:
+		Список задач с возможностью добавления новых;
+	\item \textbf{Экран <<filter>>}:
+		Фильтрация задач (завершенные, незавершенные);
+	\item \textbf{Экран <<detail>>}:
+		Детали задачи (В него осуществляется переход из экрана <<list>>);
+	\item \textbf{Экран <<stats>>}: Статистика выполнения задач;
+	\item \textbf{Экран <<setting>>}:
+		Настройки пользователя
+		(например, переключение темы или другие пользовательские настройки);
+\end{itemize}
+
+\subsection{main.dart}
+
+Файл \texttt{main.dart} играет ключевую роль в структуре
+и функциональности Flutter приложения.
+Он управляет запуском, инициализацией, навигацией
+и пользовательским интерфейсом, обеспечивая пользователям взаимодействие
+с приложением.
+Это основной файл, в котором собираются все важные компоненты,
+чтобы приложение работало корректно и удобно для пользователей
+\ldref{lst:main}{lst:tasktrackerapp}.
+
+\begin{lstlisting}[language=Java
+	, label={lst:main}
+	, caption=\leftline{Функция main}]
+import 'task_list.dart';
+import 'filter.dart';
+import 'stats.dart';
+import 'setting.dart';
+void main() {
+  runApp(const TaskTrackerApp());
+}
+\end{lstlisting}
+
+\break
+
+\begin{lstlisting}[language=Java
+	, caption=\leftline{Класс \_HomePageState}]
+class _HomePageState extends State<HomePage> {
+  int _currentIndex = 0;
+  final List<Widget> _screens = [ TaskListScreen(), FilterTasksScreen(),
+    TaskStatsScreen(), UserSettingsScreen(),
+  ];
+  void _onTabTapped(int index) {
+    setState(() { _currentIndex = index; });
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(widget.title),
+      ),
+      body: SafeArea( child: _screens[_currentIndex],),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: _onTabTapped,
+        selectedItemColor: Colors.black,
+        unselectedItemColor: Colors.black,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list), label: 'Задачи',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.filter_list), label: 'Фильтр',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.bar_chart), label: 'Статистика',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings), label: 'Настройки',
+          ),
+        ],
+      ),
+    );
+  }
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java
+	, caption=\leftline{Класс HomePage}]
+class HomePage extends StatefulWidget {
+  const HomePage({super.key, required this.title});
+  final String title;
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java
+	, label={lst:tasktrackerapp}
+	, caption=\leftline{Класс TaskTrackerApp}]
+class TaskTrackerApp extends StatelessWidget {
+  const TaskTrackerApp({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter7s',
+      theme: ThemeData(
+        colorScheme:
+			ColorScheme.fromSeed(seedColor: Colors.indigo),
+        useMaterial3: true,
+      ),
+      home: const HomePage(title: 'Flutter7s'),
+    );
+  }
+}
+\end{lstlisting}
+
+\clearpage
+
+\subsection{task\_list.dart}
+
+Файл \texttt{task\_list.dart} реализовывает важный компонент
+приложения трекера задач, который обеспечивает управление задачами
+и их отображение \rref{fig:list}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-27 21-35-53}
+	\caption{Экран списка задач}
+	\label{fig:list}
+\end{image}
+
+\texttt{TaskListScreen}
+является \texttt{StatefulWidget} \lref{lst:list:screen},
+что позволяет динамически изменять его состояние.
+Это особенно важно для приложений,
+где данные могут изменяться во времени, как в случае со списком задач.
+
+\begin{lstlisting}[language=Java
+	, label={lst:list:screen}
+	, caption=\leftline{Класс TaskListScreen}]
+import 'task_detail.dart';
+class TaskListScreen extends StatefulWidget {
+  const TaskListScreen({super.key});
+  @override
+  State<TaskListScreen> createState() => _ListScreenState();
+}
+\end{lstlisting}
+
+\texttt{\_TodoScreenState} является состоянием TaskListScreen.\par
+Используется список \texttt{\_tasks} для хранения задач.
+Пользователь может добавлять новые задачи через текстовое поле.
+Для этого применяется \texttt{TextEditingController},
+который управляет содержимым текстового поля
+и позволяет легко считывать введённые данные.
+
+\begin{lstlisting}[language=Java
+	, caption=\leftline{\_tasks и TextEditingController}]
+List<String> _tasks = ['Задача 1', 'Задача 2', 'Задача 3'];
+final TextEditingController _textController = TextEditingController();
+\end{lstlisting}
+
+Метод \texttt{\_addTask()} проверяет,
+что текстовое поле не пустое, и добавляет новую задачу в список.
+После добавления задача очищает текстовое поле,
+обеспечивая удобство использования для пользователя.
+
+\begin{lstlisting}[language=Java
+	, caption=\leftline{Метод \_addTask()}]
+void _addTask() {
+if (_textController.text.isNotEmpty) {
+  setState(() {
+	_tasks.add(_textController.text);
+	_textController.clear();
+  });
+}
+\end{lstlisting}
+
+Интерфейс построен с помощью \texttt{Scaffold},
+который предоставляет основные элементы,
+такие как \texttt{AppBar} и \texttt{Body}.
+Внутри body используется \texttt{Column} для вертикального размещения элементов,
+таких как \texttt{TextField} для ввода задач, кнопка для добавления задач
+и \texttt{ListView} для отображения списка текущих задач.
+\texttt{ListView.builder} используется для динамического отображения списка задач.
+Каждая задача в списке представлена в виде \texttt{ListTile},
+который содержит текст задачи и стрелку, указывающую на возможность перехода.
+При нажатии на задачу происходит навигация
+к экрану деталей задачи (\texttt{TaskDetailScreen})
+с передачей соответствующей информации о задаче.
+
+\break
+
+\begin{lstlisting}[language=Java
+	, caption=\leftline{Метод build}]
+@override
+Widget build(BuildContext context) {
+	return Scaffold(
+	  appBar: AppBar(
+		backgroundColor: Theme.of(context).colorScheme.inversePrimary,),
+	  body: Column(
+		children: <Widget>[
+		  Padding(
+			padding: const EdgeInsets.all(8.0),
+			child: TextField(
+			  controller: _textController,
+			  decoration: const InputDecoration(
+				labelText: 'Add a task', border: OutlineInputBorder()),
+			),
+		  ),
+		  const SizedBox(height: 10),
+		  ElevatedButton(onPressed: _addTask, child: Text('Добавить задачу')),
+		  Expanded(
+			child: ListView.builder(
+			  itemCount: _tasks.length,
+			  itemBuilder: (context, index) {
+				return ListTile(
+				  title: Text(_tasks[index]),
+				  trailing: Icon(Icons.arrow_forward),
+				  onTap: () {
+					Navigator.push(context, MaterialPageRoute(
+						builder: (context) => TaskDetailScreen(
+						  task: _tasks[index],),
+					  ),
+					);
+				  },
+				);
+			  },
+			),
+		  ),
+		],
+	  ),
+	);
+}
+\end{lstlisting}
+
+\clearpage
+
+\subsection{filter.dart}
+
+Файл \texttt{filter.dart} \ldref{lst:filter:state}{lst:filter:screen}
+реализовывает экран фильтрации задач \rref{fig:filter},
+который позволяет пользователю настраивать отображение задач на основе
+их статуса (выполнены или невыполнены).
+
+\begin{lstlisting}[language=Java
+	, label={lst:filter:state}
+	, caption=\leftline{Класс \_FilterTasksScreenState}]
+class _FilterTasksScreenState extends State<FilterTasksScreen> {
+  bool _showCompleted = false;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SwitchListTile(
+            title: const Text('Показать выполненные задачи'),
+            value: _showCompleted,
+            onChanged: (bool value) {
+              setState(() {
+                _showCompleted = value;
+              });
+            },
+          ),
+          SizedBox(height: 10),
+          Text(
+            _showCompleted
+                ? 'Показаны выполненные задачи'
+                : 'Показаны невыполненные задачи',
+            style: const TextStyle(fontSize: 18),
+          ),
+        ],
+      ),
+    );
+  }
+}
+\end{lstlisting}
+
+\break
+
+\begin{lstlisting}[language=Java
+	, label={lst:filter:screen}
+	, caption=\leftline{Класс FilterTasksScreen}]
+class FilterTasksScreen extends StatefulWidget {
+  const FilterTasksScreen({super.key});
+  @override
+  State<FilterTasksScreen> createState() => _FilterTasksScreenState();
+}
+\end{lstlisting}
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-27 21-35-56}
+	\caption{Экран фильтрации}
+	\label{fig:filter}
+\end{image}
+
+\clearpage
+
+\subsection{stats.dart}
+
+Файл \texttt{stats.dart} \lref{lst:stats} содержит реализацию экрана
+статистики задач \rref{fig:stats},
+который предоставляет пользователю визуальную информацию
+о выполненных и невыполненных задачах.
+
+\begin{lstlisting}[language=Java
+	, label={lst:stats}
+	, caption=\leftline{Класс TaskStatsScreen}]
+class TaskStatsScreen extends StatelessWidget {
+  final int _completed = 5;
+  final int _pending = 3;
+  const TaskStatsScreen({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Text(
+              'Статистика выполнения задач', style: TextStyle(fontSize: 24),
+            ),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Выполнено: $_completed', style: TextStyle(fontSize: 18)),
+                const SizedBox(width: 20),
+                Text('Невыполнено: $_pending', style: TextStyle(fontSize: 18)),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+\end{lstlisting}
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-27 21-30-01}
+	\caption{Экран статистики по задачам}
+	\label{fig:stats}
+\end{image}
+
+\clearpage
+
+\subsection{setting.dart}
+
+Файл \texttt{setting.dart} \lref{lst:setting} содержит реализацию экрана
+настроек пользователя \rref{fig:setting},
+который предоставляет пользователям возможность
+управлять темным режимом приложения.
+
+\begin{lstlisting}[language=Java
+	, label={lst:setting}
+	, caption=\leftline{Код setting.dart}]
+class UserSettingsScreen extends StatefulWidget {
+  const UserSettingsScreen({super.key});
+  @override
+  State<UserSettingsScreen> createState() => _UserSettingsScreenState();
+}
+class _UserSettingsScreenState extends State<UserSettingsScreen> {
+  bool _darkMode = false;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SwitchListTile(
+            title: Text('Темный режим'),
+            value: _darkMode,
+            onChanged: (bool value) {
+              setState(() {
+                _darkMode = value;
+              });
+            },
+          ),
+          Text(
+            'Темный режим \${_darkMode ? "включен" : "выключен"}',
+            style: TextStyle(fontSize: 18),
+          ),
+        ],
+      ),
+    );
+  }
+}
+\end{lstlisting}
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-27 21-35-59}
+	\caption{Экран настроек}
+	\label{fig:setting}
+\end{image}
+
+\clearpage
+
+\subsection{task\_detail.dart}
+
+Файл \texttt{task\_detail.dart} \lref{lst:detail}
+содержит реализацию экрана \rref{fig:detail},
+который отображает информацию о выбранной задаче из списка задач.
+
+\begin{lstlisting}[language=Java
+	, label={lst:detail}
+	, caption=\leftline{Класс TaskDetailScreen}]
+class TaskDetailScreen extends StatelessWidget {
+  final String task;
+  const TaskDetailScreen({super.key, required this.task});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Детали задачи'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text( 'Задача:', style: TextStyle(fontSize: 24),),
+            const SizedBox(height: 20),
+            Text( task, style: const TextStyle(fontSize: 18),),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () { Navigator.pop(context); },
+              child: const Text('Назад'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+\end{lstlisting}
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-27 21-36-04}
+	\caption{Экран информации о задаче}
+	\label{fig:detail}
+\end{image}
+
+\clearpage
+
+\section*{ВЫВОД}
+\addcontentsline{toc}{section}{ВЫВОД}
+
+В ходе практической работы мы познакомились
+с основным перечнем часто применяемых виджетов в Flutter,
+что позволило глубже понять,
+как строится пользовательский интерфейс в мобильных приложениях.
+Мы изучили следующие виджеты:
+
+\begin{itemize}
+	\item \textbf{Text} -- для отображения текстовой информации.
+	\item \textbf{Button} -- для реализации интерактивности,
+		позволяя пользователю выполнять действия.
+	\item \textbf{Column} -- для вертикального выравнивания элементов.
+	\item \textbf{Row} -- для горизонтального выравнивания элементов.
+	\item \textbf{Container} -- для создания прямоугольных областей,
+		которые могут содержать другие виджеты,
+		обеспечивая гибкость в управлении размером, отступами и стилем.
+	\item \textbf{SizedBox} -- для задания фиксированных размеров
+		между виджетами.
+	\item \textbf{Padding} -- для добавления отступов вокруг элементов,
+		улучшая восприятие интерфейса.
+\end{itemize}
+
+Также научились создавать собственные виджеты
+на основе \texttt{StatelessWidget} (для статических)
+и \texttt{StatefulWidget} (для динамических).
+
+В конце практической работы было разработано приложение с пятью экранами,
+каждое из которых выполняет определённую функцию в контексте трекера задач.
+Экраны включают:
+
+\begin{itemize}
+	\item \textbf{Список задач} --- для отображения и управления задачами;
+	\item \textbf{Фильтр задач} --- для настройки отображаемых задач;
+	\item \textbf{Статистика задач} --- для отображения выполненных
+		и невыполненных задач;
+	\item \textbf{Настройки пользователя} --- для настройки
+		параметров приложения;
+	\item \textbf{Детали задачи} --- для отображения информации
+		о конкретной задаче.
+\end{itemize}
+
+Таким образом, данная практика помогла освоить основные концепции разработки
+приложений на Flutter и углубить понимание структуры и организации кода.
+Мы увидели, как использование различных виджетов
+и создание собственных компонентов позволяет строить интерактивные
+и визуально привлекательные интерфейсы.
+Приобретённые знания и навыки послужат хорошей основой
+для дальнейшего изучения и разработки более сложных приложений.
+
