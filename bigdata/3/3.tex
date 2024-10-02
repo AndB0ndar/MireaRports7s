@@ -1,0 +1,1301 @@
+\documentclass[14pt,a4paper,oneside]{extarticle}
+
+	\usepackage{cmap} % for pdfLaTeX
+	\usepackage[T1,T2A]{fontenc} % correct encoding for pdfLaTeX
+	\usepackage[utf8]{inputenc} % correct encoding source file
+	\usepackage[english,russian]{babel} % correct language
+
+	% ---------------------------------------------------------------------
+	% TEXT SETTINGS
+	% ---------------------------------------------------------------------
+
+	\usepackage{fontspec} % use standart fonts (only for xelatex!!!)
+	\setmainfont{Times New Roman}
+	\setsansfont{Arial}
+	\setmonofont[Scale=0.6]{Courier New}
+
+	\usepackage[none]{hyphenat} % no word breaks
+
+	\usepackage{setspace}
+	%\singlespacing % 1.0
+	\onehalfspacing % 1.5
+
+	% ----------------------------------------------------------------------
+	% PAGE SETTINGS
+	% ----------------------------------------------------------------------
+
+	\usepackage[left=3cm, right=1.5cm, vmargin=2cm, headheight=2cm]{geometry}
+	\linespread{1.5} % line spacing 1.5
+	\usepackage{indentfirst} % indent first paragraph
+	\setlength{\parindent}{1.25cm}
+	\sloppy
+
+	\frenchspacing % ???
+	\pagestyle{plain}
+	\usepackage{fancyhdr} % for headers and footers
+
+	\clubpenalty=10000
+	\widowpenalty=10000
+
+
+
+
+
+    \usepackage[breakable]{tcolorbox}
+    
+
+    \usepackage{graphicx}
+    \usepackage{caption}
+
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{geometry} % Used to adjust the document margins
+
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+
+    \makeatletter % fix for old versions of grffile with XeLaTeX
+    \@ifpackagelater{grffile}{2019/11/01}
+    {
+      % Do nothing on new versions
+    }
+    {
+      \def\Gread@@xetex#1{%
+        \IfFileExists{"\Gin@base".bb}%
+        {\Gread@eps{\Gin@base.bb}}%
+        {\Gread@@xetex@aux#1}%
+      }
+    }
+    \makeatother
+    \usepackage[Export]{adjustbox} % Used to constrain images to a maximum size
+    \adjustboxset{max size={0.9\linewidth}{0.9\paperheight}}
+
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    % The default LaTeX title has an obnoxious amount of whitespace. By default,
+    % titling removes some of it. It also provides customization options.
+    \usepackage{titling}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage{array}     % table support for pandoc >= 2.11.3
+    \usepackage{calc}      % table minipage width calculation for pandoc >= 2.11.1
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{mathrsfs}
+    
+
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % common color for the border for error outputs.
+    \definecolor{outerrorbackground}{HTML}{FFDFDF}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+
+    
+    
+    
+    
+	% Pygments definitions
+	\makeatletter
+	\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+		\let\PY@ul=\relax \let\PY@tc=\relax%
+		\let\PY@bc=\relax \let\PY@ff=\relax}
+	\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+	\def\PY@toks#1+{\ifx\relax#1\empty\else%
+		\PY@tok{#1}\expandafter\PY@toks\fi}
+	\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+		\PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+	\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+	\@namedef{PY@tok@w}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+	\@namedef{PY@tok@c}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+	\@namedef{PY@tok@cp}{\def\PY@tc##1{\textcolor[rgb]{0.61,0.40,0.00}{##1}}}
+	\@namedef{PY@tok@k}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@kp}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@kt}{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+	\@namedef{PY@tok@o}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+	\@namedef{PY@tok@ow}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+	\@namedef{PY@tok@nb}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@nf}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+	\@namedef{PY@tok@nc}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+	\@namedef{PY@tok@nn}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+	\@namedef{PY@tok@ne}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.80,0.25,0.22}{##1}}}
+	\@namedef{PY@tok@nv}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+	\@namedef{PY@tok@no}{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+	\@namedef{PY@tok@nl}{\def\PY@tc##1{\textcolor[rgb]{0.46,0.46,0.00}{##1}}}
+	\@namedef{PY@tok@ni}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.44,0.44,0.44}{##1}}}
+	\@namedef{PY@tok@na}{\def\PY@tc##1{\textcolor[rgb]{0.41,0.47,0.13}{##1}}}
+	\@namedef{PY@tok@nt}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@nd}{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+	\@namedef{PY@tok@s}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@sd}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@si}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.64,0.35,0.47}{##1}}}
+	\@namedef{PY@tok@se}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.36,0.12}{##1}}}
+	\@namedef{PY@tok@sr}{\def\PY@tc##1{\textcolor[rgb]{0.64,0.35,0.47}{##1}}}
+	\@namedef{PY@tok@ss}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+	\@namedef{PY@tok@sx}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@m}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+	\@namedef{PY@tok@gh}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+	\@namedef{PY@tok@gu}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+	\@namedef{PY@tok@gd}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+	\@namedef{PY@tok@gi}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.52,0.00}{##1}}}
+	\@namedef{PY@tok@gr}{\def\PY@tc##1{\textcolor[rgb]{0.89,0.00,0.00}{##1}}}
+	\@namedef{PY@tok@ge}{\let\PY@it=\textit}
+	\@namedef{PY@tok@gs}{\let\PY@bf=\textbf}
+	\@namedef{PY@tok@gp}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+	\@namedef{PY@tok@go}{\def\PY@tc##1{\textcolor[rgb]{0.44,0.44,0.44}{##1}}}
+	\@namedef{PY@tok@gt}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+	\@namedef{PY@tok@err}{\def\PY@bc##1{{\setlength{\fboxsep}{\string -\fboxrule}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}}
+	\@namedef{PY@tok@kc}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@kd}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@kn}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@kr}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@bp}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@fm}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+	\@namedef{PY@tok@vc}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+	\@namedef{PY@tok@vg}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+	\@namedef{PY@tok@vi}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+	\@namedef{PY@tok@vm}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+	\@namedef{PY@tok@sa}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@sb}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@sc}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@dl}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@s2}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@sh}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@s1}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@mb}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+	\@namedef{PY@tok@mf}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+	\@namedef{PY@tok@mh}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+	\@namedef{PY@tok@mi}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+	\@namedef{PY@tok@il}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+	\@namedef{PY@tok@mo}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+	\@namedef{PY@tok@ch}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+	\@namedef{PY@tok@cm}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+	\@namedef{PY@tok@cpf}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+	\@namedef{PY@tok@c1}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+	\@namedef{PY@tok@cs}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+
+	\def\PYZbs{\char`\\}
+	\def\PYZus{\char`\_}
+	\def\PYZob{\char`\{}
+	\def\PYZcb{\char`\}}
+	\def\PYZca{\char`\^}
+	\def\PYZam{\char`\&}
+	\def\PYZlt{\char`\<}
+	\def\PYZgt{\char`\>}
+	\def\PYZsh{\char`\#}
+	\def\PYZpc{\char`\%}
+	\def\PYZdl{\char`\$}
+	\def\PYZhy{\char`\-}
+	\def\PYZsq{\char`\'}
+	\def\PYZdq{\char`\"}
+	\def\PYZti{\char`\~}
+	% for compatibility with earlier versions
+	\def\PYZat{@}
+	\def\PYZlb{[}
+	\def\PYZrb{]}
+	\makeatother
+
+
+    % For linebreaks inside Verbatim environment from package fancyvrb.
+    \makeatletter
+        \newbox\Wrappedcontinuationbox
+        \newbox\Wrappedvisiblespacebox
+        \newcommand*\Wrappedvisiblespace {\textcolor{red}{\textvisiblespace}}
+        \newcommand*\Wrappedcontinuationsymbol {\textcolor{red}{\llap{\tiny$\m@th\hookrightarrow$}}}
+        \newcommand*\Wrappedcontinuationindent {3ex }
+        \newcommand*\Wrappedafterbreak {\kern\Wrappedcontinuationindent\copy\Wrappedcontinuationbox}
+        % Take advantage of the already applied Pygments mark-up to insert
+        % potential linebreaks for TeX processing.
+        %        {, <, #, %, $, ' and ": go to next line.
+        %        _, }, ^, &, >, - and ~: stay at end of broken line.
+        % Use of \textquotesingle for straight quote.
+        \newcommand*\Wrappedbreaksatspecials {%
+            \def\PYGZus{\discretionary{\char`\_}{\Wrappedafterbreak}{\char`\_}}%
+            \def\PYGZob{\discretionary{}{\Wrappedafterbreak\char`\{}{\char`\{}}%
+            \def\PYGZcb{\discretionary{\char`\}}{\Wrappedafterbreak}{\char`\}}}%
+            \def\PYGZca{\discretionary{\char`\^}{\Wrappedafterbreak}{\char`\^}}%
+            \def\PYGZam{\discretionary{\char`\&}{\Wrappedafterbreak}{\char`\&}}%
+            \def\PYGZlt{\discretionary{}{\Wrappedafterbreak\char`\<}{\char`\<}}%
+            \def\PYGZgt{\discretionary{\char`\>}{\Wrappedafterbreak}{\char`\>}}%
+            \def\PYGZsh{\discretionary{}{\Wrappedafterbreak\char`\#}{\char`\#}}%
+            \def\PYGZpc{\discretionary{}{\Wrappedafterbreak\char`\%}{\char`\%}}%
+            \def\PYGZdl{\discretionary{}{\Wrappedafterbreak\char`\$}{\char`\$}}%
+            \def\PYGZhy{\discretionary{\char`\-}{\Wrappedafterbreak}{\char`\-}}%
+            \def\PYGZsq{\discretionary{}{\Wrappedafterbreak\textquotesingle}{\textquotesingle}}%
+            \def\PYGZdq{\discretionary{}{\Wrappedafterbreak\char`\"}{\char`\"}}%
+            \def\PYGZti{\discretionary{\char`\~}{\Wrappedafterbreak}{\char`\~}}%
+        }
+        % Some characters . , ; ? ! / are not pygmentized.
+        % This macro makes them "active" and they will insert potential linebreaks
+        \newcommand*\Wrappedbreaksatpunct {%
+            \lccode`\~`\.\lowercase{\def~}{\discretionary{\hbox{\char`\.}}{\Wrappedafterbreak}{\hbox{\char`\.}}}%
+            \lccode`\~`\,\lowercase{\def~}{\discretionary{\hbox{\char`\,}}{\Wrappedafterbreak}{\hbox{\char`\,}}}%
+            \lccode`\~`\;\lowercase{\def~}{\discretionary{\hbox{\char`\;}}{\Wrappedafterbreak}{\hbox{\char`\;}}}%
+            \lccode`\~`\:\lowercase{\def~}{\discretionary{\hbox{\char`\:}}{\Wrappedafterbreak}{\hbox{\char`\:}}}%
+            \lccode`\~`\?\lowercase{\def~}{\discretionary{\hbox{\char`\?}}{\Wrappedafterbreak}{\hbox{\char`\?}}}%
+            \lccode`\~`\!\lowercase{\def~}{\discretionary{\hbox{\char`\!}}{\Wrappedafterbreak}{\hbox{\char`\!}}}%
+            \lccode`\~`\/\lowercase{\def~}{\discretionary{\hbox{\char`\/}}{\Wrappedafterbreak}{\hbox{\char`\/}}}%
+            \catcode`\.\active
+            \catcode`\,\active
+            \catcode`\;\active
+            \catcode`\:\active
+            \catcode`\?\active
+            \catcode`\!\active
+            \catcode`\/\active
+            \lccode`\~`\~
+        }
+    \makeatother
+
+    \let\OriginalVerbatim=\Verbatim
+    \makeatletter
+    \renewcommand{\Verbatim}[1][1]{%
+        %\parskip\z@skip
+        \sbox\Wrappedcontinuationbox {\Wrappedcontinuationsymbol}%
+        \sbox\Wrappedvisiblespacebox {\FV@SetupFont\Wrappedvisiblespace}%
+        \def\FancyVerbFormatLine ##1{\hsize\linewidth
+            \vtop{\raggedright\hyphenpenalty\z@\exhyphenpenalty\z@
+                \doublehyphendemerits\z@\finalhyphendemerits\z@
+                \strut ##1\strut}%
+        }%
+        % If the linebreak is at a space, the latter will be displayed as visible
+        % space at end of first line, and a continuation symbol starts next line.
+        % Stretch/shrink are however usually zero for typewriter font.
+        \def\FV@Space {%
+            \nobreak\hskip\z@ plus\fontdimen3\font minus\fontdimen4\font
+            \discretionary{\copy\Wrappedvisiblespacebox}{\Wrappedafterbreak}
+            {\kern\fontdimen2\font}%
+        }%
+
+        % Allow breaks at special characters using \PYG... macros.
+        \Wrappedbreaksatspecials
+        % Breaks at punctuation characters . , ; ? ! and / need catcode=\active
+        \OriginalVerbatim[#1,codes*=\Wrappedbreaksatpunct]%
+    }
+    \makeatother
+
+    % Exact colors from NB
+    \definecolor{incolor}{HTML}{303F9F}
+    \definecolor{outcolor}{HTML}{D84315}
+    \definecolor{cellborder}{HTML}{CFCFCF}
+    \definecolor{cellbackground}{HTML}{F7F7F7}
+
+    % prompt
+    \makeatletter
+    \newcommand{\boxspacing}{\kern\kvtcb@left@rule\kern\kvtcb@boxsep}
+    \makeatother
+    \newcommand{\prompt}[4]{
+        {\ttfamily\llap{{\color{#2}[#3]:\hspace{3pt}#4}}\vspace{-\baselineskip}}
+    }
+    
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    
+
+\begin{document}
+
+\section{Закгрузка insurance.csv}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{1}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{2}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3/insurance.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+
+\section{Статистика по данным}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{3}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt,
+	pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{3}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+age          bmi     children       charges
+count  1338.000000  1338.000000  1338.000000   1338.000000
+mean     39.207025    30.663397     1.094918  13270.422265
+std      14.049960     6.098187     1.205493  12110.011237
+min      18.000000    15.960000     0.000000   1121.873900
+25\%      27.000000    26.296250     0.000000   4740.287150
+50\%      39.000000    30.400000     1.000000   9382.033000
+75\%      51.000000    34.693750     2.000000  16639.912515
+max      64.000000    53.130000     5.000000  63770.428010
+\end{Verbatim}
+\end{tcolorbox}
+
+\section{Гистограмма для числовых показателей}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{4}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{5}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Построение гистограмм}
+\PY{n}{df}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{center}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_7_0.png}
+\end{center}
+
+\section{Меры центральной тенденции и меры разброса для индекса массы
+тела (bmi) и расходов (charges)}
+
+\hypertarget{bmi}{%
+\subsection{BMI}\label{bmi}}
+
+Найдем среднее, медиану и моду, а также дисперсию, стандартное
+отклонение и квартильные размахи.
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{6}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{mean\PYZus{}bmi} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bmi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\PY{n}{median\PYZus{}bmi} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bmi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{median}\PY{p}{(}\PY{p}{)}
+\PY{n}{mode\PYZus{}bmi} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bmi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mode}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\PY{n}{std\PYZus{}bmi} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bmi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+\PY{n}{var\PYZus{}bmi} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bmi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{p}{)}
+
+\PY{p}{(}\PY{n}{mean\PYZus{}bmi}\PY{p}{,} \PY{n}{median\PYZus{}bmi}\PY{p}{,} \PY{n}{mode\PYZus{}bmi}\PY{p}{,} \PY{n}{std\PYZus{}bmi}\PY{p}{,} \PY{n}{var\PYZus{}bmi}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt,
+	pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{6}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+(30.66339686098655, 30.4, 32.3, 6.098186911679014, 37.18788360977323)
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{7}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bmi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.7}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{mean\PYZus{}bmi}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean: }\PY{l+s+si}{\PYZob{}}\PY{n}{mean\PYZus{}bmi}\PY{l+s+si}{:}\PY{l+s+s1}{.2f}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{median\PYZus{}bmi}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Median: }\PY{l+s+si}{\PYZob{}}\PY{n}{median\PYZus{}bmi}\PY{l+s+si}{:}\PY{l+s+s1}{.2f}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{mode\PYZus{}bmi}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mode: }\PY{l+s+si}{\PYZob{}}\PY{n}{mode\PYZus{}bmi}\PY{l+s+si}{:}\PY{l+s+s1}{.2f}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BMI Distribution with Measures of Central Tendency}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BMI}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Frequency}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{center}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_0.png}
+\end{center}
+
+\hypertarget{charges}{%
+\subsection{Charges}\label{charges}}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{8}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{mean\PYZus{}charges} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{charges}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\PY{n}{median\PYZus{}charges} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{charges}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{median}\PY{p}{(}\PY{p}{)}
+\PY{n}{mode\PYZus{}charges} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{charges}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mode}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\PY{n}{std\PYZus{}charges} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{charges}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+\PY{n}{var\PYZus{}charges} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{charges}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{p}{)}
+
+\PY{p}{(}\PY{n}{mean\PYZus{}charges}\PY{p}{,} \PY{n}{median\PYZus{}charges}\PY{p}{,} \PY{n}{mode\PYZus{}charges}\PY{p}{,} \PY{n}{std\PYZus{}charges}\PY{p}{,} \PY{n}{var\PYZus{}charges}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt,
+	pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{8}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+(13270.422265141257,
+9382.033,
+1639.5631,
+12110.011236694001,
+146652372.15285498)
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{9}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{charges}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.7}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{mean\PYZus{}charges}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean: }\PY{l+s+si}{\PYZob{}}\PY{n}{mean\PYZus{}charges}\PY{l+s+si}{:}\PY{l+s+s1}{.2f}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{median\PYZus{}charges}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Median: }\PY{l+s+si}{\PYZob{}}\PY{n}{median\PYZus{}charges}\PY{l+s+si}{:}\PY{l+s+s1}{.2f}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{mode\PYZus{}charges}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mode: }\PY{l+s+si}{\PYZob{}}\PY{n}{mode\PYZus{}charges}\PY{l+s+si}{:}\PY{l+s+s1}{.2f}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Charges Distribution with Measures of Central Tendency}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Charges}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Frequency}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{center}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_0.png}
+\end{center}
+
+\section{Box-Plot для числовых показателей}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{10}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{column}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bmi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{children}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{charges}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Box\PYZhy{}Plot for Numeric Features}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{center}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_0.png}
+\end{center}
+
+\section{Центральная предельная теорема}
+
+Проверим выполнение центральной предельной теоремы для признаков charges
+и bmi путем взятия случайных подвыборок разной длины и вычисления их
+средних.
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{11}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\end{Verbatim}
+\end{tcolorbox}
+
+Функция для выборки средних значений
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{12}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{sample\PYZus{}means}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{n}\PY{p}{,} \PY{n}{samples}\PY{o}{=}\PY{l+m+mi}{300}\PY{p}{)}\PY{p}{:}
+\PY{n}{means} \PY{o}{=} \PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{samples}\PY{p}{)}\PY{p}{]}
+\PY{k}{return} \PY{n}{means}
+\end{Verbatim}
+\end{tcolorbox}
+
+\hypertarget{bmi}{%
+\subsection{BMI}\label{bmi}}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{13}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{sample\PYZus{}means\PYZus{}bmi} \PY{o}{=} \PY{n}{sample\PYZus{}means}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bmi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{n}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{14}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{sample\PYZus{}means\PYZus{}bmi}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sample Means for BMI (n=50)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{center}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_0.png}
+\end{center}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{15}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{std\PYZus{}means\PYZus{}bmi} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{sample\PYZus{}means\PYZus{}bmi}\PY{p}{)}
+\PY{n}{mean\PYZus{}means\PYZus{}bmi} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{sample\PYZus{}means\PYZus{}bmi}\PY{p}{)}
+\PY{p}{(}\PY{n}{std\PYZus{}means\PYZus{}bmi}\PY{p}{,} \PY{n}{mean\PYZus{}means\PYZus{}bmi}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt,
+	pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{15}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+(0.8577150248691126, 30.682377333333335)
+\end{Verbatim}
+\end{tcolorbox}
+
+\hypertarget{charges}{%
+\subsection{Charges}\label{charges}}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{16}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{sample\PYZus{}means\PYZus{}charges} \PY{o}{=} \PY{n}{sample\PYZus{}means}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{charges}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{n}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{17}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{sample\PYZus{}means\PYZus{}charges}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sample Means for Charges (n=50)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{center}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_0.png}
+\end{center}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{18}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{std\PYZus{}means\PYZus{}charges} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{sample\PYZus{}means\PYZus{}charges}\PY{p}{)}
+\PY{n}{mean\PYZus{}means\PYZus{}charges} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{sample\PYZus{}means\PYZus{}charges}\PY{p}{)}
+\PY{p}{(}\PY{n}{std\PYZus{}means\PYZus{}bmi}\PY{p}{,} \PY{n}{mean\PYZus{}means\PYZus{}bmi}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt,
+	pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{18}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+(0.8577150248691126, 30.682377333333335)
+\end{Verbatim}
+\end{tcolorbox}
+
+\section{Доверительные интервалы для Charges и BMI}
+
+Построим 95\% и 99\% доверительные интервалы для среднего значения
+расходов (charges) и индекса массы тела (bmi).
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{19}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{as} \PY{n+nn}{stats}
+\end{Verbatim}
+\end{tcolorbox}
+
+\hypertarget{bmi}{%
+\subsection{BMI}\label{bmi}}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{20}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{ci\PYZus{}95\PYZus{}bmi} \PY{o}{=} \PY{n}{stats}\PY{o}{.}\PY{n}{norm}\PY{o}{.}\PY{n}{interval}\PY{p}{(}\PY{l+m+mf}{0.95}\PY{p}{,} \PY{n}{loc}\PY{o}{=}\PY{n}{mean\PYZus{}bmi}\PY{p}{,} \PY{n}{scale}\PY{o}{=}\PY{n}{std\PYZus{}bmi}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bmi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\PY{n}{ci\PYZus{}99\PYZus{}bmi} \PY{o}{=} \PY{n}{stats}\PY{o}{.}\PY{n}{norm}\PY{o}{.}\PY{n}{interval}\PY{p}{(}\PY{l+m+mf}{0.99}\PY{p}{,} \PY{n}{loc}\PY{o}{=}\PY{n}{mean\PYZus{}bmi}\PY{p}{,} \PY{n}{scale}\PY{o}{=}\PY{n}{std\PYZus{}bmi}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bmi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\PY{n}{ci\PYZus{}95\PYZus{}bmi}\PY{p}{,} \PY{n}{ci\PYZus{}99\PYZus{}bmi}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt,
+	pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{20}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+((30.336642971534822, 30.990150750438275),
+(30.233969458168303, 31.092824263804793))
+\end{Verbatim}
+\end{tcolorbox}
+
+\hypertarget{charges}{%
+\subsection{Charges}\label{charges}}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{21}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{ci\PYZus{}95\PYZus{}charges} \PY{o}{=} \PY{n}{stats}\PY{o}{.}\PY{n}{norm}\PY{o}{.}\PY{n}{interval}\PY{p}{(}\PY{l+m+mf}{0.95}\PY{p}{,} \PY{n}{loc}\PY{o}{=}\PY{n}{mean\PYZus{}charges}\PY{p}{,} \PY{n}{scale}\PY{o}{=}\PY{n}{std\PYZus{}charges}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{charges}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\PY{n}{ci\PYZus{}99\PYZus{}charges} \PY{o}{=} \PY{n}{stats}\PY{o}{.}\PY{n}{norm}\PY{o}{.}\PY{n}{interval}\PY{p}{(}\PY{l+m+mf}{0.99}\PY{p}{,} \PY{n}{loc}\PY{o}{=}\PY{n}{mean\PYZus{}charges}\PY{p}{,} \PY{n}{scale}\PY{o}{=}\PY{n}{std\PYZus{}charges}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{charges}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\PY{n}{ci\PYZus{}95\PYZus{}charges}\PY{p}{,} \PY{n}{ci\PYZus{}99\PYZus{}charges}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt,
+	pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{21}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+((12621.54197822916, 13919.302552053354),
+(12417.649014863586, 14123.195515418927))
+\end{Verbatim}
+\end{tcolorbox}
+
+\section{Проверка нормальности распределений
+с использованием KS-теста и Q-Q plot}
+
+Наконец, проверим нормальность распределений для признаков bmi и charges
+с помощью теста Колмогорова-Смирнова (KS-теста) и построим Q-Q plot.
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{22}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k+kn}{import} \PY{n}{kstest}\PY{p}{,} \PY{n}{probplot}
+\end{Verbatim}
+\end{tcolorbox}
+
+\hypertarget{bmi}{%
+\subsection{BMI}\label{bmi}}
+
+KS-тест
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{23}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{ks\PYZus{}bmi} \PY{o}{=} \PY{n}{kstest}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bmi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{norm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{args}\PY{o}{=}\PY{p}{(}\PY{n}{mean\PYZus{}bmi}\PY{p}{,} \PY{n}{std\PYZus{}bmi}\PY{p}{)}\PY{p}{)}
+\PY{n}{ks\PYZus{}bmi}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt,
+	pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{23}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+KstestResult(statistic=0.026099881197044872, pvalue=0.3162798242838005,
+statistic\_location=28.975, statistic\_sign=1)
+\end{Verbatim}
+\end{tcolorbox}
+
+Q-Q plot
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{24}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{probplot}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bmi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{dist}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{norm}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{plot}\PY{o}{=}\PY{n}{plt}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Q\PYZhy{}Q Plot for BMI}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{center}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_44_0.png}
+\end{center}
+
+\hypertarget{charges}{%
+\subsection{Charges}\label{charges}}
+
+KS-тест
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{25}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{ks\PYZus{}charges} \PY{o}{=} \PY{n}{kstest}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{charges}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{norm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{args}\PY{o}{=}\PY{p}{(}\PY{n}{mean\PYZus{}charges}\PY{p}{,} \PY{n}{std\PYZus{}charges}\PY{p}{)}\PY{p}{)}
+\PY{n}{ks\PYZus{}charges}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt,
+	pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{25}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+KstestResult(statistic=0.18846450965981876, pvalue=4.381949677777384e-42,
+statistic\_location=13470.86, statistic\_sign=1)
+\end{Verbatim}
+\end{tcolorbox}
+
+Q-Q plot
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{26}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{probplot}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{charges}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{dist}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{norm}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{plot}\PY{o}{=}\PY{n}{plt}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Q\PYZhy{}Q Plot for Charges}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{center}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_49_0.png}
+\end{center}
+
+\section{Загрузка данных}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{27}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df\PYZus{}cases} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3/ECDCCases.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{df\PYZus{}cases}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt,
+	pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{27}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+dateRep  day  month  year  cases  deaths countriesAndTerritories geoId  \textbackslash{}
+0  14/12/2020   14     12  2020    746       6             Afghanistan    AF
+1  13/12/2020   13     12  2020    298       9             Afghanistan    AF
+2  12/12/2020   12     12  2020    113      11             Afghanistan    AF
+3  12/12/2020   12     12  2020    113      11             Afghanistan    AF
+4  11/12/2020   11     12  2020     63      10             Afghanistan    AF
+
+countryterritoryCode  popData2019 continentExp  \textbackslash{}
+0                  AFG   38041757.0         Asia
+1                  AFG   38041757.0         Asia
+2                  AFG   38041757.0         Asia
+3                  AFG   38041757.0         Asia
+4                  AFG   38041757.0         Asia
+
+Cumulative\_number\_for\_14\_days\_of\_COVID-19\_cases\_per\_100000
+0                                           9.013779
+1                                           7.052776
+2                                           6.868768
+3                                           6.868768
+4                                           7.134266
+\end{Verbatim}
+\end{tcolorbox}
+
+\section{Проверка и обработка пропущенных значений}
+
+Для начала проверим, есть ли в данных пропуски, и выведем их количество
+в процентах. Затем удалим два признака, в которых больше всего
+пропусков, и обработаем оставшиеся.
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{28}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{missing\PYZus{}data\PYZus{}percent} \PY{o}{=} \PY{n}{df\PYZus{}cases}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{100}
+\PY{n}{missing\PYZus{}data\PYZus{}percent}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt,
+	pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{28}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+Cumulative\_number\_for\_14\_days\_of\_COVID-19\_cases\_per\_100000    4.650750
+geoId                                                         0.444236
+countryterritoryCode                                          0.198695
+popData2019                                                   0.198695
+dateRep                                                       0.000000
+day                                                           0.000000
+month                                                         0.000000
+year                                                          0.000000
+cases                                                         0.000000
+deaths                                                        0.000000
+countriesAndTerritories                                       0.000000
+continentExp                                                  0.000000
+dtype: float64
+\end{Verbatim}
+\end{tcolorbox}
+
+Теперь удалим два признака с наибольшим количеством пропущенных
+значений.
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{29}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{columns\PYZus{}to\PYZus{}drop} \PY{o}{=} \PY{n}{missing\PYZus{}data\PYZus{}percent}\PY{o}{.}\PY{n}{nlargest}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{.}\PY{n}{index}
+\PY{n}{df\PYZus{}cases\PYZus{}cleaned} \PY{o}{=} \PY{n}{df\PYZus{}cases}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{n}{columns\PYZus{}to\PYZus{}drop}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{30}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df\PYZus{}cases\PYZus{}cleaned}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt,
+	pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{30}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+246
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{31}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{for} \PY{n}{column} \PY{o+ow}{in} \PY{n}{df\PYZus{}cases\PYZus{}cleaned}\PY{o}{.}\PY{n}{columns}\PY{p}{:}
+\PY{k}{if} \PY{n}{df\PYZus{}cases\PYZus{}cleaned}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{.}\PY{n}{dtype} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{object}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+\PY{n}{df\PYZus{}cases\PYZus{}cleaned}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{other}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\PY{k}{else}\PY{p}{:}
+\PY{n}{median\PYZus{}value} \PY{o}{=} \PY{n}{df\PYZus{}cases\PYZus{}cleaned}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{.}\PY{n}{median}\PY{p}{(}\PY{p}{)}
+\PY{n}{df\PYZus{}cases\PYZus{}cleaned}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{n}{median\PYZus{}value}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{32}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df\PYZus{}cases\PYZus{}cleaned}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt,
+	pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{32}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+0
+\end{Verbatim}
+\end{tcolorbox}
+
+\section{Статистика по данным и анализ выбросов}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{33}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{description\PYZus{}cases} \PY{o}{=} \PY{n}{df\PYZus{}cases\PYZus{}cleaned}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\PY{n}{description\PYZus{}cases}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt,
+	pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{33}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+day         month          year          cases        deaths  \textbackslash{}
+count  61904.000000  61904.000000  61904.000000   61904.000000  61904.000000
+mean      15.629232      7.067104   2019.998918    1155.079026     26.053987
+std        8.841624      2.954816      0.032881    6779.010824    131.222948
+min        1.000000      1.000000   2019.000000   -8261.000000  -1918.000000
+25\%        8.000000      5.000000   2020.000000       0.000000      0.000000
+50\%       15.000000      7.000000   2020.000000      15.000000      0.000000
+75\%       23.000000     10.000000   2020.000000     273.000000      4.000000
+max       31.000000     12.000000   2020.000000  234633.000000   4928.000000
+
+popData2019
+count  6.190400e+04
+mean   4.091909e+07
+std    1.529798e+08
+min    8.150000e+02
+25\%    1.324820e+06
+50\%    7.169456e+06
+75\%    2.851583e+07
+max    1.433784e+09
+\end{Verbatim}
+\end{tcolorbox}
+
+Для обнаружения выбросов можно воспользоваться межквартильным размахом
+(IQR) или пороговыми значениями. Также найдем дни, когда количество
+смертей превысило 3000.
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{34}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{high\PYZus{}death\PYZus{}cases} \PY{o}{=} \PY{n}{df\PYZus{}cases\PYZus{}cleaned}\PY{p}{[}\PY{n}{df\PYZus{}cases\PYZus{}cleaned}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{deaths}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{3000}\PY{p}{]}
+
+\PY{n}{high\PYZus{}death\PYZus{}days} \PY{o}{=} \PY{n}{high\PYZus{}death\PYZus{}cases}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+
+\PY{n}{high\PYZus{}death\PYZus{}cases}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{day}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{deaths}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt,
+	pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{34}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+day  deaths
+2118     2    3351
+16908    7    3800
+37038    9    3013
+44888   14    3935
+44909   24    3887
+59007   12    3343
+59009   10    3124
+59016    3    3190
+59239   24    3179
+59245   18    3770
+59247   16    4928
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{35}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{high\PYZus{}death\PYZus{}days}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt,
+	pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{35}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+11
+\end{Verbatim}
+\end{tcolorbox}
+
+\section{Поиск дубликатов и их удаление}
+
+Проверим наличие дубликатов и удалим их.
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{36}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df\PYZus{}cases\PYZus{}cleaned}\PY{o}{.}\PY{n}{duplicated}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt,
+	pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{36}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+4
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{37}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df\PYZus{}cases\PYZus{}no\PYZus{}duplicates} \PY{o}{=} \PY{n}{df\PYZus{}cases\PYZus{}cleaned}\PY{o}{.}\PY{n}{drop\PYZus{}duplicates}\PY{p}{(}\PY{p}{)}
+\PY{n}{df\PYZus{}cases\PYZus{}no\PYZus{}duplicates}\PY{o}{.}\PY{n}{duplicated}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt,
+	pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{37}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+0
+\end{Verbatim}
+\end{tcolorbox}
+
+\section{Загрузка данных и выделение выборок}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{38}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df\PYZus{}bmi} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3/bmi.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{39}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{northwest\PYZus{}bmi} \PY{o}{=} \PY{n}{df\PYZus{}bmi}\PY{p}{[}\PY{n}{df\PYZus{}bmi}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{northwest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bmi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\PY{n}{southwest\PYZus{}bmi} \PY{o}{=} \PY{n}{df\PYZus{}bmi}\PY{p}{[}\PY{n}{df\PYZus{}bmi}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{southwest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bmi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\PY{n+nb}{len}\PY{p}{(}\PY{n}{northwest\PYZus{}bmi}\PY{p}{)}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{southwest\PYZus{}bmi}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt,
+	pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{39}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+(325, 325)
+\end{Verbatim}
+\end{tcolorbox}
+
+\section{Проверка на нормальность (критерий Шапиро-Уилка)}
+
+Теперь проверим обе выборки на нормальность с помощью критерия
+Шапиро-Уилка.
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{40}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k+kn}{import} \PY{n}{shapiro}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{41}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{shapiro\PYZus{}northwest} \PY{o}{=} \PY{n}{shapiro}\PY{p}{(}\PY{n}{northwest\PYZus{}bmi}\PY{p}{)}
+\PY{n}{shapiro\PYZus{}southwest} \PY{o}{=} \PY{n}{shapiro}\PY{p}{(}\PY{n}{southwest\PYZus{}bmi}\PY{p}{)}
+\PY{n}{shapiro\PYZus{}northwest}\PY{p}{,} \PY{n}{shapiro\PYZus{}southwest}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt,
+	pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{41}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+(ShapiroResult(statistic=0.995464981663833, pvalue=0.4655897798883668),
+ShapiroResult(statistic=0.9949269360950754, pvalue=0.36296471144790743))
+\end{Verbatim}
+\end{tcolorbox}
+
+Значение p-value из теста Шапиро-Уилка покажет, можно ли принять
+гипотезу о нормальности распределения. Если p-value \textgreater{} 0.05,
+мы можем предположить, что распределение нормально.
+
+\section{Проверка гомогенности дисперсий (критерий Бартлетта)}
+
+Для проверки гомогенности дисперсий используем критерий Бартлетта.
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{42}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k+kn}{import} \PY{n}{bartlett}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{43}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{bartlett\PYZus{}test} \PY{o}{=} \PY{n}{bartlett}\PY{p}{(}\PY{n}{northwest\PYZus{}bmi}\PY{p}{,} \PY{n}{southwest\PYZus{}bmi}\PY{p}{)}
+\PY{n}{bartlett\PYZus{}test}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt,
+	pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{43}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+BartlettResult(statistic=3.4000745256459286, pvalue=0.06519347353581818)
+\end{Verbatim}
+\end{tcolorbox}
+
+Если p-value \textgreater{} 0.05, это указывает на то, что дисперсии
+можно считать одинаковыми (гомогенными).
+
+\section{Сравнение средних значений с использованием t-критерия Стьюдента}
+
+Если выборки проходят проверки на нормальность и гомогенность дисперсий,
+можно использовать t-критерий Стьюдента для независимых выборок.
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{44}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k+kn}{import} \PY{n}{ttest\PYZus{}ind}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{45}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{t\PYZus{}test} \PY{o}{=} \PY{n}{ttest\PYZus{}ind}\PY{p}{(}\PY{n}{northwest\PYZus{}bmi}\PY{p}{,} \PY{n}{southwest\PYZus{}bmi}\PY{p}{,} \PY{n}{equal\PYZus{}var}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\PY{n}{t\PYZus{}test}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt,
+	pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{45}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+TtestResult(statistic=-3.2844171500398582, pvalue=0.001076958496307695,
+df=648.0)
+\end{Verbatim}
+\end{tcolorbox}
+
+Значение p-value из t-критерия Стьюдента покажет, есть ли статистически
+значимая разница между средними значениями двух выборок. Если p-value
+\textless{} 0.05, гипотеза о равенстве средних отклоняется, и можно
+утверждать, что средние значения различаются.
+
+\section{Проверка равномерности распределения с помощью критерия Хи-квадрат}
+
+Для проверки равномерности распределения результатов бросков кубика
+воспользуемся критерием Хи-квадрат. Сначала создадим массив наблюдаемых
+значений и массив ожидаемых значений (равномерное распределение).
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{46}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k+kn}{import} \PY{n}{chisquare}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{47}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{observed} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{97}\PY{p}{,} \PY{l+m+mi}{98}\PY{p}{,} \PY{l+m+mi}{109}\PY{p}{,} \PY{l+m+mi}{95}\PY{p}{,} \PY{l+m+mi}{97}\PY{p}{,} \PY{l+m+mi}{104}\PY{p}{]}
+\PY{n}{expected} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{600} \PY{o}{/} \PY{l+m+mi}{6}\PY{p}{]} \PY{o}{*} \PY{l+m+mi}{6}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{48}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{chi2\PYZus{}stat}\PY{p}{,} \PY{n}{p\PYZus{}value} \PY{o}{=} \PY{n}{chisquare}\PY{p}{(}\PY{n}{observed}\PY{p}{,} \PY{n}{expected}\PY{p}{)}
+\PY{n}{chi2\PYZus{}stat}\PY{p}{,} \PY{n}{p\PYZus{}value}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt,
+	pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{48}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+(1.44, 0.9198882077437889)
+\end{Verbatim}
+\end{tcolorbox}
+
+p-value \textgreater{} 0.05, значит гипотеза о равномерности принимается
+(кубик можно считать ``справедливым'').
+
+\section{Проверка независимости переменных (семейное положение и занятость)
+с помощью критерия Хи-квадрат}
+
+Теперь проверим, влияет ли семейное положение на занятость, используя
+таблицу сопряженности и критерий Хи-квадрат.
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{49}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+\PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k+kn}{import} \PY{n}{chi2\PYZus{}contingency}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{50}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}
+\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Женат}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{89}\PY{p}{,} \PY{l+m+mi}{17}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{,} \PY{l+m+mi}{43}\PY{p}{,} \PY{l+m+mi}{22}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Гражданский брак}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{80}\PY{p}{,} \PY{l+m+mi}{22}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{35}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{]}\PY{p}{,}
+\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Не состоит в отношениях}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{35}\PY{p}{,} \PY{l+m+mi}{44}\PY{p}{,} \PY{l+m+mi}{35}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{22}\PY{p}{]}
+\PY{p}{\PYZcb{}}\PY{p}{)}
+\PY{n}{data}\PY{o}{.}\PY{n}{index} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Полный рабочий день}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Частичная занятость}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Временно не работает}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{На домохозяйстве}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{На пенсии}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Учёба}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{51}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{chi2\PYZus{}stat}\PY{p}{,} \PY{n}{p\PYZus{}value}\PY{p}{,} \PY{n}{dof}\PY{p}{,} \PY{n}{expected} \PY{o}{=} \PY{n}{chi2\PYZus{}contingency}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+\PY{n}{chi2\PYZus{}stat}\PY{p}{,} \PY{n}{p\PYZus{}value}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt,
+	pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{51}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+(122.29654948595365, 1.7291616900960234e-21)
+\end{Verbatim}
+\end{tcolorbox}
+
+p-value значение значительно меньше 0.05. Это указывает на то, что есть
+статистически значимая связь между семейным положением и занятостью.
+
+На основании полученного результата, можно утверждать, что семейное
+положение влияет на занятость. Это означает, что распределение занятости
+не одинаково для различных категорий семейного положения, и можно
+ожидать, что люди в разных семейных статусах будут по-разному
+представлены в различных категориях занятости.
+
+\end{document}
+

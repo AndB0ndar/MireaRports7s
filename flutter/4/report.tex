@@ -1,0 +1,372 @@
+\section*{ЦЕЛЬ ПРАКТИЧЕСКОЙ РАБОТЫ}
+\addcontentsline{toc}{section}{ЦЕЛЬ ПРАКТИЧЕСКОЙ РАБОТЫ}
+
+План практической работы:
+
+\begin{itemize}
+	\item Создание списков
+	\item Знакомство со SingleChildScrollView
+	\item Знакомство с ListView и его конструкторами
+	\item Удаление элемента из списка
+	\item Знакомство с Key и корректное удаление из списка
+	\item Выполнение практической работы \No\,4;
+\end{itemize}
+
+\clearpage
+
+\section*{ВЫПОЛНЕНИЕ ПРАКТИЧЕСКОЙ РАБОТЫ}
+\addcontentsline{toc}{section}{ВЫПОЛНЕНИЕ ПРАКТИЧЕСКОЙ РАБОТЫ}
+
+\section{Создание списков}
+
+Widget вертикальной верстки \texttt{Column} позволяет располагать Widget-ы
+в нем по вертикали друг за другом.
+При взятии нескольких элементов в Widget-е\texttt{Column} 
+у нас получается элемент верстки --- список.
+Для корректной работы со списком всегда необходимы 2 составляющие:
+контейнер для списка и элемент списка.
+В качестве контейнера списка будет взят Widget \texttt{Column},
+но для элемента списка требуется создать или один из библиотечных Widget-ов,
+или собственный Widget.
+Так же любой элемент состоит из визуального представления и данных,
+которые должны отображаться.
+Поэтому часто для не примитивных данных требуется создание класса-структуры,
+описывающего данные элемента списка.\par
+Итого простейший список может представлять из себя контейнер
+в виде Widget-а \texttt{Column}, а также элемент списка
+с отображением в виде Widget-a Text и данными в виде String.
+Код с простейшим списком представлен на рисунке~\ref{fig:column:simple},
+а его визуализация на рисунке~\ref{fig:column:simple:show}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-28 21-27-24}
+	\caption{Код простого списка на Column}
+	\label{fig:column:simple}
+\end{image}
+
+\begin{image}
+	\includegrph[scale=0.45]{Screenshot from 2024-09-28 21-04-41}
+	\caption{Отображение простого списка на Column}
+	\label{fig:column:simple:show}
+\end{image}
+
+Однако при увеличении количества элементов можно столкнуться с проблемой,
+что не все элементы списка умещаются на экране
+и фреймвокр выдает ошибку отрисовки, продемонстрированную
+на рисунке~\ref{fig:column:simple:show:error}.
+Это связано с тем, что наш контейнер в виде Widget-а \texttt{Column}
+имеет высоту равную высоте всего его содержимого.
+Для решения этой проблемы необходимо
+Widget \texttt{Column} научиться прокручиваться.
+
+\begin{image}
+	\includegrph[scale=0.45]{Screenshot from 2024-09-28 21-05-09}
+	\caption{Ошибка отрисовки}
+	\label{fig:column:simple:show:error}
+\end{image}
+
+\section{Знакомство со SingleChildScrollView}
+
+В фреймворке Flutter имеется Widget,
+позволяющий уместить любой элемент больший, чем размер экрана, в контейнер.
+Widget \texttt{SingleChildScrollView} позволяет разместить внутри себя
+любой Widget большего размера, чем сам он имеет,
+с возможностью скроллить его содержимое в одном из направлений.
+Это позволяет решить проблему, которая была получена в предыдущем пункте.
+При оборачивании контейнера списка в виде Widget-а Column
+в контейнер прокрутки \texttt{SingleChildScrollView}
+полученный список получает возможность скролла и проблема
+с высотой списка более чем размер экрана решается.
+Код прокручиваемого списка изображен на рисунке~\ref{fig:column:scroll},
+а его визуализация на рисунке~\ref{fig:column:scroll:show}.
+
+\begin{image}
+	\includegrph[scale=0.5]{Screenshot from 2024-09-28 21-27-48}
+	\caption{Код обернутого списка на Column}
+	\label{fig:column:scroll}
+\end{image}
+
+\begin{image}
+	\includegrph[scale=0.5]{Screenshot from 2024-09-28 21-06-35}
+	\caption{Отрисовка обернутого списка на Column}
+	\label{fig:column:scroll:show}
+\end{image}
+
+\section{Знакомство с ListView и его конструкторами}
+
+Проблема с прокручиваемыми списками настолько часта,
+что в фреймвоке Flutter создали специальный Widget,
+позволяющий создавать списки сразу с функционалом скролла.
+Widget \texttt{ListView} в качестве основного аргумента принимает
+массив элементов списка, которые будут отображены в нем.
+Помимо аргумента, устанавливающего содержимое списка,
+у Widget-а \texttt{ListView} есть ряд интересных параметров:
+\texttt{reversed} --- позволяет развернуть очередность отображение элементов
+в списке, \texttt{scrollDirection} --- задается объектом класса Axis
+и указывает значение как направления списка, так и направления скролла.\par
+Так же интерес к Widget-у \texttt{ListView} заключается не только
+в его основном конструкторе, но и к его вспомогательным конструкторам.
+\texttt{ListView} имеет ряд вспомогательных конструкторов,
+меняющих его основную механику работы.
+
+\subsection{Builder}
+
+Вспомогательный конструктор\texttt{ListView.builder} 
+позволяет списку создавать и хранить в памяти отображение
+не всех элементов списка, а только тех, которые сейчас находятся на экране.
+Сигнатура конструктора \texttt{ListView.builder} отличительна
+от его основного конструктора.
+Основной особенностью заключается факт того,
+что элементы списка задаются контейнеру не массивом,
+а двумя отдельными параметрами:
+\texttt{itemBuilder} --- отвечающим за отрисовку конкретного элемента
+на экране, \texttt{itemCount} --- отвечающим
+за количество элементов списка в контейнере.
+Смысл заключается в том, что данные списка не лежат в самом контейнере
+и при вызове метода отрисовки элемента списка передается индекс элемента
+и задача разработчика указать, какие данные будут взяты для отрисовки данного
+элемента. Пример кода работы с \texttt{ListView.builder}
+продемонстрирован на рисунке~\ref{fig:list},
+а его визуализация на рисунке~\ref{fig:list:show}.
+
+\begin{image}
+	\includegrph[scale=0.5]{Screenshot from 2024-09-28 21-14-22}
+	\caption{Код списка на ListView.builder}
+	\label{fig:list}
+\end{image}
+
+\begin{image}
+	\includegrph[scale=0.5]{Screenshot from 2024-09-28 21-14-40}
+	\caption{Отображение списка на ListView.builder}
+	\label{fig:list:show}
+\end{image}
+
+\subsection{Separated}
+
+Вспомогательный конструктор \texttt{ListView.separated}
+имеет схожую логику с \texttt{ListView.builder},
+однако он позволяет создавать разделитель между элементами списка.
+Сигнатура конструктора \texttt{ListView.separated}
+не сильно отличительна от его ранее рассмотренного конструктора.
+Единственным отличием является параметр \texttt{separatorBuilder},
+отвечающий за отрисовку разделителя элементов на экране.
+Пример кода работы с \texttt{ListView.separated}
+продемонстрирован на рисунке~\ref{fig:list:sep},
+а его визуализация на рисунке~\ref{fig:list:sep:show}.
+
+\begin{image}
+	\includegrph[scale=0.4]{Screenshot from 2024-09-28 21-32-56}
+	\caption{Код списка на ListView.separated}
+	\label{fig:list:sep}
+\end{image}
+
+\begin{image}
+	\includegrph[scale=0.4]{Screenshot from 2024-09-28 21-20-50}
+	\caption{Отображение списка на ListView.separated}
+	\label{fig:list:sep:show}
+\end{image}
+
+\section{Удаление элемента списка}
+
+Иногда в разработке требуется возможность произвести
+корректировку перечня данных в списке, к примеру удалить один
+или несколько элементов на экране.
+Если контейнер нашего списка расположен в \texttt{Stateless} Widget-е,
+сделать это будет невозможно, однако,
+если перенести наш контейнер в \texttt{Stateful} Widget,
+то при обновлении \texttt{State} нашего Widget-а
+становиться возможно изменить и данные, лежащие в нем.\par
+Для удаления можно обернуть элемент списка в \texttt{GestureDetector} Widget
+для обработки нажатия на него и имея данные элемента списка можно удалить его
+из массива данных через метод \texttt{setState}.
+Реализацию можно рассмотреть на рисунке~\ref{fig:remove}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-28 21-36-07}
+	\caption{Код удаления с помощью GestureDetector}
+	\label{fig:remove}
+\end{image}
+
+Однако, если при удалении последнего элемента списка все выполняется корректно,
+то при удаления любого другого элемента списка удалится не желаемый элемент,
+а все равно последний.
+Связано это с тем, что при удалении не последнего элемента списка,
+при перерисовке экрана, фреймвокр проверяет связь между Widget-ом
+и Element-ом проверяется через тип используемого Widget-а.
+То есть при удалении 3-его элемента списка в виде Widget-а \texttt{Text}
+система удалит его из структуры Widget-ов и перестроит отображение.
+При перестройке оно пройдется по списку
+и сопоставит все Widget-ы с их Element-ами.
+Так как последнему Element-у не достанется Widget-а,
+так как один мы удалили, то он и будет отброшен.
+Эта проблема описывается как стандартная проблема
+<<Удаления не последнего элемента списка>>.\par
+Для решения этой проблемы используются ключи.
+Каждый Widget в качестве одного из параметров своего конструктора принимает
+уникальный ключ, в качестве объекта класса Key.
+Данный ключ позволяет фреймвоку проверять связь между Widget-ом
+и Element-ом не по типу Widget-а, а как раз по данному ключу.
+В качестве объекта значения ключа виджета чаще всего используют класс ValueKey,
+так как он позволяет сделать ключ на основе каких-нибудь данных,
+к примеру данных элемента списка.
+Реализацию списка с ключами можно изучить на рисунке~\ref{fig:remove:key}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-28 21-36-17}
+	\caption{Код удаления с использованиес key}
+	\label{fig:remove:key}
+\end{image}
+
+\clearpage
+
+\section{Реализованное приложение}
+
+Создадим приложение, демонстрирующее на одном экране список
+построенный на Widget-е \texttt{Column},
+на втором на Widget-е \texttt{ListView}
+и на третьем Widget-е \texttt{ListView.separated}.
+На каждом экране должна быть возможность добавить
+и удалить элемент в список из приложения.
+
+\subsection{main.dart}
+
+Файл \texttt{main.dart} нужен для того,
+чтобы предоставить пользователю интерфейс с тремя различными экранами,
+демонстрирующими различные способы отображения списков в Flutter:
+с помощью \texttt{Column}, \texttt{ListView} и \texttt{ListView.separated}.
+Он использует \texttt{BottomNavigationBar},
+позволяя пользователю легко переключаться между этими экранами
+\rdref{fig:lst:1}{fig:lst:2}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-28 21-49-03}
+	\caption{Код классов HomePage и TaskListsApp}
+	\label{fig:lst:1}
+\end{image}
+
+\begin{image}
+	\includegrph[scale=0.37]{Screenshot from 2024-09-28 21-48-33}
+	\caption{Код класса \_HomePageState}
+	\label{fig:lst:2}
+\end{image}
+
+Отображение списка проиллюстрировано на рисунке~\ref{fig:column:show}
+
+\begin{image}
+	\includegrph[scale=0.37]{Screenshot from 2024-09-28 20-54-42}
+	\caption{Экран со списком на Column}
+	\label{fig:column:show}
+\end{image}
+
+\subsection{column.dart}
+
+Эта страница предназначена для демонстрации функциональности управления
+списком задач с использованием виджета \texttt{Column} в Flutter.
+Она предоставляет пользователю возможность добавлять
+и удалять элементы из списка, используя текстовое поле для ввода
+и кнопки для взаимодействия \rdref{fig:lst:column}{fig:lst:column:state}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-28 21-45-01}
+	\caption{Код классов ColumnScreen}
+	\label{fig:lst:column}
+\end{image}
+
+\begin{image}
+	\includegrph[scale=0.42]{Screenshot from 2024-09-28 21-44-33}
+	\caption{Код класса \_ColumnScreenState}
+	\label{fig:lst:column:state}
+\end{image}
+
+Отображение списка проиллюстрировано на рисунке~\ref{fig:column:show}
+
+\begin{image}
+	\includegrph[scale=0.57]{Screenshot from 2024-09-28 20-54-42}
+	\caption{Экран со списком на Column}
+	\label{fig:column:show}
+\end{image}
+
+\subsection{listview.dart}
+
+Эта страница предназначена для демонстрации функциональности управления
+списком задач с использованием виджета \texttt{Column} в Flutter.
+Она предоставляет пользователю возможность добавлять
+и удалять элементы из списка, используя текстовое поле для ввода
+и кнопки для взаимодействия \rdref{fig:lst:listview}{fig:lst:listview:state}.
+
+\begin{image}
+	\includegrph[scale=0.65]{Screenshot from 2024-09-28 21-46-05}
+	\caption{Код классов ListViewScreen}
+	\label{fig:lst:listview}
+\end{image}
+
+Отображение списка проиллюстрировано на рисунке~\ref{fig:listview:show}
+
+\begin{image}
+	\includegrph[scale=0.4]{Screenshot from 2024-09-28 21-45-57}
+	\caption{Код класса \_ListViewScreenState}
+	\label{fig:lst:listview:state}
+\end{image}
+
+\begin{image}
+	\includegrph[scale=0.39]{Screenshot from 2024-09-28 20-54-54}
+	\caption{Экран со списком на ListView}
+	\label{fig:listview:show}
+\end{image}
+
+\clearpage
+
+\subsection{separated.dart}
+
+В файле \texttt{separated.dart} реализовывается управление списком задач
+с использованием виджета \texttt{ListView.separated} в Flutter.
+Эта страница позволяет пользователям добавлять и удалять задачи,
+а также демонстрирует,
+как организовать список с разделителями между элементами
+\rdref{fig:lst:listview:sep}{fig:lst:listview:sep:state}.
+
+\begin{image}
+	\includegrph[scale=0.5]{Screenshot from 2024-09-28 21-47-51}
+	\caption{Код классов ListViewSeparatedScreen}
+	\label{fig:lst:listview:sep}
+\end{image}
+
+\begin{image}
+	\includegrph[scale=0.43]{Screenshot from 2024-09-28 21-47-33}
+	\caption{Код класса \_ListViewSeparatedScreenState}
+	\label{fig:lst:listview:sep:state}
+\end{image}
+
+Отображение списка проиллюстрировано на рисунке~\ref{fig:listview:sep:show}
+
+\begin{image}
+	\includegrph{Screenshot from 2024-09-28 20-56-35}
+	\caption{Экран со списком на ListView.separated}
+	\label{fig:listview:sep:show}
+\end{image}
+
+
+\clearpage
+
+\section*{ВЫВОД}
+\addcontentsline{toc}{section}{ВЫВОД}
+
+В ходе выполнения практической работы было разработано приложение
+для управления списком задач,
+что позволило изучить основы работы со списками в Flutter.
+Мы научились создавать и отображать динамические списки
+с использованием различных подходов:
+от простого \texttt{Column} до более гибких виджетов \texttt{ListView} 
+и \texttt{ListView.separated}. 
+
+Реализована функциональность добавления и удаления задач,
+что дало практический опыт работы с состоянием приложения
+через \texttt{setState()}.
+Также было рассмотрено использование \texttt{SingleChildScrollView} 
+для прокрутки контента и важность применения ключей (\texttt{Key})
+для корректного удаления элементов списка.
+
+Эта работа позволила ознакомиться с базовыми инструментами
+для создания динамических интерфейсов
+и эффективного управления данными в приложениях Flutter.
+

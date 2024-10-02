@@ -1,0 +1,1006 @@
+\documentclass[14pt,a4paper,oneside]{extarticle}
+
+	\usepackage{cmap} % for pdfLaTeX
+	\usepackage[T1,T2A]{fontenc} % correct encoding for pdfLaTeX
+	\usepackage[utf8]{inputenc} % correct encoding source file
+	\usepackage[english,russian]{babel} % correct language
+
+	% -------------------
+	% TEXT SETTINGS
+	% -------------------
+
+	\usepackage{fontspec} % use standart fonts (only for xelatex!!!)
+	\setmainfont{Times New Roman}
+	\setsansfont{Arial}
+	\setmonofont[Scale=0.6]{Courier New}
+
+	\usepackage[none]{hyphenat} % no word breaks
+
+	\usepackage{setspace}
+	%\singlespacing % 1.0
+	\onehalfspacing % 1.5
+
+	% -------------------
+	% PAGE SETTINGS
+	% -------------------
+
+	\usepackage[left=3cm, right=1.5cm, vmargin=2cm, headheight=2cm]{geometry}
+	\linespread{1.5} % line spacing 1.5
+	\usepackage{indentfirst} % indent first paragraph
+	\setlength{\parindent}{1.25cm}
+	\sloppy
+
+	\frenchspacing % ???
+	\pagestyle{plain}
+	\usepackage{fancyhdr} % for headers and footers
+
+	\clubpenalty=10000
+	\widowpenalty=10000
+
+	% ------------------
+	% ATTACHMENTS SETTINGS
+	% ------------------
+
+	\usepackage[labelsep=endash]{caption}
+	%\setlength{\abovecaptionskip}{3pt}
+	%\setlength{\belowcaptionskip}{3pt}
+
+	% for non-end-to-end numbering
+	%\usepackage{chngcntr}
+	%\counterwithin{figure}{section}
+	%\counterwithin{table}{section}
+
+	% for long table
+	\usepackage{longtable}
+
+	% for graphics
+	\usepackage{graphicx}
+	\newcommand{\rref}[1]{(Рисунок~\ref{#1})}
+	\newcommand{\rdref}[2]{(Рисунки~\ref{#1}\,-\,\ref{#2})}
+	\newcommand{\tref}[1]{(Таблица~\ref{#1})}
+	\newcommand{\tdref}[2]{(Таблици~\ref{#1}\,-\,\ref{#2})}
+	\newenvironment{image}{
+		\begin{figure}[h!tp]
+		\centering
+	}{
+		\end{figure}
+	}
+	\newcommand\includegrph[2][width=0.8\textwidth]{\includegraphics[#1]{#2}}
+
+	\usepackage{amsmath} % more flexibility equations (use in title!!!)
+	\usepackage{pdfpages} % include pdf
+
+
+	% ------------------
+	% SECTION SETTINGS
+	% ------------------
+
+	\usepackage{titlesec}
+
+	% section size
+	\titleformat{\chapter}[block]
+	  {\fontsize{18pt}{22pt}\bfseries}
+	  {\chaptertitlename\ \thechapter.}{0.5em}{}
+	\titleformat{\section}
+		{\fontsize{16pt}{20pt}\bfseries}{\thesection.}{1em}{}
+	\titleformat{\subsection}
+		{\fontsize{14pt}{18pt}\bfseries}{\thesubsection.}{1em}{}
+	\titleformat{\subsubsection}
+		{\fontsize{14pt}{18pt}\bfseries}{\thesubsubsection.}{1em}{}
+	\titlespacing{\chapter}{1.25cm}{1pt}{1pt}
+	\titlespacing{\section}{1.25cm}{1pt}{1pt}
+	\titlespacing{\subsection}{1.25cm}{1pt}{1pt}
+	\titlespacing{\subsubsection}{1.25cm}{1pt}{1pt}
+	\titlespacing{\paragraph}{1.25cm}{0pt}{0pt}
+
+	% new command for sections
+	\newcommand\Chapter[1]{
+		\refstepcounter{chapter}
+		\chapter*{\textbf{ГЛАВА\;\arabic{chapter}.}
+			\raggedright #1
+		}
+		\addcontentsline{toc}{chapter}{ГЛАВА\;\arabic{chapter}.\ #1}
+	}
+	\newcommand\Section[1]{
+		\refstepcounter{section}
+		\section*{\textbf{\arabic{chapter}.\arabic{section}.}
+			\raggedright #1
+		}
+		\addcontentsline{toc}{section}{\arabic{chapter}.\arabic{section}.\ #1}
+	}
+	\newcommand\Subsection[1]{
+		\refstepcounter{subsection}
+		\subsection*{\textbf{\arabic{chapter}.\arabic{section}.\arabic{subsection}.}
+			\raggedright #1
+		}
+		\addcontentsline{toc}{subsection}
+			{\arabic{chapter}.\arabic{section}.\arabic{subsection}.\ #1}
+	}
+	\newcommand\Subsubsection[1]{
+		\refstepcounter{subsubsection}
+		\subsubsection*{\textbf{\arabic{chapter}.\arabic{section}.\arabic{subsection}.\arabic{subsubsection}.}
+			\raggedright #1
+		}
+		\addcontentsline{toc}{subsubsection}
+			{\arabic{chapter}.\arabic{section}.\arabic{subsection}.\arabic{subsubsection}.\ #1}
+	}
+
+	% new command for appendix
+	\newcommand\AppendixChapter[1]{
+		\refstepcounter{chapter}
+		\chapter*{\textbf{\appendixname\;\thechapter.}
+			\raggedright #1
+		}
+		\addcontentsline{toc}{chapter}{\appendixname~\thechapter.\ #1}
+	}
+	\newcommand\AppendixSection[1]{
+		\refstepcounter{section}
+		\section*{\textbf{\appendixname\;\thesection.}
+			\raggedright #1
+		}
+	}
+	\newcommand\AppendixSubsection[1]{
+		\refstepcounter{subsection}
+		\section*{\textbf{\appendixname\;\thesubsection.}
+			\raggedright #1
+		}
+	}
+
+	% ------------------
+	% NEW COMMAND
+	% ------------------
+
+	\providecommand{\No}{\textnumero}
+
+	% ------------------
+	% ------------------
+
+    \usepackage[breakable]{tcolorbox}
+    
+
+    \usepackage{graphicx}
+    \usepackage{caption}
+
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{geometry} % Used to adjust the document margins
+
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+
+    \makeatletter % fix for old versions of grffile with XeLaTeX
+    \@ifpackagelater{grffile}{2019/11/01}
+    {
+      % Do nothing on new versions
+    }
+    {
+      \def\Gread@@xetex#1{%
+        \IfFileExists{"\Gin@base".bb}%
+        {\Gread@eps{\Gin@base.bb}}%
+        {\Gread@@xetex@aux#1}%
+      }
+    }
+    \makeatother
+    \usepackage[Export]{adjustbox} % Used to constrain images to a maximum size
+    \adjustboxset{max size={0.9\linewidth}{0.9\paperheight}}
+
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    % The default LaTeX title has an obnoxious amount of whitespace. By default,
+    % titling removes some of it. It also provides customization options.
+    \usepackage{titling}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage{array}     % table support for pandoc >= 2.11.3
+    \usepackage{calc}      % table minipage width calculation for pandoc >= 2.11.1
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{mathrsfs}
+    
+
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % common color for the border for error outputs.
+    \definecolor{outerrorbackground}{HTML}{FFDFDF}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+
+    
+    
+    
+    
+	% Pygments definitions
+	\makeatletter
+	\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+		\let\PY@ul=\relax \let\PY@tc=\relax%
+		\let\PY@bc=\relax \let\PY@ff=\relax}
+	\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+	\def\PY@toks#1+{\ifx\relax#1\empty\else%
+		\PY@tok{#1}\expandafter\PY@toks\fi}
+	\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+		\PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+	\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+	\@namedef{PY@tok@w}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+	\@namedef{PY@tok@c}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+	\@namedef{PY@tok@cp}{\def\PY@tc##1{\textcolor[rgb]{0.61,0.40,0.00}{##1}}}
+	\@namedef{PY@tok@k}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@kp}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@kt}{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+	\@namedef{PY@tok@o}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+	\@namedef{PY@tok@ow}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+	\@namedef{PY@tok@nb}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@nf}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+	\@namedef{PY@tok@nc}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+	\@namedef{PY@tok@nn}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+	\@namedef{PY@tok@ne}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.80,0.25,0.22}{##1}}}
+	\@namedef{PY@tok@nv}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+	\@namedef{PY@tok@no}{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+	\@namedef{PY@tok@nl}{\def\PY@tc##1{\textcolor[rgb]{0.46,0.46,0.00}{##1}}}
+	\@namedef{PY@tok@ni}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.44,0.44,0.44}{##1}}}
+	\@namedef{PY@tok@na}{\def\PY@tc##1{\textcolor[rgb]{0.41,0.47,0.13}{##1}}}
+	\@namedef{PY@tok@nt}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@nd}{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+	\@namedef{PY@tok@s}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@sd}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@si}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.64,0.35,0.47}{##1}}}
+	\@namedef{PY@tok@se}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.36,0.12}{##1}}}
+	\@namedef{PY@tok@sr}{\def\PY@tc##1{\textcolor[rgb]{0.64,0.35,0.47}{##1}}}
+	\@namedef{PY@tok@ss}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+	\@namedef{PY@tok@sx}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@m}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+	\@namedef{PY@tok@gh}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+	\@namedef{PY@tok@gu}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+	\@namedef{PY@tok@gd}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+	\@namedef{PY@tok@gi}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.52,0.00}{##1}}}
+	\@namedef{PY@tok@gr}{\def\PY@tc##1{\textcolor[rgb]{0.89,0.00,0.00}{##1}}}
+	\@namedef{PY@tok@ge}{\let\PY@it=\textit}
+	\@namedef{PY@tok@gs}{\let\PY@bf=\textbf}
+	\@namedef{PY@tok@gp}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+	\@namedef{PY@tok@go}{\def\PY@tc##1{\textcolor[rgb]{0.44,0.44,0.44}{##1}}}
+	\@namedef{PY@tok@gt}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+	\@namedef{PY@tok@err}{\def\PY@bc##1{{\setlength{\fboxsep}{\string -\fboxrule}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}}
+	\@namedef{PY@tok@kc}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@kd}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@kn}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@kr}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@bp}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@fm}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+	\@namedef{PY@tok@vc}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+	\@namedef{PY@tok@vg}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+	\@namedef{PY@tok@vi}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+	\@namedef{PY@tok@vm}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+	\@namedef{PY@tok@sa}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@sb}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@sc}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@dl}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@s2}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@sh}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@s1}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@mb}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+	\@namedef{PY@tok@mf}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+	\@namedef{PY@tok@mh}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+	\@namedef{PY@tok@mi}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+	\@namedef{PY@tok@il}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+	\@namedef{PY@tok@mo}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+	\@namedef{PY@tok@ch}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+	\@namedef{PY@tok@cm}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+	\@namedef{PY@tok@cpf}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+	\@namedef{PY@tok@c1}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+	\@namedef{PY@tok@cs}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+
+	\def\PYZbs{\char`\\}
+	\def\PYZus{\char`\_}
+	\def\PYZob{\char`\{}
+	\def\PYZcb{\char`\}}
+	\def\PYZca{\char`\^}
+	\def\PYZam{\char`\&}
+	\def\PYZlt{\char`\<}
+	\def\PYZgt{\char`\>}
+	\def\PYZsh{\char`\#}
+	\def\PYZpc{\char`\%}
+	\def\PYZdl{\char`\$}
+	\def\PYZhy{\char`\-}
+	\def\PYZsq{\char`\'}
+	\def\PYZdq{\char`\"}
+	\def\PYZti{\char`\~}
+	% for compatibility with earlier versions
+	\def\PYZat{@}
+	\def\PYZlb{[}
+	\def\PYZrb{]}
+	\makeatother
+
+
+    % For linebreaks inside Verbatim environment from package fancyvrb.
+    \makeatletter
+        \newbox\Wrappedcontinuationbox
+        \newbox\Wrappedvisiblespacebox
+        \newcommand*\Wrappedvisiblespace {\textcolor{red}{\textvisiblespace}}
+        \newcommand*\Wrappedcontinuationsymbol {\textcolor{red}{\llap{\tiny$\m@th\hookrightarrow$}}}
+        \newcommand*\Wrappedcontinuationindent {3ex }
+        \newcommand*\Wrappedafterbreak {\kern\Wrappedcontinuationindent\copy\Wrappedcontinuationbox}
+        % Take advantage of the already applied Pygments mark-up to insert
+        % potential linebreaks for TeX processing.
+        %        {, <, #, %, $, ' and ": go to next line.
+        %        _, }, ^, &, >, - and ~: stay at end of broken line.
+        % Use of \textquotesingle for straight quote.
+        \newcommand*\Wrappedbreaksatspecials {%
+            \def\PYGZus{\discretionary{\char`\_}{\Wrappedafterbreak}{\char`\_}}%
+            \def\PYGZob{\discretionary{}{\Wrappedafterbreak\char`\{}{\char`\{}}%
+            \def\PYGZcb{\discretionary{\char`\}}{\Wrappedafterbreak}{\char`\}}}%
+            \def\PYGZca{\discretionary{\char`\^}{\Wrappedafterbreak}{\char`\^}}%
+            \def\PYGZam{\discretionary{\char`\&}{\Wrappedafterbreak}{\char`\&}}%
+            \def\PYGZlt{\discretionary{}{\Wrappedafterbreak\char`\<}{\char`\<}}%
+            \def\PYGZgt{\discretionary{\char`\>}{\Wrappedafterbreak}{\char`\>}}%
+            \def\PYGZsh{\discretionary{}{\Wrappedafterbreak\char`\#}{\char`\#}}%
+            \def\PYGZpc{\discretionary{}{\Wrappedafterbreak\char`\%}{\char`\%}}%
+            \def\PYGZdl{\discretionary{}{\Wrappedafterbreak\char`\$}{\char`\$}}%
+            \def\PYGZhy{\discretionary{\char`\-}{\Wrappedafterbreak}{\char`\-}}%
+            \def\PYGZsq{\discretionary{}{\Wrappedafterbreak\textquotesingle}{\textquotesingle}}%
+            \def\PYGZdq{\discretionary{}{\Wrappedafterbreak\char`\"}{\char`\"}}%
+            \def\PYGZti{\discretionary{\char`\~}{\Wrappedafterbreak}{\char`\~}}%
+        }
+        % Some characters . , ; ? ! / are not pygmentized.
+        % This macro makes them "active" and they will insert potential linebreaks
+        \newcommand*\Wrappedbreaksatpunct {%
+            \lccode`\~`\.\lowercase{\def~}{\discretionary{\hbox{\char`\.}}{\Wrappedafterbreak}{\hbox{\char`\.}}}%
+            \lccode`\~`\,\lowercase{\def~}{\discretionary{\hbox{\char`\,}}{\Wrappedafterbreak}{\hbox{\char`\,}}}%
+            \lccode`\~`\;\lowercase{\def~}{\discretionary{\hbox{\char`\;}}{\Wrappedafterbreak}{\hbox{\char`\;}}}%
+            \lccode`\~`\:\lowercase{\def~}{\discretionary{\hbox{\char`\:}}{\Wrappedafterbreak}{\hbox{\char`\:}}}%
+            \lccode`\~`\?\lowercase{\def~}{\discretionary{\hbox{\char`\?}}{\Wrappedafterbreak}{\hbox{\char`\?}}}%
+            \lccode`\~`\!\lowercase{\def~}{\discretionary{\hbox{\char`\!}}{\Wrappedafterbreak}{\hbox{\char`\!}}}%
+            \lccode`\~`\/\lowercase{\def~}{\discretionary{\hbox{\char`\/}}{\Wrappedafterbreak}{\hbox{\char`\/}}}%
+            \catcode`\.\active
+            \catcode`\,\active
+            \catcode`\;\active
+            \catcode`\:\active
+            \catcode`\?\active
+            \catcode`\!\active
+            \catcode`\/\active
+            \lccode`\~`\~
+        }
+    \makeatother
+
+    \let\OriginalVerbatim=\Verbatim
+    \makeatletter
+    \renewcommand{\Verbatim}[1][1]{%
+        %\parskip\z@skip
+        \sbox\Wrappedcontinuationbox {\Wrappedcontinuationsymbol}%
+        \sbox\Wrappedvisiblespacebox {\FV@SetupFont\Wrappedvisiblespace}%
+        \def\FancyVerbFormatLine ##1{\hsize\linewidth
+            \vtop{\raggedright\hyphenpenalty\z@\exhyphenpenalty\z@
+                \doublehyphendemerits\z@\finalhyphendemerits\z@
+                \strut ##1\strut}%
+        }%
+        % If the linebreak is at a space, the latter will be displayed as visible
+        % space at end of first line, and a continuation symbol starts next line.
+        % Stretch/shrink are however usually zero for typewriter font.
+        \def\FV@Space {%
+            \nobreak\hskip\z@ plus\fontdimen3\font minus\fontdimen4\font
+            \discretionary{\copy\Wrappedvisiblespacebox}{\Wrappedafterbreak}
+            {\kern\fontdimen2\font}%
+        }%
+
+        % Allow breaks at special characters using \PYG... macros.
+        \Wrappedbreaksatspecials
+        % Breaks at punctuation characters . , ; ? ! and / need catcode=\active
+        \OriginalVerbatim[#1,codes*=\Wrappedbreaksatpunct]%
+    }
+    \makeatother
+
+    % Exact colors from NB
+    \definecolor{incolor}{HTML}{303F9F}
+    \definecolor{outcolor}{HTML}{D84315}
+    \definecolor{cellborder}{HTML}{CFCFCF}
+    \definecolor{cellbackground}{HTML}{F7F7F7}
+
+    % prompt
+    \makeatletter
+    \newcommand{\boxspacing}{\kern\kvtcb@left@rule\kern\kvtcb@boxsep}
+    \makeatother
+    \newcommand{\prompt}[4]{
+        {\ttfamily\llap{{\color{#2}[#3]:\hspace{3pt}#4}}\vspace{-\baselineskip}}
+    }
+    
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    
+
+\begin{document}
+
+\include{./res/title.tex}
+
+\section{1}
+
+Найти и выгрузить многомерные данные (с большим количеством признаков --
+столбцов) с использованием библиотеки pandas. В отчёте описать найденные
+данные.
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{1}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{52}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{input\PYZus{}file} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{food\PYZus{}recipes.csv}\PY{l+s+s2}{\PYZdq{}}
+\PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{input\PYZus{}file}\PY{p}{,} \PY{n}{header} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}
+\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{prep\PYZus{}time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{prep\PYZus{}time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{extract}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{(}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{d+)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{float}\PY{p}{)}
+\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cook\PYZus{}time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cook\PYZus{}time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{extract}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{(}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{d+)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{float}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\section{2}
+
+Вывести информацию о данных при помощи методов .info(), .head().
+Проверить данные на наличие пустых значений. В случае их наличия удалить
+данные строки или интерполировать пропущенные значения. При
+необходимости дополнительно предобработать данные для дальнейшей работы
+с ними.
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{53}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 8009 entries, 0 to 8008
+Data columns (total 16 columns):
+\#   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+0   recipe\_title   8009 non-null   object
+1   url            8009 non-null   object
+2   record\_health  8009 non-null   object
+3   vote\_count     8009 non-null   int64
+4   rating         8009 non-null   float64
+5   description    7994 non-null   object
+6   cuisine        7943 non-null   object
+7   course         7854 non-null   object
+8   diet           7858 non-null   object
+9   prep\_time      7979 non-null   float64
+10  cook\_time      7979 non-null   float64
+11  ingredients    7997 non-null   object
+12  instructions   8009 non-null   object
+13  author         8009 non-null   object
+14  tags           7930 non-null   object
+15  category       8009 non-null   object
+dtypes: float64(3), int64(1), object(12)
+memory usage: 1001.2+ KB
+\end{Verbatim}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{54}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt,
+	pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{54}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+	recipe\_title  \textbackslash{}
+0  Roasted Peppers And Mushroom Tortilla Pizza Re{\ldots}
+1  Thakkali Gotsu Recipe | Thakkali Curry | Spicy{\ldots}
+2               Spicy Grilled Pineapple Salsa Recipe
+3     Karwar Style Dali Thoy Recipe - Toor dal Curry
+4    Rajma Kofta In Milk And Poppy Seed Gravy Recipe
+
+			 url record\_health  \textbackslash{}
+0  https://www.archanaskitchen.com/roasted-pepper{\ldots}          good
+1  https://www.archanaskitchen.com/tomato-gotsu-r{\ldots}          good
+2  https://www.archanaskitchen.com/spicy-grilled-{\ldots}          good
+3  https://www.archanaskitchen.com/dali-thoy-reci{\ldots}          good
+4  https://www.archanaskitchen.com/rajma-kofta-in{\ldots}          good
+
+vote\_count    rating                                        description  \textbackslash{}
+0         434  4.958525   is a quicker version pizza to satisfy your cr{\ldots}
+1        3423  4.932223   also known as the   is a quick and easy to ma{\ldots}
+2        2091  4.945959  Spicy Grilled Pineapple Salsa is a simple reci{\ldots}
+3         990  4.888889  The   is a quintessential of Konkani dish whic{\ldots}
+4         345  4.828986  Koftas are traditional Indian recipes mostly w{\ldots}
+
+cuisine     course                     diet  prep\_time  \textbackslash{}
+0               Mexican     Dinner               Vegetarian       15.0
+1  South Indian Recipes      Lunch               Vegetarian       10.0
+2               Mexican  Side Dish               Vegetarian       10.0
+3     Coastal Karnataka  Side Dish  High Protein Vegetarian        5.0
+4  North Indian Recipes  Side Dish  High Protein Vegetarian       20.0
+
+cook\_time                                        ingredients  \textbackslash{}
+0       15.0  Tortillas|Extra Virgin Olive Oil|Garlic|Mozzar{\ldots}
+1       20.0  Sesame (Gingelly) Oil|Mustard seeds (Rai/ Kadu{\ldots}
+2        0.0  Extra Virgin Olive Oil|Pineapple|White onion|R{\ldots}
+3       20.0  Arhar dal (Split Toor Dal)|Turmeric powder (Ha{\ldots}
+4       30.0  Rajma (Large Kidney Beans)|Cashew nuts|Sultana{\ldots}
+
+	instructions             author  \textbackslash{}
+0  To begin making the Roasted Peppers And Mushro{\ldots}  Divya Shivaraman
+1  To begin making Tomato Gotsu Recipe/ Thakkali {\ldots}      Archana Doshi
+2  To begin making the Spicy Grilled Pineapple Sa{\ldots}  Archana's Kitchen
+3  To prepare Karwar Style Dali Thoy Recipe (Toor{\ldots}      Jyothi Rajesh
+4  To begin making Rajma Kofta In Milk And Poppy {\ldots}        RUBY PATHAK
+
+			tags              category
+0  Party Food Recipes|Tea Party Recipes|Mushroom {\ldots}         Pizza Recipes
+1  Vegetarian Recipes|Tomato Recipes|South Indian{\ldots}  Indian Curry Recipes
+2  Party Starter \& Appetizer Recipes|Pineapple Re{\ldots}       Mexican Recipes
+3  Side Dish Recipes|South Indian Recipes|Indian {\ldots}  Indian Curry Recipes
+4  Side Dish Recipes|Indian Lunch Recipes|Office {\ldots}         Kofta Recipes
+\end{Verbatim}
+\end{tcolorbox}
+
+\section{3}
+
+Построить столбчатую диаграмму (.bar) с использованием модуля
+graph\_objs из библиотеки Plotly со следующими параметрами:
+
+\begin{enumerate}
+	\item По оси Х указать дату или название, по оси У указать количественный показатель.
+	\item Сделать так, чтобы столбец принимал цвет в зависимости от значения
+показателя (marker=dict(color=признак, coloraxis=``coloraxis'')).
+	\item Сделать так, чтобы границы каждого столбца были выделены чёрной линией с толщиной равной 2.
+	\item Отобразить заголовок диаграммы, разместив его по центру сверху, с 20 размером текста.
+	\item Добавить подписи для осей X и Y с размером текста, равным 16. Для оси абсцисс развернуть метки так, чтобы они читались под углом, равным 315.
+	\item Размер текста меток осей сделать равным 14.
+	\item Расположить график во всю ширину рабочей области и присвоить высоту, равную 700 пикселей.
+	\item Добавить сетку на график, сделать её цвет `ivory' и толщину равную 2. (Можно сделать это при настройке осей с помощью gridwidth=2, gridcolor=`ivory')
+	\item Убрать лишние отступы по краям.
+\end{enumerate}
+
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{55}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{o}{!}pip install plotly
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{56}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{plotly}\PY{n+nn}{.}\PY{n+nn}{graph\PYZus{}objs} \PY{k}{as} \PY{n+nn}{go}
+\PY{k+kn}{import} \PY{n+nn}{plotly}\PY{n+nn}{.}\PY{n+nn}{express} \PY{k}{as} \PY{n+nn}{px}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{57}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{recipes} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{recipe\PYZus{}title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}
+\PY{n}{votes} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{vote\PYZus{}count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{58}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{fig\PYZus{}update}\PY{p}{(}\PY{n}{fig}\PY{p}{,} \PY{n}{title}\PY{p}{,} \PY{n}{xtitle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ytitle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+\PY{n}{fig}\PY{o}{.}\PY{n}{update\PYZus{}layout}\PY{p}{(}
+\PY{n}{title}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}
+\PY{n}{text}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Заголовок диаграммы}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+\PY{n}{x}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,}  \PY{c+c1}{\PYZsh{} По центру}
+\PY{n}{font}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{size}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Размер текста заголовка}
+\PY{p}{)}\PY{p}{,}
+\PY{n}{xaxis}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}
+\PY{n}{title}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{text}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ось X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{font}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{size}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}\PY{p}{)}\PY{p}{,}  \PY{c+c1}{\PYZsh{} Подпись оси X}
+\PY{n}{tickangle}\PY{o}{=}\PY{l+m+mi}{315}\PY{p}{,}  \PY{c+c1}{\PYZsh{} Угол наклона меток оси X}
+\PY{n}{tickfont}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{size}\PY{o}{=}\PY{l+m+mi}{14}\PY{p}{)}\PY{p}{,}  \PY{c+c1}{\PYZsh{} Размер текста меток оси X}
+\PY{n}{showgrid}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}
+\PY{n}{gridwidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,}
+\PY{n}{gridcolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ivory}\PY{l+s+s1}{\PYZsq{}}
+\PY{p}{)}\PY{p}{,}
+\PY{n}{yaxis}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}
+\PY{n}{title}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{text}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ось Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{font}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{size}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}\PY{p}{)}\PY{p}{,}  \PY{c+c1}{\PYZsh{} Подпись оси Y}
+\PY{n}{tickfont}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{size}\PY{o}{=}\PY{l+m+mi}{14}\PY{p}{)}\PY{p}{,}  \PY{c+c1}{\PYZsh{} Размер текста меток оси Y}
+\PY{n}{showgrid}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}
+\PY{n}{gridwidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,}
+\PY{n}{gridcolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ivory}\PY{l+s+s1}{\PYZsq{}}
+\PY{p}{)}\PY{p}{,}
+\PY{n}{margin}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{l}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{r}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{t}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,} \PY{n}{b}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,}  \PY{c+c1}{\PYZsh{} Убираем лишние отступы}
+\PY{n}{width}\PY{o}{=}\PY{l+m+mi}{1200}\PY{p}{,}  \PY{c+c1}{\PYZsh{} Ширина графика}
+\PY{n}{height}\PY{o}{=}\PY{l+m+mi}{700}\PY{p}{,}  \PY{c+c1}{\PYZsh{} Высота графика}
+\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{59}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{fig} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Figure}\PY{p}{(}\PY{p}{)}
+\PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}trace}\PY{p}{(}\PY{n}{go}\PY{o}{.}\PY{n}{Bar}\PY{p}{(}
+\PY{n}{x}\PY{o}{=}\PY{n}{recipes}\PY{p}{,}
+\PY{n}{y}\PY{o}{=}\PY{n}{votes}\PY{p}{,}
+\PY{n}{marker}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}
+\PY{n}{color}\PY{o}{=}\PY{n}{votes}\PY{p}{,}
+\PY{n}{coloraxis}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{coloraxis}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+\PY{n}{line}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{width}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+\PY{p}{)}
+\PY{p}{)}\PY{p}{)}
+\PY{n}{fig}\PY{o}{.}\PY{n}{update\PYZus{}layout}\PY{p}{(}\PY{n}{coloraxis}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{colorscale}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Viridis}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+\PY{n}{fig\PYZus{}update}\PY{p}{(}\PY{n}{fig}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Голосование за рецепты}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Название рецепта}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Количество голосов}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{fig}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{center}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_0.png}
+\end{center}
+
+\section{4}
+
+Построить круговую диаграмму (go.Pie), использовав данные и стиль
+оформления из предыдущего графика. Сделать так, чтобы границы каждой
+доли были выделены чёрной линией с толщиной, равной 2 и категории
+круговой диаграммы были читаемы (к примеру, объединить часть объектов)
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{60}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{fig} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Figure}\PY{p}{(}\PY{p}{)}
+\PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}trace}\PY{p}{(}\PY{n}{go}\PY{o}{.}\PY{n}{Pie}\PY{p}{(}
+\PY{n}{labels}\PY{o}{=}\PY{n}{recipes}\PY{p}{,}
+\PY{n}{values}\PY{o}{=}\PY{n}{votes}\PY{p}{,}
+\PY{n}{marker}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}
+\PY{n}{line}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{width}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+\PY{p}{)}\PY{p}{,}
+\PY{n}{textinfo}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{label+percent}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+\PY{n}{insidetextorientation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{radial}\PY{l+s+s1}{\PYZsq{}}
+\PY{p}{)}\PY{p}{)}
+\PY{n}{fig\PYZus{}update}\PY{p}{(}\PY{n}{fig}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Голосование за рецепты}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Название рецепта}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Количество голосов}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{fig}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{center}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_0.png}
+\end{center}
+
+\section{5}
+
+Построить линейные графики, взять один из параметров и определить
+зависимость между другими несколькими (от 2 до 5) показателями с
+использованием библиотеки matplotlib. Сделать вывод. 1. Сделать график с
+линиями и маркерами, цвет линии `crimson', цвет точек `white', цвет
+границ точек `black', толщина границ точек равна 2. 2. Добавить сетку на
+график, сделать её цвет `mistyrose' и толщину равную 2. (Можно сделать
+это при настройке осей с помощью linewidth=2, color=`mistyrose').
+
+Для построения линейного графика и анализа зависимости одного параметра
+от нескольких других с использованием библиотеки matplotlib, можно взять
+пример с вашего DataFrame. В этом примере мы будем строить график
+зависимости параметра (rating) от нескольких других параметров
+(vote\_count, prep\_time и cook\_time).
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{61}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{o}{!}pip install matplotlib
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{62}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{65}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{count} \PY{o}{=} \PY{l+m+mi}{10}
+\PY{n}{x} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{n}{count}\PY{p}{]}
+\PY{n}{y1} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{prep\PYZus{}time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{n}{count}\PY{p}{]}
+\PY{n}{y2} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cook\PYZus{}time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{n}{count}\PY{p}{]}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{66}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y1}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Prep Time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{crimson}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{markersize}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{,}
+\PY{n}{markerfacecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{white}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{markeredgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{markeredgewidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y2}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cook Time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{crimson}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZca{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{markersize}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{,}
+\PY{n}{markerfacecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{white}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{markeredgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{markeredgewidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{k+kc}{True}\PY{p}{,} \PY{n}{which}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{both}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mistyrose}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Зависимость параметров от количества голосов}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Рейтинг}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{14}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Время}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{14}\PY{p}{)}
+\PY{c+c1}{\PYZsh{} Добавляем легенду}
+\PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{12}\PY{p}{)}
+\PY{c+c1}{\PYZsh{} Отображаем график}
+\PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{center}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_0.png}
+\end{center}
+
+С меньшим временем готовки и приготовления рейтинг выше, но эти ключевые
+параметры не являются единственными, поэтому есть блюдо, которое
+выбивыется из этого правила.
+
+\section{6}
+
+Выполнить визуализацию многомерных данных, используя t-SNE. Необходимо
+использовать набор данных MNIST или fashion MNIST (можно использовать и
+другие готовые наборы данных, где можно наблюдать разделение объектов по
+кластерам). Рассмотреть результаты визуализации для разных значений
+перплексии.
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{67}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{datasets} \PY{k+kn}{import} \PY{n}{fetch\PYZus{}openml}
+\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{manifold} \PY{k+kn}{import} \PY{n}{TSNE}
+\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k+kn}{import} \PY{n}{StandardScaler}
+\PY{k+kn}{import} \PY{n+nn}{time}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{68}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mnist.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{X} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{500}\PY{p}{]}
+\PY{n}{y} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{500}\PY{p}{]}
+\PY{n}{scaler} \PY{o}{=} \PY{n}{StandardScaler}\PY{p}{(}\PY{p}{)}
+\PY{n}{X\PYZus{}scaled} \PY{o}{=} \PY{n}{scaler}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{69}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{plot\PYZus{}tsne}\PY{p}{(}\PY{n}{perplexity}\PY{p}{)}\PY{p}{:}
+\PY{n}{tsne} \PY{o}{=} \PY{n}{TSNE}\PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{perplexity}\PY{o}{=}\PY{n}{perplexity}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{)}
+\PY{n}{start\PYZus{}time} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+\PY{n}{X\PYZus{}tsne} \PY{o}{=} \PY{n}{tsne}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{X\PYZus{}scaled}\PY{p}{)}
+\PY{n}{tsne\PYZus{}time} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{start\PYZus{}time}
+\PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+\PY{n}{scatter} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X\PYZus{}tsne}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X\PYZus{}tsne}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{y}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tab10}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t\PYZhy{}SNE: Perplexity = }\PY{l+s+si}{\PYZob{}}\PY{n}{perplexity}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{colorbar}\PY{p}{(}\PY{n}{scatter}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\PY{k}{return} \PY{n}{tsne\PYZus{}time}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{70}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{for} \PY{n}{perplexity} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{]}\PY{p}{:}
+\PY{n}{tsne\PYZus{}time} \PY{o}{=} \PY{n}{plot\PYZus{}tsne}\PY{p}{(}\PY{n}{perplexity}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Время работы t\PYZhy{}SNE (perplexity=}\PY{l+s+si}{\PYZob{}}\PY{n}{perplexity}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{): }\PY{l+s+si}{\PYZob{}}\PY{n}{tsne\PYZus{}time}\PY{l+s+si}{:}\PY{l+s+s1}{.2f}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{ с.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{center}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_0.png}
+\end{center}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+Время работы t-SNE (perplexity=5): 1.11 с.
+\end{Verbatim}
+
+\begin{center}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_2.png}
+\end{center}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+Время работы t-SNE (perplexity=30): 1.23 с.
+\end{Verbatim}
+
+\begin{center}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_4.png}
+\end{center}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+Время работы t-SNE (perplexity=50): 1.32 с.
+\end{Verbatim}
+
+\textbf{Перплексия 5}: Алгоритм сосредоточен больше на локальной
+структуре данных, и можно увидеть мелкие локальные кластеры. Время
+работы: \textbf{0.81} с.
+
+\textbf{Перплексия 30}: Более сбалансированный взгляд на локальные и
+глобальные отношения, кластеры становятся четче видны. Время работы:
+\textbf{0.59} с.
+
+\textbf{Перплексия 50}: При высоких значениях перплексии внимание
+уделяется более глобальной структуре данных, но локальные связи могут
+размываться. Время работы: \textbf{0.99} с.
+
+\section{7}
+
+Выполнить визуализацию многомерных данных, используя UMAP с различными
+параметрами n\_neighbors и min\_dist. Рассчитать время работы алгоритма
+с помощью библиотеки time и сравнить его с временем работы t-SNE.
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{71}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{o}{!}pip install umap\PYZhy{}learn
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{72}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+\PY{k+kn}{import} \PY{n+nn}{umap}
+\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{manifold} \PY{k+kn}{import} \PY{n}{TSNE}
+\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k+kn}{import} \PY{n}{StandardScaler}
+\PY{k+kn}{import} \PY{n+nn}{time}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{73}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mnist.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{count} \PY{o}{=} \PY{l+m+mi}{100}
+\PY{n}{X} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{p}{:}\PY{n}{count}\PY{p}{]}
+\PY{n}{y} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{p}{:}\PY{n}{count}\PY{p}{]}
+\PY{n}{scaler} \PY{o}{=} \PY{n}{StandardScaler}\PY{p}{(}\PY{p}{)}
+\PY{n}{X\PYZus{}scaled} \PY{o}{=} \PY{n}{scaler}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{74}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{plot\PYZus{}umap}\PY{p}{(}\PY{n}{n\PYZus{}neighbors}\PY{p}{,} \PY{n}{min\PYZus{}dist}\PY{p}{)}\PY{p}{:}
+\PY{n}{reducer} \PY{o}{=} \PY{n}{umap}\PY{o}{.}\PY{n}{UMAP}\PY{p}{(}\PY{n}{n\PYZus{}neighbors}\PY{o}{=}\PY{n}{n\PYZus{}neighbors}\PY{p}{,} \PY{n}{min\PYZus{}dist}\PY{o}{=}\PY{n}{min\PYZus{}dist}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{)}
+\PY{n}{start\PYZus{}time} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+\PY{n}{X\PYZus{}umap} \PY{o}{=} \PY{n}{reducer}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{X\PYZus{}scaled}\PY{p}{)}
+\PY{n}{umap\PYZus{}time} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{start\PYZus{}time}
+\PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+\PY{n}{scatter} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X\PYZus{}umap}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X\PYZus{}umap}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{y}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tab10}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{UMAP: n\PYZus{}neighbors = }\PY{l+s+si}{\PYZob{}}\PY{n}{n\PYZus{}neighbors}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{, min\PYZus{}dist = }\PY{l+s+si}{\PYZob{}}\PY{n}{min\PYZus{}dist}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{colorbar}\PY{p}{(}\PY{n}{scatter}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\PY{k}{return} \PY{n}{umap\PYZus{}time}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt,
+	pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{75}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{for} \PY{n}{n\PYZus{}neighbors}\PY{p}{,} \PY{n}{min\PYZus{}dist} \PY{o+ow}{in} \PY{p}{[}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mf}{0.1}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{50}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{]}\PY{p}{:}
+\PY{n}{umap\PYZus{}time} \PY{o}{=} \PY{n}{plot\PYZus{}umap}\PY{p}{(}\PY{n}{n\PYZus{}neighbors}\PY{p}{,} \PY{n}{min\PYZus{}dist}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Время работы UMAP (n\PYZus{}neighbors=}\PY{l+s+si}{\PYZob{}}\PY{n}{n\PYZus{}neighbors}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{, min\PYZus{}dist=}\PY{l+s+si}{\PYZob{}}\PY{n}{min\PYZus{}dist}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{): }\PY{l+s+si}{\PYZob{}}\PY{n}{umap\PYZus{}time}\PY{l+s+si}{:}\PY{l+s+s1}{.2f}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{ секунд}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\begin{center}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_1.png}
+\end{center}
+
+\begin{center}
+\adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_4.png}
+\end{center}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+Время работы UMAP (n\_neighbors=50, min\_dist=0.5): 0.57 секунд
+\end{Verbatim}
+
+Время работы UMAP (0.51 с и 0.78 с) меньше, чем у t-SNE (0.59 с, 0.81 с
+и 0.99 с) при аналогичных условиях. При этом время работы t-SNE
+увеличивается с ростом перплексии. UMAP показывает стабильную скорость и
+лучше подходит для быстрого уменьшения размерности. По итогу можно
+сделать вывод, что UMAP предпочтительнее для задач, где важна скорость
+при сохранении качества визуализации.
+
+\end{document}
+

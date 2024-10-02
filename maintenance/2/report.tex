@@ -217,15 +217,11 @@
 	% DHCP Server
 	\node[box, below=2cm of host] (dhcp) {DHCP Server\\192.168.56.100\\Mask: 255.255.255.0};
 
-	% DNS Server
-	\node[box, above=2cm of host] (dns) {DNS Server\\8.8.8.8};
-
 	% Arrows connecting
-	\draw[->] (host) -- node[net, above] {Virtual Network} (guest);
-	\draw[->] (host) -- node[net, left] {DHCP Request} (dhcp);
-	\draw[->] (guest) -- node[net, right] {DHCP Response} (dhcp);
-	\draw[->] (guest) -- node[net, below right] {Internet Access} (host);
-	\draw[->] (host) -- node[net, above] {DNS Server} (dns);
+	\draw[-] (host) -- node[net, above] {} (guest);
+	\draw[-] (host) -- node[net, left] {} (dhcp);
+	\draw[-] (guest) -- node[net, right] {} (dhcp);
+	\draw[-] (guest) -- node[net, below right] {} (host);
 \end{tikzpicture}
 
 \section{Администрирование локальных пользователей и групп}
