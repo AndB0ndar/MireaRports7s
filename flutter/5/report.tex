@@ -1,0 +1,310 @@
+\section*{ЦЕЛЬ ПРАКТИЧЕСКОЙ РАБОТЫ}
+\addcontentsline{toc}{section}{ЦЕЛЬ ПРАКТИЧЕСКОЙ РАБОТЫ}
+
+План практической работы:
+
+\begin{itemize}
+	\item Определение нынешней платформы
+	\item Платформенно-зависимый код
+	\item Выполнение практической работы \No\,5;
+\end{itemize}
+
+\clearpage
+
+\section*{ВЫПОЛНЕНИЕ ПРАКТИЧЕСКОЙ РАБОТЫ}
+\addcontentsline{toc}{section}{ВЫПОЛНЕНИЕ ПРАКТИЧЕСКОЙ РАБОТЫ}
+
+\section{Определение платформы}
+
+\subsection{Определение веб-платформы}
+
+Единственной платформой,
+которую нельзя отличить стандартным способом является веб платформа.
+Для определения веб платформы в фреймворке Flutter используется
+глобальная переменная \textbf{kIsWeb}.
+Если ее значение является истиной,
+то запускаемая платформа --- веб, если же нет,
+то запускаемая платформа мобильная или десктопная.
+
+Код с использования глобальное переменной проиллюстрирован
+на рисунке~\ref{fig:kisweb}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-10-04 18-55-58}
+	\caption{Код использования kIsWeb}
+	\label{fig:kisweb}
+\end{image}
+
+Запущенные приложения проиллюстрированы
+на рисунках~\ref{fig:kisweb:web}\,-\,\ref{fig:kisweb:linux}.
+
+\begin{image}
+	\includegrph[scale=0.5]{Screenshot from 2024-10-04 18-56-42}
+	\caption{Web приложение}
+	\label{fig:kisweb:web}
+\end{image}
+
+\begin{image}
+	\includegrph[scale=0.5]{Screenshot from 2024-10-04 19-25-35}
+	\caption{Десктопное приложение}
+	\label{fig:kisweb:linux}
+\end{image}
+
+\subsection{Определение мобильных и десктопных платформ}
+
+При работе с мобильными или десктопными платформами
+для определения платформы и операционной системы, запускающей приложение,
+используется класс \texttt{Platform}.
+В данном классе есть статические логические поля,
+возвращающие операционную систему, на которой запускается приложение.
+Для мобильных платформ это:
+\texttt{isAndroid}, \texttt{isIOS} и \texttt{isFuchsia},
+а для десктопных платформ это:
+\texttt{isWindows}, \texttt{isMacOS}, \texttt{isLinux}.
+Определив платформу, на которой запущено приложение можно
+далее писать платформенно-зависимый код.
+
+Код с использования глобальное переменной проиллюстрирован
+на рисунке~\ref{fig:platform}.
+
+\begin{image}
+	\includegrph[scale=0.6]{Screenshot from 2024-10-04 19-29-04}
+	\caption{Код использования Platform}
+	\label{fig:platform}
+\end{image}
+
+Запущенные приложения проиллюстрированы
+на рисунках~\ref{fig:platform:linux}\,-\,\ref{fig:platform:android}.
+
+\begin{image}
+	\includegrph[scale=0.4]{Screenshot from 2024-10-04 19-29-29}
+	\caption{Linux приложение}
+	\label{fig:platform:linux}
+\end{image}
+
+\begin{image}
+	\includegrph[scale=0.4]{Screenshot from 2024-10-04 19-34-54}
+	\caption{Android приложение}
+	\label{fig:platform:android}
+\end{image}
+
+\section{Написание платформенно-зависимого кода}
+
+После определения платформы можно использовать различные реализации
+логики для каждой из них.
+Например, для работы с файловой системой:
+
+\begin{itemize}
+	\item На мобильных устройствах (iOS, Android)
+		можно использовать пакеты вроде
+		\texttt{path\_provider} для доступа к файлам.
+	\item На десктопных платформах (Windows, macOS, Linux)
+		доступ к файловой системе может быть реализован
+		с использованием стандартных средств работы с файлами.
+	\item Для веб-платформы прямого доступа к файловой системе нет.
+\end{itemize}
+
+\subsection{Выбор платформы}
+
+Создадим класс \texttt{PlatformSpecificHomePage},
+который определяет, какой виджет загружать в зависимости от платформы
+(веб, мобильные или десктопные устройства)
+\rref{fig:lst:todo:taskapp}.
+
+\begin{image}
+	\includegrph[scale=0.6]{Screenshot from 2024-10-04 20-46-52}
+	\caption{Код класса PlatformSpecificHomePage}
+	\label{fig:path:home}
+\end{image}
+
+\subsection{Установка зависимости}
+
+Для работы с файловой системой на мобильных устройствах (iOS, Android)
+можно использовать пакет \texttt{path\_provider} для доступа к файлам.
+Для этого необходимо прописать этот пакет
+в зависимостях проекта \rref{fig:path:dep}, в файле \texttt{pubspec.yaml}.
+
+\begin{image}
+	\includegrph[scale=0.8]{Screenshot from 2024-10-04 20-33-46}
+	\caption{Установка зависимости path\_provider}
+	\label{fig:path:dep}
+\end{image}
+
+\subsection{Web приложение}
+
+Так как в web приложения нет работы с файлами, данное приложение не должно
+ничего выводит.
+
+Код продемонстрирован на рисунке~\ref{fig:path:web}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-10-04 20-46-59}
+	\caption{Код для Web приложение}
+	\label{fig:path:web}
+\end{image}
+
+Страница проиллюстрирована на рисунке~\ref{fig:path:web:show}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-10-04 20-48-32}
+	\caption{Web приложение}
+	\label{fig:path:web:show}
+\end{image}
+
+\subsection{Мобильное приложение}
+
+Для получения пути в мобильном приложении нужно импортировать пакет
+\verb|package:path_provider/path_provider.dart|.
+
+Код реализации мобильного приложения продемонстрирован
+на рисунке~\ref{fig:path:android}.
+
+\begin{image}
+	\includegrph[scale=0.4]{Screenshot from 2024-10-04 20-47-13}
+	\caption{Код для Android приложение}
+	\label{fig:path:android}
+\end{image}
+
+Страница проиллюстрирована на рисунке~\ref{fig:path:android:show}.
+
+\begin{image}
+	\includegrph[scale=0.4]{Screenshot from 2024-10-04 20-52-53}
+	\caption{Android приложение}
+	\label{fig:path:android:show}
+\end{image}
+
+\subsection{Десктопное приложение}
+
+Код реализации десктопного приложения продемонстрирован
+на рисунке~\ref{fig:path:linux}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-10-04 20-47-24}
+	\caption{Код для десктопного приложения}
+	\label{fig:path:linux}
+\end{image}
+
+Страница проиллюстрирована на рисунке~\ref{fig:path:linux:show}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-10-04 20-49-10}
+	\caption{Десктопное приложение}
+	\label{fig:path:linux:show}
+\end{image}
+
+\section{Приложение}
+
+\subsection{main.dart}
+
+Это главный файл приложения, который запускает приложение.
+Он отвечает за инициализацию и настройку корневого виджета.
+Также этот файл содержит класс \texttt{PlatformSpecificHomePage},
+который определяет, какой виджет загружать в зависимости от платформы
+(веб, мобильные или десктопные устройства).
+
+Код продемонстрирован
+на рисунках~\ref{fig:lst:todo:taskapp}\,-\,\ref{fig:lst:todo:home}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-10-04 19-58-27}
+	\caption{Код класса TaskApp}
+	\label{fig:lst:todo:taskapp}
+\end{image}
+
+\begin{image}
+	\includegrph{Screenshot from 2024-10-04 19-58-36}
+	\caption{Код класса PlatformSpecificHomePage}
+	\label{fig:lst:todo:home}
+\end{image}
+
+\section{web.dart}
+
+Этот файл определяет виджет \texttt{WebTodoPage},
+который отображается на веб-платформах \rref{fig:lst:todo:web}.
+Он показывает заголовок и сообщение.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-10-04 19-58-51}
+	\caption{Код класса WebTodoPage}
+	\label{fig:lst:todo:web}
+\end{image}
+
+Отображение этого приложения проиллюстрировано
+на рисунке~\ref{fig:todo:web}.
+
+\begin{image}
+	\includegrph{Screenshot from 2024-10-04 20-04-27}
+	\caption{Web приложение}
+	\label{fig:todo:web}
+\end{image}
+
+\subsection{mobile.dart}
+
+Класс \texttt{MobileTodoPage} \rref{fig:lst:todo:mobile} реализует
+страницу приложения для мобильных устройств,
+которая позволяет пользователю управлять списком задач (todo list).
+Это состояние \texttt{StatefulWidget}, что означает,
+что он может хранить изменяемые данные и реагировать на изменения.
+
+\begin{image}
+	\includegrph[scale=0.5]{Screenshot from 2024-10-04 20-01-43}
+	\caption{Код класса MobileTodoPage}
+	\label{fig:lst:todo:mobile}
+\end{image}
+
+Когда пользователь вводит текст в поле и нажимает кнопку <<Добавить>>,
+задача добавляется в список, и интерфейс обновляется,
+отображая новую задачу в виде элемента списка.
+Пользователь может добавлять сколько угодно задач,
+и все они будут динамически отображаться в списке.
+
+Отображение этого приложения проиллюстрировано
+на рисунке~\ref{fig:todo:mobile}.
+
+\begin{image}
+	\includegrph[scale=0.9]{Screenshot from 2024-10-04 19-57-15}
+	\caption{Android приложение}
+	\label{fig:todo:mobile}
+\end{image}
+
+\subsection{desctop.dart}
+
+Класс \texttt{DesktopTodoPage} \rref{fig:lst:todo:desctop}
+реализует страницу приложения для настольных устройств (десктопов),
+которая позволяет пользователю управлять списком задач (todo list).
+Как и в случае с \texttt{MobileTodoPage}, этот класс является состоянием
+(\texttt{StatefulWidget}), что позволяет ему хранить изменяемые данные
+и реагировать на изменения.
+
+\begin{image}
+	\includegrph[scale=0.47]{Screenshot from 2024-10-04 20-02-05}
+	\caption{Код класса DesctopTodoPage}
+	\label{fig:lst:todo:desctop}
+\end{image}
+
+Пользователь может вводить текст в поле и нажимать кнопку <<Добавить>>,
+чтобы добавлять задачи в список.
+Каждая добавленная задача отображается в списке,
+который обновляется при добавлении новой задачи.
+
+Отображение этого приложения проиллюстрировано
+на рисунке~\ref{fig:todo:linux}.
+
+\begin{image}
+	\includegrph[scale=0.5]{Screenshot from 2024-10-04 19-57-51}
+	\caption{Linux приложение}
+	\label{fig:todo:linux}
+\end{image}
+
+\clearpage
+
+\section*{ВЫВОД}
+\addcontentsline{toc}{section}{ВЫВОД}
+
+В ходе прктической работы была изучена работа
+с платформенно-зависимым кодом в разработке приложений на Flutter.
+Были рассмотрены ключевые аспекты определения платформы,
+написания платформенно-зависимого кода
+и создания приложений для различных типов платформ,
+таких как веб, мобильные устройства и десктопы.
+
