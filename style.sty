@@ -14,7 +14,7 @@
 \setsansfont{Arial}
 \setmonofont[Scale=0.9]{Courier New}
 
-\usepackage[none]{hyphenat} % no word breaks
+%\usepackage[none]{hyphenat} % no word breaks
 
 \usepackage{setspace}
 %\singlespacing % 1.0
@@ -52,6 +52,7 @@
 
 % for long table
 \usepackage{longtable}
+\newcommand{\conttable}[1]{\caption*{\leftline{Продолжение таблицы~\ref{#1}}}}
 
 % for graphics
 \usepackage{graphicx}
