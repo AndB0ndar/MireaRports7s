@@ -1,0 +1,1109 @@
+\documentclass[14pt,a4paper,oneside]{extarticle}
+
+	\usepackage{cmap} % for pdfLaTeX
+	\usepackage[T1,T2A]{fontenc} % correct encoding for pdfLaTeX
+	\usepackage[utf8]{inputenc} % correct encoding source file
+	\usepackage[english,russian]{babel} % correct language
+
+	% -------------------
+	% TEXT SETTINGS
+	% -------------------
+
+	\usepackage{fontspec} % use standart fonts (only for xelatex!!!)
+	\setmainfont{Times New Roman}
+	\setsansfont{Arial}
+	\setmonofont[Scale=0.6]{Courier New}
+
+	\usepackage[none]{hyphenat} % no word breaks
+
+	\usepackage{setspace}
+	%\singlespacing % 1.0
+	\onehalfspacing % 1.5
+
+	% -------------------
+	% PAGE SETTINGS
+	% -------------------
+
+	\usepackage[left=3cm, right=1.5cm, vmargin=2cm, headheight=2cm]{geometry}
+	\linespread{1.5} % line spacing 1.5
+	\usepackage{indentfirst} % indent first paragraph
+	\setlength{\parindent}{1.25cm}
+	\sloppy
+
+	\frenchspacing % ???
+	\pagestyle{plain}
+	\usepackage{fancyhdr} % for headers and footers
+
+	\clubpenalty=10000
+	\widowpenalty=10000
+
+	% ------------------
+	% ATTACHMENTS SETTINGS
+	% ------------------
+
+	\usepackage[labelsep=endash]{caption}
+	%\setlength{\abovecaptionskip}{3pt}
+	%\setlength{\belowcaptionskip}{3pt}
+
+	% for non-end-to-end numbering
+	%\usepackage{chngcntr}
+	%\counterwithin{figure}{section}
+	%\counterwithin{table}{section}
+
+	% for long table
+	\usepackage{longtable}
+
+	% for graphics
+	\usepackage{graphicx}
+	\newcommand{\rref}[1]{(Рисунок~\ref{#1})}
+	\newcommand{\rdref}[2]{(Рисунки~\ref{#1}\,-\,\ref{#2})}
+	\newcommand{\tref}[1]{(Таблица~\ref{#1})}
+	\newcommand{\tdref}[2]{(Таблици~\ref{#1}\,-\,\ref{#2})}
+	\newenvironment{image}{
+		\begin{figure}[h!tp]
+		\centering
+	}{
+		\end{figure}
+	}
+	\newcommand\includegrph[2][width=0.8\textwidth]{\includegraphics[#1]{#2}}
+
+	\usepackage{amsmath} % more flexibility equations (use in title!!!)
+	\usepackage{pdfpages} % include pdf
+
+
+	% ------------------
+	% SECTION SETTINGS
+	% ------------------
+
+	\usepackage{titlesec}
+
+	% section size
+	\titleformat{\chapter}[block]
+	  {\fontsize{18pt}{22pt}\bfseries}
+	  {\chaptertitlename\ \thechapter.}{0.5em}{}
+	\titleformat{\section}
+		{\fontsize{16pt}{20pt}\bfseries}{\thesection.}{1em}{}
+	\titleformat{\subsection}
+		{\fontsize{14pt}{18pt}\bfseries}{\thesubsection.}{1em}{}
+	\titleformat{\subsubsection}
+		{\fontsize{14pt}{18pt}\bfseries}{\thesubsubsection.}{1em}{}
+	\titlespacing{\chapter}{1.25cm}{1pt}{1pt}
+	\titlespacing{\section}{1.25cm}{1pt}{1pt}
+	\titlespacing{\subsection}{1.25cm}{1pt}{1pt}
+	\titlespacing{\subsubsection}{1.25cm}{1pt}{1pt}
+	\titlespacing{\paragraph}{1.25cm}{0pt}{0pt}
+
+	% new command for sections
+	\newcommand\Chapter[1]{
+		\refstepcounter{chapter}
+		\chapter*{\textbf{ГЛАВА\;\arabic{chapter}.}
+			\raggedright #1
+		}
+		\addcontentsline{toc}{chapter}{ГЛАВА\;\arabic{chapter}.\ #1}
+	}
+	\newcommand\Section[1]{
+		\refstepcounter{section}
+		\section*{\textbf{\arabic{chapter}.\arabic{section}.}
+			\raggedright #1
+		}
+		\addcontentsline{toc}{section}{\arabic{chapter}.\arabic{section}.\ #1}
+	}
+	\newcommand\Subsection[1]{
+		\refstepcounter{subsection}
+		\subsection*{\textbf{\arabic{chapter}.\arabic{section}.\arabic{subsection}.}
+			\raggedright #1
+		}
+		\addcontentsline{toc}{subsection}
+			{\arabic{chapter}.\arabic{section}.\arabic{subsection}.\ #1}
+	}
+	\newcommand\Subsubsection[1]{
+		\refstepcounter{subsubsection}
+		\subsubsection*{\textbf{\arabic{chapter}.\arabic{section}.\arabic{subsection}.\arabic{subsubsection}.}
+			\raggedright #1
+		}
+		\addcontentsline{toc}{subsubsection}
+			{\arabic{chapter}.\arabic{section}.\arabic{subsection}.\arabic{subsubsection}.\ #1}
+	}
+
+	% new command for appendix
+	\newcommand\AppendixChapter[1]{
+		\refstepcounter{chapter}
+		\chapter*{\textbf{\appendixname\;\thechapter.}
+			\raggedright #1
+		}
+		\addcontentsline{toc}{chapter}{\appendixname~\thechapter.\ #1}
+	}
+	\newcommand\AppendixSection[1]{
+		\refstepcounter{section}
+		\section*{\textbf{\appendixname\;\thesection.}
+			\raggedright #1
+		}
+	}
+	\newcommand\AppendixSubsection[1]{
+		\refstepcounter{subsection}
+		\section*{\textbf{\appendixname\;\thesubsection.}
+			\raggedright #1
+		}
+	}
+
+	% ------------------
+	% NEW COMMAND
+	% ------------------
+
+	\providecommand{\No}{\textnumero}
+
+	% ------------------
+	% ------------------
+
+    \usepackage[breakable]{tcolorbox}
+    
+
+    \usepackage{graphicx}
+    \usepackage{caption}
+
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{geometry} % Used to adjust the document margins
+
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+
+    \makeatletter % fix for old versions of grffile with XeLaTeX
+    \@ifpackagelater{grffile}{2019/11/01}
+    {
+      % Do nothing on new versions
+    }
+    {
+      \def\Gread@@xetex#1{%
+        \IfFileExists{"\Gin@base".bb}%
+        {\Gread@eps{\Gin@base.bb}}%
+        {\Gread@@xetex@aux#1}%
+      }
+    }
+    \makeatother
+    \usepackage[Export]{adjustbox} % Used to constrain images to a maximum size
+    \adjustboxset{max size={0.9\linewidth}{0.9\paperheight}}
+
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    % The default LaTeX title has an obnoxious amount of whitespace. By default,
+    % titling removes some of it. It also provides customization options.
+    \usepackage{titling}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage{array}     % table support for pandoc >= 2.11.3
+    \usepackage{calc}      % table minipage width calculation for pandoc >= 2.11.1
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{mathrsfs}
+    
+
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % common color for the border for error outputs.
+    \definecolor{outerrorbackground}{HTML}{FFDFDF}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+
+    
+    
+    
+    
+	% Pygments definitions
+	\makeatletter
+	\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+		\let\PY@ul=\relax \let\PY@tc=\relax%
+		\let\PY@bc=\relax \let\PY@ff=\relax}
+	\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+	\def\PY@toks#1+{\ifx\relax#1\empty\else%
+		\PY@tok{#1}\expandafter\PY@toks\fi}
+	\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+		\PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+	\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+	\@namedef{PY@tok@w}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+	\@namedef{PY@tok@c}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+	\@namedef{PY@tok@cp}{\def\PY@tc##1{\textcolor[rgb]{0.61,0.40,0.00}{##1}}}
+	\@namedef{PY@tok@k}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@kp}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@kt}{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+	\@namedef{PY@tok@o}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+	\@namedef{PY@tok@ow}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+	\@namedef{PY@tok@nb}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@nf}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+	\@namedef{PY@tok@nc}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+	\@namedef{PY@tok@nn}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+	\@namedef{PY@tok@ne}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.80,0.25,0.22}{##1}}}
+	\@namedef{PY@tok@nv}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+	\@namedef{PY@tok@no}{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+	\@namedef{PY@tok@nl}{\def\PY@tc##1{\textcolor[rgb]{0.46,0.46,0.00}{##1}}}
+	\@namedef{PY@tok@ni}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.44,0.44,0.44}{##1}}}
+	\@namedef{PY@tok@na}{\def\PY@tc##1{\textcolor[rgb]{0.41,0.47,0.13}{##1}}}
+	\@namedef{PY@tok@nt}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@nd}{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+	\@namedef{PY@tok@s}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@sd}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@si}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.64,0.35,0.47}{##1}}}
+	\@namedef{PY@tok@se}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.36,0.12}{##1}}}
+	\@namedef{PY@tok@sr}{\def\PY@tc##1{\textcolor[rgb]{0.64,0.35,0.47}{##1}}}
+	\@namedef{PY@tok@ss}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+	\@namedef{PY@tok@sx}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@m}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+	\@namedef{PY@tok@gh}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+	\@namedef{PY@tok@gu}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+	\@namedef{PY@tok@gd}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+	\@namedef{PY@tok@gi}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.52,0.00}{##1}}}
+	\@namedef{PY@tok@gr}{\def\PY@tc##1{\textcolor[rgb]{0.89,0.00,0.00}{##1}}}
+	\@namedef{PY@tok@ge}{\let\PY@it=\textit}
+	\@namedef{PY@tok@gs}{\let\PY@bf=\textbf}
+	\@namedef{PY@tok@gp}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+	\@namedef{PY@tok@go}{\def\PY@tc##1{\textcolor[rgb]{0.44,0.44,0.44}{##1}}}
+	\@namedef{PY@tok@gt}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+	\@namedef{PY@tok@err}{\def\PY@bc##1{{\setlength{\fboxsep}{\string -\fboxrule}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}}
+	\@namedef{PY@tok@kc}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@kd}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@kn}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@kr}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@bp}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@fm}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+	\@namedef{PY@tok@vc}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+	\@namedef{PY@tok@vg}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+	\@namedef{PY@tok@vi}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+	\@namedef{PY@tok@vm}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+	\@namedef{PY@tok@sa}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@sb}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@sc}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@dl}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@s2}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@sh}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@s1}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@mb}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+	\@namedef{PY@tok@mf}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+	\@namedef{PY@tok@mh}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+	\@namedef{PY@tok@mi}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+	\@namedef{PY@tok@il}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+	\@namedef{PY@tok@mo}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+	\@namedef{PY@tok@ch}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+	\@namedef{PY@tok@cm}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+	\@namedef{PY@tok@cpf}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+	\@namedef{PY@tok@c1}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+	\@namedef{PY@tok@cs}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+
+	\def\PYZbs{\char`\\}
+	\def\PYZus{\char`\_}
+	\def\PYZob{\char`\{}
+	\def\PYZcb{\char`\}}
+	\def\PYZca{\char`\^}
+	\def\PYZam{\char`\&}
+	\def\PYZlt{\char`\<}
+	\def\PYZgt{\char`\>}
+	\def\PYZsh{\char`\#}
+	\def\PYZpc{\char`\%}
+	\def\PYZdl{\char`\$}
+	\def\PYZhy{\char`\-}
+	\def\PYZsq{\char`\'}
+	\def\PYZdq{\char`\"}
+	\def\PYZti{\char`\~}
+	% for compatibility with earlier versions
+	\def\PYZat{@}
+	\def\PYZlb{[}
+	\def\PYZrb{]}
+	\makeatother
+
+
+    % For linebreaks inside Verbatim environment from package fancyvrb.
+    \makeatletter
+        \newbox\Wrappedcontinuationbox
+        \newbox\Wrappedvisiblespacebox
+        \newcommand*\Wrappedvisiblespace {\textcolor{red}{\textvisiblespace}}
+        \newcommand*\Wrappedcontinuationsymbol {\textcolor{red}{\llap{\tiny$\m@th\hookrightarrow$}}}
+        \newcommand*\Wrappedcontinuationindent {3ex }
+        \newcommand*\Wrappedafterbreak {\kern\Wrappedcontinuationindent\copy\Wrappedcontinuationbox}
+        % Take advantage of the already applied Pygments mark-up to insert
+        % potential linebreaks for TeX processing.
+        %        {, <, #, %, $, ' and ": go to next line.
+        %        _, }, ^, &, >, - and ~: stay at end of broken line.
+        % Use of \textquotesingle for straight quote.
+        \newcommand*\Wrappedbreaksatspecials {%
+            \def\PYGZus{\discretionary{\char`\_}{\Wrappedafterbreak}{\char`\_}}%
+            \def\PYGZob{\discretionary{}{\Wrappedafterbreak\char`\{}{\char`\{}}%
+            \def\PYGZcb{\discretionary{\char`\}}{\Wrappedafterbreak}{\char`\}}}%
+            \def\PYGZca{\discretionary{\char`\^}{\Wrappedafterbreak}{\char`\^}}%
+            \def\PYGZam{\discretionary{\char`\&}{\Wrappedafterbreak}{\char`\&}}%
+            \def\PYGZlt{\discretionary{}{\Wrappedafterbreak\char`\<}{\char`\<}}%
+            \def\PYGZgt{\discretionary{\char`\>}{\Wrappedafterbreak}{\char`\>}}%
+            \def\PYGZsh{\discretionary{}{\Wrappedafterbreak\char`\#}{\char`\#}}%
+            \def\PYGZpc{\discretionary{}{\Wrappedafterbreak\char`\%}{\char`\%}}%
+            \def\PYGZdl{\discretionary{}{\Wrappedafterbreak\char`\$}{\char`\$}}%
+            \def\PYGZhy{\discretionary{\char`\-}{\Wrappedafterbreak}{\char`\-}}%
+            \def\PYGZsq{\discretionary{}{\Wrappedafterbreak\textquotesingle}{\textquotesingle}}%
+            \def\PYGZdq{\discretionary{}{\Wrappedafterbreak\char`\"}{\char`\"}}%
+            \def\PYGZti{\discretionary{\char`\~}{\Wrappedafterbreak}{\char`\~}}%
+        }
+        % Some characters . , ; ? ! / are not pygmentized.
+        % This macro makes them "active" and they will insert potential linebreaks
+        \newcommand*\Wrappedbreaksatpunct {%
+            \lccode`\~`\.\lowercase{\def~}{\discretionary{\hbox{\char`\.}}{\Wrappedafterbreak}{\hbox{\char`\.}}}%
+            \lccode`\~`\,\lowercase{\def~}{\discretionary{\hbox{\char`\,}}{\Wrappedafterbreak}{\hbox{\char`\,}}}%
+            \lccode`\~`\;\lowercase{\def~}{\discretionary{\hbox{\char`\;}}{\Wrappedafterbreak}{\hbox{\char`\;}}}%
+            \lccode`\~`\:\lowercase{\def~}{\discretionary{\hbox{\char`\:}}{\Wrappedafterbreak}{\hbox{\char`\:}}}%
+            \lccode`\~`\?\lowercase{\def~}{\discretionary{\hbox{\char`\?}}{\Wrappedafterbreak}{\hbox{\char`\?}}}%
+            \lccode`\~`\!\lowercase{\def~}{\discretionary{\hbox{\char`\!}}{\Wrappedafterbreak}{\hbox{\char`\!}}}%
+            \lccode`\~`\/\lowercase{\def~}{\discretionary{\hbox{\char`\/}}{\Wrappedafterbreak}{\hbox{\char`\/}}}%
+            \catcode`\.\active
+            \catcode`\,\active
+            \catcode`\;\active
+            \catcode`\:\active
+            \catcode`\?\active
+            \catcode`\!\active
+            \catcode`\/\active
+            \lccode`\~`\~
+        }
+    \makeatother
+
+    \let\OriginalVerbatim=\Verbatim
+    \makeatletter
+    \renewcommand{\Verbatim}[1][1]{%
+        %\parskip\z@skip
+        \sbox\Wrappedcontinuationbox {\Wrappedcontinuationsymbol}%
+        \sbox\Wrappedvisiblespacebox {\FV@SetupFont\Wrappedvisiblespace}%
+        \def\FancyVerbFormatLine ##1{\hsize\linewidth
+            \vtop{\raggedright\hyphenpenalty\z@\exhyphenpenalty\z@
+                \doublehyphendemerits\z@\finalhyphendemerits\z@
+                \strut ##1\strut}%
+        }%
+        % If the linebreak is at a space, the latter will be displayed as visible
+        % space at end of first line, and a continuation symbol starts next line.
+        % Stretch/shrink are however usually zero for typewriter font.
+        \def\FV@Space {%
+            \nobreak\hskip\z@ plus\fontdimen3\font minus\fontdimen4\font
+            \discretionary{\copy\Wrappedvisiblespacebox}{\Wrappedafterbreak}
+            {\kern\fontdimen2\font}%
+        }%
+
+        % Allow breaks at special characters using \PYG... macros.
+        \Wrappedbreaksatspecials
+        % Breaks at punctuation characters . , ; ? ! and / need catcode=\active
+        \OriginalVerbatim[#1,codes*=\Wrappedbreaksatpunct]%
+    }
+    \makeatother
+
+    % Exact colors from NB
+    \definecolor{incolor}{HTML}{303F9F}
+    \definecolor{outcolor}{HTML}{D84315}
+    \definecolor{cellborder}{HTML}{CFCFCF}
+    \definecolor{cellbackground}{HTML}{F7F7F7}
+
+    % prompt
+    \makeatletter
+    \newcommand{\boxspacing}{\kern\kvtcb@left@rule\kern\kvtcb@boxsep}
+    \makeatother
+    \newcommand{\prompt}[4]{
+        {\ttfamily\llap{{\color{#2}[#3]:\hspace{3pt}#4}}\vspace{-\baselineskip}}
+    }
+    
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    
+
+\begin{document}
+    
+\include{./res/title.tex}
+
+    
+    \hypertarget{section}{%
+\section{1}\label{section}}
+
+Определить два вектора, представляющие собой число автомобилей,
+припаркованных в течении 5 рабочих дней у бизнес-центра на уличной
+стоянке и в подземном гараже.
+
+    \begin{longtable}[]{@{}lll@{}}
+\toprule
+День & Улица & Гараж\tabularnewline
+\midrule
+\endhead
+Понедельник & 80 & 100\tabularnewline
+Вторник & 98 & 82\tabularnewline
+Среда & 75 & 105\tabularnewline
+Четверг & 91 & 89\tabularnewline
+Пятница & 78 & 102\tabularnewline
+\bottomrule
+\end{longtable}
+
+    \hypertarget{section}{%
+\subsection{1.1}\label{section}}
+
+Найти и интерпретировать корреляцию между переменными «Улица» и «Гараж»
+(подсчитать корреляцию по Пирсону).
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{2}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+\PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k+kn}{import} \PY{n}{pearsonr}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{3}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{street} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{80}\PY{p}{,} \PY{l+m+mi}{98}\PY{p}{,} \PY{l+m+mi}{75}\PY{p}{,} \PY{l+m+mi}{91}\PY{p}{,} \PY{l+m+mi}{78}\PY{p}{]}\PY{p}{)}
+\PY{n}{garage} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{82}\PY{p}{,} \PY{l+m+mi}{105}\PY{p}{,} \PY{l+m+mi}{89}\PY{p}{,} \PY{l+m+mi}{102}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{4}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{correlation}\PY{p}{,} \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{pearsonr}\PY{p}{(}\PY{n}{street}\PY{p}{,} \PY{n}{garage}\PY{p}{)}
+\PY{n}{correlation}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{4}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+-1.0
+\end{Verbatim}
+\end{tcolorbox}
+        
+    Коэффициент корреляции Пирсона между количеством автомобилей,
+припаркованных на улице и в гараже, составляет -1.0. Это означает, что
+существует идеальная отрицательная корреляция между двумя переменными:
+по мере увеличения числа автомобилей на улице, количество автомобилей в
+гараже уменьшается и наоборот.
+
+    \hypertarget{section}{%
+\subsection{1.2}\label{section}}
+
+Построить диаграмму рассеяния для вышеупомянутых переменных.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{5}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{street}\PY{p}{,} \PY{n}{garage}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Scatter Plot: Street vs Garage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of cars (Street)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of cars (Garage)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_8_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Диаграмма рассеяния визуализирует это обратное соотношение между числом
+автомобилей на улице и в гараже.
+
+    \hypertarget{section}{%
+\section{2}\label{section}}
+
+Найти и выгрузить данные. Вывести, провести предобработку и описать
+признаки.
+
+    \hypertarget{section}{%
+\subsection{2.1}\label{section}}
+
+Построить корреляционную матрицу по одной целевой переменной. Определить
+наиболее коррелирующую переменную, продолжить с ней работу в следующем
+пункте.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{18}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k+kn}{import} \PY{n}{mean\PYZus{}squared\PYZus{}error}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{19}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{correlation\PYZus{}matrix} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{corrcoef}\PY{p}{(}\PY{n}{street}\PY{p}{,} \PY{n}{garage}\PY{p}{)}
+\PY{n}{correlation\PYZus{}matrix}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{19}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([[ 1., -1.],
+       [-1.,  1.]])
+\end{Verbatim}
+\end{tcolorbox}
+        
+    Корреляционная матрица показала, что между переменными ``Улица'' и
+``Гараж'' существует идеальная отрицательная корреляция (-1.0). Наиболее
+коррелирующей переменной является ``Гараж''.
+
+    \hypertarget{section}{%
+\subsection{2.2}\label{section}}
+
+Реализовать регрессию вручную, отобразить наклон, сдвиг и MSE.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{23}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} y = slope * x + intercept}
+\PY{n}{n} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{street}\PY{p}{)}
+\PY{n}{x\PYZus{}mean} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{garage}\PY{p}{)}
+\PY{n}{y\PYZus{}mean} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{street}\PY{p}{)}
+\PY{n}{slope} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{garage} \PY{o}{\PYZhy{}} \PY{n}{x\PYZus{}mean}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{n}{street} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}mean}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{garage} \PY{o}{\PYZhy{}} \PY{n}{x\PYZus{}mean}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+\PY{n}{intercept} \PY{o}{=} \PY{n}{y\PYZus{}mean} \PY{o}{\PYZhy{}} \PY{n}{slope} \PY{o}{*} \PY{n}{x\PYZus{}mean}
+
+\PY{c+c1}{\PYZsh{} Предсказание на основе регрессии}
+\PY{n}{predicted\PYZus{}street} \PY{o}{=} \PY{n}{slope} \PY{o}{*} \PY{n}{garage} \PY{o}{+} \PY{n}{intercept}
+
+\PY{c+c1}{\PYZsh{} MSE}
+\PY{n}{mse} \PY{o}{=} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{street}\PY{p}{,} \PY{n}{predicted\PYZus{}street}\PY{p}{)}
+
+\PY{n}{slope}\PY{p}{,} \PY{n}{intercept}\PY{p}{,} \PY{n}{mse}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{23}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+(-1.0, 180.0, 0.0)
+\end{Verbatim}
+\end{tcolorbox}
+        
+    Реализация линейной регрессии вручную дала следующие результаты: *
+Наклон (slope): -1.0 * Сдвиг (intercept): 180.0 * Среднеквадратическая
+ошибка (MSE): 0.0
+
+Это указывает на то, что модель линейной регрессии идеально подходит для
+этих данных, и ошибок при предсказании нет.
+
+    \hypertarget{section}{%
+\subsection{2.3}\label{section}}
+
+Визуализировать регрессию на графике.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{24}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{garage}\PY{p}{,} \PY{n}{street}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Actual data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{garage}\PY{p}{,} \PY{n}{predicted\PYZus{}street}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Regression line}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Linear Regression: Street vs Garage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Garage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Street}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Визуализация регрессии на графике показала линию, которая точно
+описывает соотношение между числом автомобилей в гараже и на улице.
+
+    \hypertarget{section}{%
+\section{3}\label{section}}
+
+Загрузить данные: `insurance.csv'. Вывести и провести предобработку.
+Вывести список уникальных регионов.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{38}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{o}{!}pip install statsmodels
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Defaulting to user installation because normal site-packages is not writeable
+Requirement already satisfied: statsmodels in
+/home/arbon/.local/lib/python3.10/site-packages (0.14.4)
+Requirement already satisfied: numpy<3,>=1.22.3 in
+/usr/local/lib/python3.10/dist-packages (from statsmodels) (1.23.5)
+Requirement already satisfied: scipy!=1.9.2,>=1.8 in
+/home/arbon/.local/lib/python3.10/site-packages (from statsmodels) (1.14.1)
+Requirement already satisfied: pandas!=2.1.0,>=1.4 in
+/home/arbon/.local/lib/python3.10/site-packages (from statsmodels) (1.5.3)
+Requirement already satisfied: patsy>=0.5.6 in
+/home/arbon/.local/lib/python3.10/site-packages (from statsmodels) (0.5.6)
+Requirement already satisfied: packaging>=21.3 in
+/home/arbon/.local/lib/python3.10/site-packages (from statsmodels) (24.1)
+Requirement already satisfied: python-dateutil>=2.8.1 in
+/usr/local/lib/python3.10/dist-packages (from pandas!=2.1.0,>=1.4->statsmodels)
+(2.8.2)
+Requirement already satisfied: pytz>=2020.1 in /usr/lib/python3/dist-packages
+(from pandas!=2.1.0,>=1.4->statsmodels) (2022.1)
+Requirement already satisfied: six in /usr/lib/python3/dist-packages (from
+patsy>=0.5.6->statsmodels) (1.16.0)
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{39}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k+kn}{import} \PY{n}{stats}
+\PY{k+kn}{import} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{api} \PY{k}{as} \PY{n+nn}{sm}
+\PY{k+kn}{from} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{formula}\PY{n+nn}{.}\PY{n+nn}{api} \PY{k+kn}{import} \PY{n}{ols}
+\PY{k+kn}{from} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{stats}\PY{n+nn}{.}\PY{n+nn}{multicomp} \PY{k+kn}{import} \PY{n}{pairwise\PYZus{}tukeyhsd}
+\PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{40}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{4/insurance.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 1338 entries, 0 to 1337
+Data columns (total 7 columns):
+ \#   Column    Non-Null Count  Dtype
+---  ------    --------------  -----
+ 0   age       1338 non-null   int64
+ 1   sex       1338 non-null   object
+ 2   bmi       1338 non-null   float64
+ 3   children  1338 non-null   int64
+ 4   smoker    1338 non-null   object
+ 5   region    1338 non-null   object
+ 6   charges   1338 non-null   float64
+dtypes: float64(2), int64(2), object(3)
+memory usage: 73.3+ KB
+None
+   age     sex     bmi  children smoker     region      charges
+0   19  female  27.900         0    yes  southwest  16884.92400
+1   18    male  33.770         1     no  southeast   1725.55230
+2   28    male  33.000         3     no  southeast   4449.46200
+3   33    male  22.705         0     no  northwest  21984.47061
+4   32    male  28.880         0     no  northwest   3866.85520
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{41}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Уникальные регионы}
+\PY{n}{unique\PYZus{}regions} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}
+\PY{n}{unique\PYZus{}regions}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{41}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array(['southwest', 'southeast', 'northwest', 'northeast'], dtype=object)
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \hypertarget{section}{%
+\section{3.1}\label{section}}
+
+Выполнить однофакторный ANOVA тест, чтобы проверить влияние региона на
+индекс массы тела (BMI), используя первый способ, через библиотеку
+Scipy.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{43}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{bmi\PYZus{}by\PYZus{}region} \PY{o}{=} \PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n}{region}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bmi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{k}{for} \PY{n}{region} \PY{o+ow}{in} \PY{n}{unique\PYZus{}regions}\PY{p}{]}
+\PY{n}{anova\PYZus{}result\PYZus{}scipy} \PY{o}{=} \PY{n}{stats}\PY{o}{.}\PY{n}{f\PYZus{}oneway}\PY{p}{(}\PY{o}{*}\PY{n}{bmi\PYZus{}by\PYZus{}region}\PY{p}{)}
+\PY{n}{anova\PYZus{}result\PYZus{}scipy}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{43}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+F\_onewayResult(statistic=39.49505720170283, pvalue=1.881838913929143e-24)
+\end{Verbatim}
+\end{tcolorbox}
+        
+    Результаты однофакторного ANOVA теста, выполненного с использованием
+библиотеки Scipy, следующие:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Статистика F}: 39.495
+\item
+  \textbf{P-value}: (1.88e10-24)
+\end{itemize}
+
+\textbf{Статистика F} указывает на отношение межгрупповой и
+внутригрупповой дисперсии. Высокое значение (39.495) указывает на
+значительные различия между группами (регионами) по индексу массы тела
+(BMI).
+
+\textbf{P-value} очень низкое ((1.88e10-24)), что гораздо
+меньше стандартного уровня значимости 0.05. Это означает, что различия
+между средними значениями BMI в разных регионах статистически значимы.
+
+Таким образом, можно заключить, что регион оказывает значительное
+влияние на индекс массы тела (BMI).
+
+    \hypertarget{section}{%
+\section{3.2}\label{section}}
+
+Выполнить однофакторный ANOVA тест, чтобы проверить влияние региона на
+индекс массы тела (BMI), используя второй способ, с помощью функции
+anova\_lm() из библиотеки statsmodels.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{45}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{model} \PY{o}{=} \PY{n}{ols}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bmi \PYZti{} region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
+\PY{n}{anova\PYZus{}result\PYZus{}statsmodels} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{anova\PYZus{}lm}\PY{p}{(}\PY{n}{model}\PY{p}{,} \PY{n}{typ}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+\PY{n}{anova\PYZus{}result\PYZus{}statsmodels}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{45}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+                sum\_sq      df          F        PR(>F)
+region     4055.880631     3.0  39.495057  1.881839e-24
+Residual  45664.319755  1334.0        NaN           NaN
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \textbf{sum\_sq (Сумма квадратов)}: * Для региона: 4055.88 --- это сумма
+квадратов отклонений между средними значениями групп. * Для остатков:
+45664.32 --- это сумма квадратов отклонений внутри групп.
+
+\textbf{df (Степени свободы)}: * Для региона: 3.0 --- это количество
+групп (регионов) минус 1. * Для остатков: 1334.0 --- это общее
+количество наблюдений минус количество групп.
+
+Значение \textbf{F} (39.495) аналогично результату, полученному из
+scipy, и указывает на значительное различие между средними значениями
+групп.PR(\textgreater F) (P-value):
+
+Значение \textbf{PR(\textgreater F) (P-value)} 1.88×10−24 также
+подтверждает, что различия между средними значениями BMI в разных
+регионах статистически значимы.
+
+Оба метода ANOVA (через Scipy и statsmodels) дают согласующиеся
+результаты, показывающие, что различия в BMI между регионами
+статистически значимы.
+
+    \hypertarget{section}{%
+\section{3.3}\label{section}}
+
+С помощью t критерия Стьюдента перебрать все пары. Определить поправку
+Бонферрони. Сделать выводы.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{47}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{from} \PY{n+nn}{itertools} \PY{k+kn}{import} \PY{n}{combinations}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{50}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{pairs} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{combinations}\PY{p}{(}\PY{n}{unique\PYZus{}regions}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+\PY{n}{p\PYZus{}values} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+\PY{k}{for} \PY{n}{pair} \PY{o+ow}{in} \PY{n}{pairs}\PY{p}{:}
+    \PY{n}{group1} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n}{pair}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bmi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+    \PY{n}{group2} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n}{pair}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bmi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+    \PY{n}{ttest\PYZus{}result} \PY{o}{=} \PY{n}{stats}\PY{o}{.}\PY{n}{ttest\PYZus{}ind}\PY{p}{(}\PY{n}{group1}\PY{p}{,} \PY{n}{group2}\PY{p}{)}
+    \PY{n}{p\PYZus{}values}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{ttest\PYZus{}result}\PY{o}{.}\PY{n}{pvalue}\PY{p}{)}
+
+\PY{n}{bonferroni\PYZus{}corrected\PYZus{}p\PYZus{}values} \PY{o}{=} \PY{p}{[}\PY{n}{p} \PY{o}{*} \PY{n+nb}{len}\PY{p}{(}\PY{n}{pairs}\PY{p}{)} \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{p\PYZus{}values}\PY{p}{]}
+\PY{n}{bonferroni\PYZus{}corrected\PYZus{}p\PYZus{}values}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{50}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+[3.2624405783808385e-08,
+ 0.006461750977846171,
+ 0.011451697002943843,
+ 1.5861428431380637e-18,
+ 7.116089624548878e-17,
+ 5.711575024931184]
+\end{Verbatim}
+\end{tcolorbox}
+        
+    Поправленные \textbf{p-значения}: Поскольку у нас 6 пар, мы умножили
+каждое исходное p-значение на 6 (поправка Бонферрони). Результаты
+показали, что все скорректированные p-значения по-прежнему остаются
+крайне малыми.
+
+Все скорректированные p-значения значительно ниже уровня значимости
+0.05, что указывает на статистически значимые различия в BMI между всеми
+парами регионов.
+
+Каждая пара регионов показывает, что их средние значения BMI
+статистически различаются. Это подтверждает, что влияние региона на BMI
+действительно является значимым.
+
+    \hypertarget{section}{%
+\section{3.4}\label{section}}
+
+Выполнить пост-хок тесты Тьюки и построить график.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{53}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{tukey\PYZus{}result} \PY{o}{=} \PY{n}{pairwise\PYZus{}tukeyhsd}\PY{p}{(}\PY{n}{endog}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bmi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{groups}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.05}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{tukey\PYZus{}result}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+   Multiple Comparison of Means - Tukey HSD, FWER=0.05
+==========================================================
+  group1    group2  meandiff p-adj   lower   upper  reject
+----------------------------------------------------------
+northeast northwest   0.0263 0.9999 -1.1552  1.2078  False
+northeast southeast   4.1825    0.0   3.033   5.332   True
+northeast southwest   1.4231 0.0107  0.2416  2.6046   True
+northwest southeast   4.1562    0.0  3.0077  5.3047   True
+northwest southwest   1.3968 0.0127  0.2162  2.5774   True
+southeast southwest  -2.7594    0.0 -3.9079 -1.6108   True
+----------------------------------------------------------
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{54}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{tukey\PYZus{}result}\PY{o}{.}\PY{n}{plot\PYZus{}simultaneous}\PY{p}{(}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Tukey HSD Test: BMI by Region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_38_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Различия между ``northeast'' и ``southeast'' (p \textless{} 0.001) и
+``southwest'' (p = 0.0107) статистически значимы.
+
+Различия между ``northwest'' и ``southeast'' (p \textless{} 0.001) и
+``southwest'' (p = 0.0127) также статистически значимы.
+
+Различие между ``southeast'' и ``southwest'' (p \textless{} 0.001) также
+значимо.
+
+Различие между ``northeast'' и ``northwest'' не является значимым (p =
+0.9999).
+
+    \hypertarget{section}{%
+\section{3.5}\label{section}}
+
+Выполнить двухфакторный ANOVA тест, чтобы проверить влияние региона и
+пола на индекс массы тела (BMI), используя функцию anova\_lm() из
+библиотеки statsmodels.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{55}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{model\PYZus{}two\PYZus{}way} \PY{o}{=} \PY{n}{ols}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bmi \PYZti{} C(region) * C(sex)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
+\PY{n}{anova\PYZus{}two\PYZus{}way} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{anova\PYZus{}lm}\PY{p}{(}\PY{n}{model\PYZus{}two\PYZus{}way}\PY{p}{,} \PY{n}{typ}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+\PY{n}{anova\PYZus{}two\PYZus{}way}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{55}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+                        sum\_sq      df          F        PR(>F)
+C(region)          4034.975135     3.0  39.398134  2.163195e-24
+C(sex)               86.007035     1.0   2.519359  1.126940e-01
+C(region):C(sex)    174.157808     3.0   1.700504  1.650655e-01
+Residual          45404.154911  1330.0        NaN           NaN
+\end{Verbatim}
+\end{tcolorbox}
+        
+    C(region): * sum\_sq: 4034.975 --- сумма квадратов для различий между
+регионами. * F: 39.398 --- указывает на значительное различие между
+средними значениями BMI по регионам. * PR(\textgreater F): 2.16×10−24
+--- очень низкое значение, что говорит о статистически значимом влиянии
+региона на BMI.
+
+C(sex): * sum\_sq: 86.007 --- сумма квадратов для различий между полами.
+* F: 2.519 --- не столь высокое значение по сравнению с регионом. *
+PR(\textgreater F): 0.1127 --- значение выше 0.05, что указывает на
+отсутствие значительного влияния пола на BMI.
+
+C(region):C(sex): * sum\_sq: 174.158 --- сумма квадратов для
+взаимодействия региона и пола. * F: 1.701 --- также незначительное
+значение. * PR(\textgreater F): 0.1651 --- незначимое влияние
+взаимодействия региона и пола на BMI.
+
+Регион имеет статистически значимое влияние на индекс массы тела (BMI).
+Пол не показывает статистически значимого влияния на BMI. Взаимодействие
+между регионом и полом также не является значимым.
+
+    \hypertarget{section}{%
+\section{3.6}\label{section}}
+
+Выполнить пост-хок тесты Тьюки и построить график.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{59}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{combination}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\PY{n}{tukey\PYZus{}two\PYZus{}way} \PY{o}{=} \PY{n}{pairwise\PYZus{}tukeyhsd}\PY{p}{(}\PY{n}{endog}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bmi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{groups}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{combination}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.05}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{tukey\PYZus{}two\PYZus{}way}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+          Multiple Comparison of Means - Tukey HSD, FWER=0.05
+========================================================================
+     group1           group2      meandiff p-adj   lower   upper  reject
+------------------------------------------------------------------------
+northeast-female   northeast-male  -0.2998 0.9998 -2.2706  1.6711  False
+northeast-female northwest-female  -0.0464    1.0 -2.0142  1.9215  False
+northeast-female   northwest-male  -0.2042    1.0 -2.1811  1.7728  False
+northeast-female southeast-female   3.3469    0.0    1.41  5.2839   True
+northeast-female   southeast-male   4.6657    0.0  2.7634   6.568   True
+northeast-female southwest-female   0.7362 0.9497 -1.2377    2.71  False
+northeast-female   southwest-male   1.8051 0.1007 -0.1657   3.776  False
+  northeast-male northwest-female   0.2534 0.9999 -1.7083  2.2152  False
+  northeast-male   northwest-male   0.0956    1.0 -1.8752  2.0665  False
+  northeast-male southeast-female   3.6467    0.0  1.7159  5.5775   True
+  northeast-male   southeast-male   4.9655    0.0  3.0695  6.8614   True
+  northeast-male southwest-female    1.036 0.7515 -0.9318  3.0037  False
+  northeast-male   southwest-male   2.1049 0.0258  0.1402  4.0697   True
+northwest-female   northwest-male  -0.1578    1.0 -2.1257    1.81  False
+northwest-female southeast-female   3.3933    0.0  1.4656   5.321   True
+northwest-female   southeast-male    4.712    0.0  2.8192  6.6049   True
+northwest-female southwest-female   0.7825 0.9294 -1.1822  2.7473  False
+northwest-female   southwest-male   1.8515 0.0806 -0.1103  3.8132  False
+  northwest-male southeast-female   3.5511    0.0  1.6141  5.4881   True
+  northwest-male   southeast-male   4.8698    0.0  2.9676  6.7721   True
+  northwest-male southwest-female   0.9403 0.8354 -1.0335  2.9142  False
+  northwest-male   southwest-male   2.0093  0.042  0.0385  3.9801   True
+southeast-female   southeast-male   1.3187 0.3823  -0.542  3.1795  False
+southeast-female southwest-female  -2.6108 0.0011 -4.5446 -0.6769   True
+southeast-female   southwest-male  -1.5418 0.2304 -3.4726   0.389  False
+  southeast-male southwest-female  -3.9295    0.0 -5.8286 -2.0304   True
+  southeast-male   southwest-male  -2.8606 0.0001 -4.7565 -0.9646   True
+southwest-female   southwest-male    1.069 0.7201 -0.8988  3.0367  False
+------------------------------------------------------------------------
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{60}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{tukey\PYZus{}two\PYZus{}way}\PY{o}{.}\PY{n}{plot\PYZus{}simultaneous}\PY{p}{(}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Tukey HSD Test: BMI by Region and Sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_45_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Пара southeast-female и southwest-female имеет наименьшее значение BMI
+среди всех групп, в то время как northeast-female и southeast-male
+показали наибольшее значение.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\end{Verbatim}
+\end{tcolorbox}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+\end{document}
