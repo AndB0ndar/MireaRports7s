@@ -266,17 +266,21 @@ nmap -sV --script=vuln -oN vuln_scan_results.txt 192.168.1.11
 	\item vsFTPd 2.3.4 Backdoor (CVE-2011-2523):
 		Позволяет злоумышленнику получить удалённый доступ
 		к системе с правами root через бэкдор в FTP-сервере.
+		CVSS: 7.5 (High).
 	\item OpenSSH 4.7p1 (CVE-2023-38408 и другие):
 		Уязвимость в OpenSSH позволяет выполнить удалённый код
 		и захватить систему.
+		CVSS: 4.3 (Medium).
 	\item Avahi DoS (CVE-2011-1002):
 		Возможна атака DoS через отправку специальных UDP пакетов.
+		CVSS: 5.9 (Medium).
 	\item CSRF (Cross-Site Request Forgery):
 		Веб-приложение DVWA (Damn Vulnerable Web Application)
 		может быть подвержено атакам CSRF,
 		что позволяет злоумышленникам заставить
 		пользователя выполнить нежелательные действия,
 		будучи авторизованным на сайте.
+		CVSS: 10.0 (Critical).
 \end{itemize}
 
 \subsection{Анализ уязвимостей с примененным ModSecurity}
