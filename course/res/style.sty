@@ -71,7 +71,7 @@
 
 % for long table
 \usepackage{longtable}
-\newcommand{\conttable}[1]{\caption*{\leftline{Продолжение таблицы~\ref{#1}}}}
+\newcommand{\conttable}[1]{\caption*{\leftline{Продолжение Таблицы~\ref{#1}}}}
 
 % for graphics
 \usepackage{graphicx}
@@ -144,7 +144,7 @@
 	leftmargin=0cm,
 	itemindent=1.25cm,
 	labelwidth=-0.6cm,
-	label=---,
+	label=--,
 }
 
 \setlist[enumerate]{
@@ -224,24 +224,27 @@
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
 \renewcommand{\cftsubsecleader}{\cftdotfill{\cftdotsep}}
 
+%\renewcommand{\cftchapfont}{\normalfont}
+%\renewcommand{\cftsecfont}{\normalfont}
+
 % ----------------------------------------------------------------------------
 % BIBLIOGRAPHY
 % https://www.ctan.org/pkg/biblatex-gost
 % ----------------------------------------------------------------------------
 
-\usepackage[
-	parentracker=true,
-	backend=biber,
-	hyperref=false,
-	bibencoding=utf8,
-	style=gost-numeric,
-	language=auto,
-	autolang=other,
-	citestyle=gost-numeric,
+%\usepackage[
+	%parentracker=true,
+	%backend=biber,
+	%hyperref=false,
+	%bibencoding=utf8,
+	%style=gost-numeric,
+	%language=auto,
+	%autolang=other,
+	%citestyle=gost-numeric,
 	%defernumbers=true,
-	bibstyle=gost-numeric,
+	%bibstyle=gost-numeric,
 	%sorting=ntvy,
-	]{biblatex}
+	%]{biblatex}
 
 % ----------------------------------------------------------------------------
 % NEW COMMAND
