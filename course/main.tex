@@ -2,6 +2,7 @@
 
 \usepackage{./res/style}
 \graphicspath{{./img/}} % path to graphics
+\addbibresource{bibliography.bib}
 
 \author{Bondar Andrei Renatovich}
 \date{\today}
@@ -19,15 +20,18 @@
 \tableofcontents
 \end{spacing}
 
-%\include{./chapters/abbreviations.tex}
+\include{./chapters/abbreviations.tex}
 \include{./chapters/introduction.tex}
 \include{./chapters/research.tex}
-\include{./chapters/design.tex}
 \include{./chapters/analytical.tex} % {./chapters/technological.tex}
+\include{./chapters/design.tex}
 %\include{./chapters/economic.tex}
 \include{./chapters/conclusion.tex}
 
-\include{./chapters/sources.tex}
+\nocite{*}
+\printbibliography[heading=bibintoc]
+
+\label{lastpage}
 
 \appendix
 

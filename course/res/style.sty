@@ -24,19 +24,31 @@
 % PAGE SETTINGS
 % ----------------------------------------------------------------------------
 
-\usepackage[left=3cm, right=1.5cm, vmargin=2cm, headheight=2cm]{geometry}
+\usepackage[left=3cm, right=1cm, vmargin=2cm, headheight=2cm]{geometry}
 \linespread{1.5} % line spacing 1.5
 \usepackage{indentfirst} % indent first paragraph
-\setlength{\parindent}{1.25cm}
+\setlength{\parindent}{1.25cm} % left indent 1.25 cm
 \sloppy
 
 \frenchspacing % ???
+
 \pagestyle{plain}
+
 \usepackage{fancyhdr} % for headers and footers
 
 % Ban dangling lines (ban single lines on a page)
 \clubpenalty=10000
 \widowpenalty=10000
+
+% ----------------------------------------------------------------------------
+% COUNTERS SETTINGS
+% ----------------------------------------------------------------------------
+
+\usepackage[figure,table,xspace]{totalcount}
+% add
+% \totalfigures
+% \totaltables
+% \listoffigures - list of figures
 
 % ----------------------------------------------------------------------------
 % ATTACHMENTS SETTINGS
@@ -71,24 +83,9 @@
 
 % for long table
 \usepackage{longtable}
-\newcommand{\conttable}[1]{\caption*{\leftline{Продолжение Таблицы~\ref{#1}}}}
 
 % for graphics
 \usepackage{graphicx}
-\newcommand{\rref}[1]{(Рисунок~\ref{#1})}
-\newcommand{\rdref}[2]{(Рисунки~\ref{#1}\,-\,\ref{#2})}
-\newcommand{\tref}[1]{(Таблица~\ref{#1})}
-\newcommand{\tdref}[2]{(Таблици~\ref{#1}\,-\,\ref{#2})}
-\newcommand{\lref}[1]{(Листинг~\ref{#1})}
-\newcommand{\ldref}[2]{(Листинги~\ref{#1}\,-\,\ref{#2})}
-
-\newenvironment{image}{
-	\begin{figure}[h!tp]
-	\centering
-}{
-	\end{figure}
-}
-\newcommand\includegrph[2][width=0.8\textwidth]{\includegraphics[#1]{#2}}
 
 \usepackage{tikz}  % powerful graphic creation
 \usetikzlibrary{positioning, backgrounds}
@@ -188,13 +185,13 @@
 
 % Customizing indents and spacing
 \titlespacing*{\chapter}
-  {1.25cm}{0pt}{10pt} % Left indent 1.25 cm, spacing before 15pt, after 10pt
+  {\parindent}{0pt}{10pt} % Left indent 1.25 cm, spacing before 15pt, after 10pt
 \titlespacing*{\section}
-  {1.25cm}{15pt}{10pt}
+  {\parindent}{15pt}{10pt}
 \titlespacing*{\subsection}
-  {1.25cm}{15pt}{10pt}
+  {\parindent}{15pt}{10pt}
 \titlespacing*{\subsubsection}
-  {1.25cm}{15pt}{10pt}
+  {\parindent}{15pt}{10pt}
 
 % Header separator on a new page.
 % Each new CHAPTER starts on a new page.
@@ -229,27 +226,78 @@
 
 % ----------------------------------------------------------------------------
 % BIBLIOGRAPHY
-% https://www.ctan.org/pkg/biblatex-gost
+%
+% Install in Linux
+% exec				mkdir -p ~/texmf/tex/latex
+% load archive from	https://www.ctan.org/pkg/biblatex-gost
+% unzip to			~/texmf/tex/latex/<biblatex-gost>
+% exec				texhash ~/texmf
+% 
 % ----------------------------------------------------------------------------
 
-%\usepackage[
-	%parentracker=true,
-	%backend=biber,
-	%hyperref=false,
-	%bibencoding=utf8,
-	%style=gost-numeric,
-	%language=auto,
-	%autolang=other,
+\usepackage[
+	parentracker=true,
+	backend=biber,
+	hyperref=false,
+	bibencoding=utf8,
+	style=gost-numeric,
+	language=auto,
+	autolang=other,
 	%citestyle=gost-numeric,
-	%defernumbers=true,
 	%bibstyle=gost-numeric,
-	%sorting=ntvy,
-	%]{biblatex}
+	sorting=none,  % entries are processed in citation order
+	]{biblatex}
 
 % ----------------------------------------------------------------------------
 % NEW COMMAND
 % ----------------------------------------------------------------------------
 
+% text substitutions
+\newcommand{\conttable}[1]{\caption*{\leftline{Продолжение Таблицы~\ref{#1}}}}
+\newcommand{\rref}[1]{(Рисунок~\ref{#1})}
+\newcommand{\rdref}[2]{(Рисунки~\ref{#1}\,-\,\ref{#2})}
+\newcommand{\tref}[1]{(Таблица~\ref{#1})}
+\newcommand{\tdref}[2]{(Таблици~\ref{#1}\,-\,\ref{#2})}
+\newcommand{\lref}[1]{(Листинг~\ref{#1})}
+\newcommand{\ldref}[2]{(Листинги~\ref{#1}\,-\,\ref{#2})}
+
+% figure environment and command
+\newenvironment{image}{
+	\begin{figure}[h!tp]
+	\centering
+}{
+	\end{figure}
+}
+\newcommand\includegrph[2][width=0.8\textwidth]{\includegraphics[#1]{#2}}
+
+% appendix
+\let\oldappendix\appendix % save old \appendix
+\usepackage{alphalph} % for \Asbuk
+\renewcommand{\appendix}{
+    \oldappendix
+    \renewcommand{\thechapter}{\Asbuk{chapter}}
+}
+\newcommand\achapter[1]{
+	\refstepcounter{chapter}
+	\chapter*{\textbf{\appendixname\;\thechapter} \\ \raggedright #1}
+	\label{chap:#1}
+	\addcontentsline{toc}{section}{\appendixname~\thechapter\ ---\ #1}
+	%\addcontentsline{toc}{chapter}{\appendixname~\thechapter\ ---\ #1}
+}
+\newcommand\asection[1]{
+	\refstepcounter{section}
+	\section*{\textbf{\thesection} \raggedright #1}
+}
+\newcommand\asubsection[1]{
+	\refstepcounter{subsection}
+	\section*{\textbf{\thesubsection} \raggedright #1}
+}
+\newcommand\asubsubsection[1]{
+	\refstepcounter{subsubsection}
+	\section*{\textbf{\thesubsubsection} \raggedright #1}
+}
+
+% other commands
 \providecommand{\No}{\textnumero}
 \newcommand{\rarrow}{$\rightarrow$}
 
