@@ -108,6 +108,12 @@
 }
 
 % ----------------------------------------------------------------------------
+% COLOR SETTINGS
+% ----------------------------------------------------------------------------
+
+\usepackage{color}
+
+% ----------------------------------------------------------------------------
 % HYPERREF SETTINGS
 % ----------------------------------------------------------------------------
 
@@ -157,9 +163,9 @@
   {\bfseries\fontsize{18pt}{20pt}\selectfont} % Bold, size 18pt
   {\thesection}{1em}{} % numbering, indentation and uppercase 
 \titleformat{\subsection}[block]
-	{\fontsize{16pt}{20pt}\bfseries}{\thesection.}{1em}{}
-\titleformat{\subsubsection}
-	{\fontsize{14pt}{18pt}\bfseries}{\thesubsection.}{1em}{}
+	{\fontsize{16pt}{20pt}\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}[block]
+	{\fontsize{14pt}{18pt}\bfseries}{\thesubsubsection}{1em}{}
 
 \titlespacing*{\section}
   {\parindent}{0pt}{10pt}
