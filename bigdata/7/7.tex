@@ -1,0 +1,1051 @@
+\documentclass[14pt,a4paper,oneside]{extarticle}
+
+	\usepackage{cmap} % for pdfLaTeX
+	\usepackage[T1,T2A]{fontenc} % correct encoding for pdfLaTeX
+	\usepackage[utf8]{inputenc} % correct encoding source file
+	\usepackage[english,russian]{babel} % correct language
+
+	% -------------------
+	% TEXT SETTINGS
+	% -------------------
+
+	\usepackage{fontspec} % use standart fonts (only for xelatex!!!)
+	\setmainfont{Times New Roman}
+	\setsansfont{Arial}
+	\setmonofont[Scale=0.6]{Courier New}
+
+	\usepackage[none]{hyphenat} % no word breaks
+
+	\usepackage{setspace}
+	%\singlespacing % 1.0
+	\onehalfspacing % 1.5
+
+	% -------------------
+	% PAGE SETTINGS
+	% -------------------
+
+	\usepackage[left=3cm, right=1.5cm, vmargin=2cm, headheight=2cm]{geometry}
+	\linespread{1.5} % line spacing 1.5
+	\usepackage{indentfirst} % indent first paragraph
+	\setlength{\parindent}{1.25cm}
+	\sloppy
+
+	\frenchspacing % ???
+	\pagestyle{plain}
+	\usepackage{fancyhdr} % for headers and footers
+
+	\clubpenalty=10000
+	\widowpenalty=10000
+
+	% ------------------
+	% ATTACHMENTS SETTINGS
+	% ------------------
+
+	\usepackage[labelsep=endash]{caption}
+	%\setlength{\abovecaptionskip}{3pt}
+	%\setlength{\belowcaptionskip}{3pt}
+
+	% for non-end-to-end numbering
+	%\usepackage{chngcntr}
+	%\counterwithin{figure}{section}
+	%\counterwithin{table}{section}
+
+	% for long table
+	\usepackage{longtable}
+
+	% for graphics
+	\usepackage{graphicx}
+	\newcommand{\rref}[1]{(Рисунок~\ref{#1})}
+	\newcommand{\rdref}[2]{(Рисунки~\ref{#1}\,-\,\ref{#2})}
+	\newcommand{\tref}[1]{(Таблица~\ref{#1})}
+	\newcommand{\tdref}[2]{(Таблици~\ref{#1}\,-\,\ref{#2})}
+	\newenvironment{image}{
+		\begin{figure}[h!tp]
+		\centering
+	}{
+		\end{figure}
+	}
+	\newcommand\includegrph[2][width=0.8\textwidth]{\includegraphics[#1]{#2}}
+
+	\usepackage{amsmath} % more flexibility equations (use in title!!!)
+	\usepackage{pdfpages} % include pdf
+
+
+	% ------------------
+	% SECTION SETTINGS
+	% ------------------
+
+	\usepackage{titlesec}
+
+	% section size
+	\titleformat{\section}[block]
+		{\fontsize{16pt}{20pt}\bfseries}{\thesection}{1em}{}
+	\titleformat{\subsection}
+		{\fontsize{14pt}{18pt}\bfseries}{\thesubsection}{1em}{}
+	\titleformat{\subsubsection}
+		{\fontsize{14pt}{18pt}\bfseries}{\thesubsubsection}{1em}{}
+	\titlespacing*{\section}{1.25cm}{0pt}{0pt}
+	\titlespacing*{\subsection}{1.25cm}{0pt}{0pt}
+	\titlespacing*{\subsubsection}{1.25cm}{0pt}{0pt}
+	\titlespacing*{\paragraph}{1.25cm}{0pt}{0pt}
+
+	% ------------------
+	% NEW COMMAND
+	% ------------------
+
+	\providecommand{\No}{\textnumero}
+
+	% ------------------
+	% ------------------
+
+    \usepackage[breakable]{tcolorbox}
+    
+
+    \usepackage{graphicx}
+    \usepackage{caption}
+
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{geometry} % Used to adjust the document margins
+
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+
+    \makeatletter % fix for old versions of grffile with XeLaTeX
+    \@ifpackagelater{grffile}{2019/11/01}
+    {
+      % Do nothing on new versions
+    }
+    {
+      \def\Gread@@xetex#1{%
+        \IfFileExists{"\Gin@base".bb}%
+        {\Gread@eps{\Gin@base.bb}}%
+        {\Gread@@xetex@aux#1}%
+      }
+    }
+    \makeatother
+    \usepackage[Export]{adjustbox} % Used to constrain images to a maximum size
+    \adjustboxset{max size={0.9\linewidth}{0.9\paperheight}}
+
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    % The default LaTeX title has an obnoxious amount of whitespace. By default,
+    % titling removes some of it. It also provides customization options.
+    \usepackage{titling}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage{array}     % table support for pandoc >= 2.11.3
+    \usepackage{calc}      % table minipage width calculation for pandoc >= 2.11.1
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{mathrsfs}
+    
+
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % common color for the border for error outputs.
+    \definecolor{outerrorbackground}{HTML}{FFDFDF}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+
+    
+    
+    
+    
+	% Pygments definitions
+	\makeatletter
+	\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+		\let\PY@ul=\relax \let\PY@tc=\relax%
+		\let\PY@bc=\relax \let\PY@ff=\relax}
+	\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+	\def\PY@toks#1+{\ifx\relax#1\empty\else%
+		\PY@tok{#1}\expandafter\PY@toks\fi}
+	\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+		\PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+	\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+	\@namedef{PY@tok@w}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+	\@namedef{PY@tok@c}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+	\@namedef{PY@tok@cp}{\def\PY@tc##1{\textcolor[rgb]{0.61,0.40,0.00}{##1}}}
+	\@namedef{PY@tok@k}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@kp}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@kt}{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+	\@namedef{PY@tok@o}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+	\@namedef{PY@tok@ow}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+	\@namedef{PY@tok@nb}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@nf}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+	\@namedef{PY@tok@nc}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+	\@namedef{PY@tok@nn}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+	\@namedef{PY@tok@ne}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.80,0.25,0.22}{##1}}}
+	\@namedef{PY@tok@nv}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+	\@namedef{PY@tok@no}{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+	\@namedef{PY@tok@nl}{\def\PY@tc##1{\textcolor[rgb]{0.46,0.46,0.00}{##1}}}
+	\@namedef{PY@tok@ni}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.44,0.44,0.44}{##1}}}
+	\@namedef{PY@tok@na}{\def\PY@tc##1{\textcolor[rgb]{0.41,0.47,0.13}{##1}}}
+	\@namedef{PY@tok@nt}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@nd}{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+	\@namedef{PY@tok@s}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@sd}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@si}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.64,0.35,0.47}{##1}}}
+	\@namedef{PY@tok@se}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.36,0.12}{##1}}}
+	\@namedef{PY@tok@sr}{\def\PY@tc##1{\textcolor[rgb]{0.64,0.35,0.47}{##1}}}
+	\@namedef{PY@tok@ss}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+	\@namedef{PY@tok@sx}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@m}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+	\@namedef{PY@tok@gh}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+	\@namedef{PY@tok@gu}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+	\@namedef{PY@tok@gd}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+	\@namedef{PY@tok@gi}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.52,0.00}{##1}}}
+	\@namedef{PY@tok@gr}{\def\PY@tc##1{\textcolor[rgb]{0.89,0.00,0.00}{##1}}}
+	\@namedef{PY@tok@ge}{\let\PY@it=\textit}
+	\@namedef{PY@tok@gs}{\let\PY@bf=\textbf}
+	\@namedef{PY@tok@gp}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+	\@namedef{PY@tok@go}{\def\PY@tc##1{\textcolor[rgb]{0.44,0.44,0.44}{##1}}}
+	\@namedef{PY@tok@gt}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+	\@namedef{PY@tok@err}{\def\PY@bc##1{{\setlength{\fboxsep}{\string -\fboxrule}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}}
+	\@namedef{PY@tok@kc}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@kd}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@kn}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@kr}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@bp}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+	\@namedef{PY@tok@fm}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+	\@namedef{PY@tok@vc}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+	\@namedef{PY@tok@vg}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+	\@namedef{PY@tok@vi}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+	\@namedef{PY@tok@vm}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+	\@namedef{PY@tok@sa}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@sb}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@sc}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@dl}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@s2}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@sh}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@s1}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+	\@namedef{PY@tok@mb}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+	\@namedef{PY@tok@mf}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+	\@namedef{PY@tok@mh}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+	\@namedef{PY@tok@mi}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+	\@namedef{PY@tok@il}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+	\@namedef{PY@tok@mo}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+	\@namedef{PY@tok@ch}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+	\@namedef{PY@tok@cm}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+	\@namedef{PY@tok@cpf}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+	\@namedef{PY@tok@c1}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+	\@namedef{PY@tok@cs}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+
+	\def\PYZbs{\char`\\}
+	\def\PYZus{\char`\_}
+	\def\PYZob{\char`\{}
+	\def\PYZcb{\char`\}}
+	\def\PYZca{\char`\^}
+	\def\PYZam{\char`\&}
+	\def\PYZlt{\char`\<}
+	\def\PYZgt{\char`\>}
+	\def\PYZsh{\char`\#}
+	\def\PYZpc{\char`\%}
+	\def\PYZdl{\char`\$}
+	\def\PYZhy{\char`\-}
+	\def\PYZsq{\char`\'}
+	\def\PYZdq{\char`\"}
+	\def\PYZti{\char`\~}
+	% for compatibility with earlier versions
+	\def\PYZat{@}
+	\def\PYZlb{[}
+	\def\PYZrb{]}
+	\makeatother
+
+
+    % For linebreaks inside Verbatim environment from package fancyvrb.
+    \makeatletter
+        \newbox\Wrappedcontinuationbox
+        \newbox\Wrappedvisiblespacebox
+        \newcommand*\Wrappedvisiblespace {\textcolor{red}{\textvisiblespace}}
+        \newcommand*\Wrappedcontinuationsymbol {\textcolor{red}{\llap{\tiny$\m@th\hookrightarrow$}}}
+        \newcommand*\Wrappedcontinuationindent {3ex }
+        \newcommand*\Wrappedafterbreak {\kern\Wrappedcontinuationindent\copy\Wrappedcontinuationbox}
+        % Take advantage of the already applied Pygments mark-up to insert
+        % potential linebreaks for TeX processing.
+        %        {, <, #, %, $, ' and ": go to next line.
+        %        _, }, ^, &, >, - and ~: stay at end of broken line.
+        % Use of \textquotesingle for straight quote.
+        \newcommand*\Wrappedbreaksatspecials {%
+            \def\PYGZus{\discretionary{\char`\_}{\Wrappedafterbreak}{\char`\_}}%
+            \def\PYGZob{\discretionary{}{\Wrappedafterbreak\char`\{}{\char`\{}}%
+            \def\PYGZcb{\discretionary{\char`\}}{\Wrappedafterbreak}{\char`\}}}%
+            \def\PYGZca{\discretionary{\char`\^}{\Wrappedafterbreak}{\char`\^}}%
+            \def\PYGZam{\discretionary{\char`\&}{\Wrappedafterbreak}{\char`\&}}%
+            \def\PYGZlt{\discretionary{}{\Wrappedafterbreak\char`\<}{\char`\<}}%
+            \def\PYGZgt{\discretionary{\char`\>}{\Wrappedafterbreak}{\char`\>}}%
+            \def\PYGZsh{\discretionary{}{\Wrappedafterbreak\char`\#}{\char`\#}}%
+            \def\PYGZpc{\discretionary{}{\Wrappedafterbreak\char`\%}{\char`\%}}%
+            \def\PYGZdl{\discretionary{}{\Wrappedafterbreak\char`\$}{\char`\$}}%
+            \def\PYGZhy{\discretionary{\char`\-}{\Wrappedafterbreak}{\char`\-}}%
+            \def\PYGZsq{\discretionary{}{\Wrappedafterbreak\textquotesingle}{\textquotesingle}}%
+            \def\PYGZdq{\discretionary{}{\Wrappedafterbreak\char`\"}{\char`\"}}%
+            \def\PYGZti{\discretionary{\char`\~}{\Wrappedafterbreak}{\char`\~}}%
+        }
+        % Some characters . , ; ? ! / are not pygmentized.
+        % This macro makes them "active" and they will insert potential linebreaks
+        \newcommand*\Wrappedbreaksatpunct {%
+            \lccode`\~`\.\lowercase{\def~}{\discretionary{\hbox{\char`\.}}{\Wrappedafterbreak}{\hbox{\char`\.}}}%
+            \lccode`\~`\,\lowercase{\def~}{\discretionary{\hbox{\char`\,}}{\Wrappedafterbreak}{\hbox{\char`\,}}}%
+            \lccode`\~`\;\lowercase{\def~}{\discretionary{\hbox{\char`\;}}{\Wrappedafterbreak}{\hbox{\char`\;}}}%
+            \lccode`\~`\:\lowercase{\def~}{\discretionary{\hbox{\char`\:}}{\Wrappedafterbreak}{\hbox{\char`\:}}}%
+            \lccode`\~`\?\lowercase{\def~}{\discretionary{\hbox{\char`\?}}{\Wrappedafterbreak}{\hbox{\char`\?}}}%
+            \lccode`\~`\!\lowercase{\def~}{\discretionary{\hbox{\char`\!}}{\Wrappedafterbreak}{\hbox{\char`\!}}}%
+            \lccode`\~`\/\lowercase{\def~}{\discretionary{\hbox{\char`\/}}{\Wrappedafterbreak}{\hbox{\char`\/}}}%
+            \catcode`\.\active
+            \catcode`\,\active
+            \catcode`\;\active
+            \catcode`\:\active
+            \catcode`\?\active
+            \catcode`\!\active
+            \catcode`\/\active
+            \lccode`\~`\~
+        }
+    \makeatother
+
+    \let\OriginalVerbatim=\Verbatim
+    \makeatletter
+    \renewcommand{\Verbatim}[1][1]{%
+        %\parskip\z@skip
+        \sbox\Wrappedcontinuationbox {\Wrappedcontinuationsymbol}%
+        \sbox\Wrappedvisiblespacebox {\FV@SetupFont\Wrappedvisiblespace}%
+        \def\FancyVerbFormatLine ##1{\hsize\linewidth
+            \vtop{\raggedright\hyphenpenalty\z@\exhyphenpenalty\z@
+                \doublehyphendemerits\z@\finalhyphendemerits\z@
+                \strut ##1\strut}%
+        }%
+        % If the linebreak is at a space, the latter will be displayed as visible
+        % space at end of first line, and a continuation symbol starts next line.
+        % Stretch/shrink are however usually zero for typewriter font.
+        \def\FV@Space {%
+            \nobreak\hskip\z@ plus\fontdimen3\font minus\fontdimen4\font
+            \discretionary{\copy\Wrappedvisiblespacebox}{\Wrappedafterbreak}
+            {\kern\fontdimen2\font}%
+        }%
+
+        % Allow breaks at special characters using \PYG... macros.
+        \Wrappedbreaksatspecials
+        % Breaks at punctuation characters . , ; ? ! and / need catcode=\active
+        \OriginalVerbatim[#1,codes*=\Wrappedbreaksatpunct]%
+    }
+    \makeatother
+
+    % Exact colors from NB
+    \definecolor{incolor}{HTML}{303F9F}
+    \definecolor{outcolor}{HTML}{D84315}
+    \definecolor{cellborder}{HTML}{CFCFCF}
+    \definecolor{cellbackground}{HTML}{F7F7F7}
+
+    % prompt
+    \makeatletter
+    \newcommand{\boxspacing}{\kern\kvtcb@left@rule\kern\kvtcb@boxsep}
+    \makeatother
+    \newcommand{\prompt}[4]{
+        {\ttfamily\llap{{\color{#2}[#3]:\hspace{3pt}#4}}\vspace{-\baselineskip}}
+    }
+    
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    
+
+\begin{document}
+    
+\include{./res/title.tex}
+    
+    
+    \hypertarget{ux43eux431ux449ux438ux435-ux437ux430ux432ux438ux441ux438ux43cux43eux441ux442ux438}{%
+\section{Общие
+зависимости}\label{ux43eux431ux449ux438ux435-ux437ux430ux432ux438ux441ux438ux43cux43eux441ux442ux438}}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{70}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\PY{k+kn}{import} \PY{n+nn}{time}
+\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k+kn}{import} \PY{n}{accuracy\PYZus{}score}\PY{p}{,} \PY{n}{classification\PYZus{}report}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \hypertarget{ux43dux430ux439ux442ux438-ux434ux430ux43dux43dux44bux435-ux434ux43bux44f-ux437ux430ux434ux430ux447ux438-ux43aux43bux430ux441ux441ux438ux444ux438ux43aux430ux446ux438ux438-ux438ux43bux438-ux434ux43bux44f-ux437ux430ux434ux430ux447ux438-ux440ux435ux433ux440ux435ux441ux441ux438ux438}{%
+\section{Найти данные для задачи классификации или для задачи
+регрессии}\label{ux43dux430ux439ux442ux438-ux434ux430ux43dux43dux44bux435-ux434ux43bux44f-ux437ux430ux434ux430ux447ux438-ux43aux43bux430ux441ux441ux438ux444ux438ux43aux430ux446ux438ux438-ux438ux43bux438-ux434ux43bux44f-ux437ux430ux434ux430ux447ux438-ux440ux435ux433ux440ux435ux441ux441ux438ux438}}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{71}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/content/fish\PYZus{}data.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{71}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+              species  length  weight  w\_l\_ratio
+0  Anabas testudineus   10.66    3.45       0.32
+1  Anabas testudineus    6.91    3.27       0.47
+2  Anabas testudineus    8.38    3.46       0.41
+3  Anabas testudineus    7.57    3.36       0.44
+4  Anabas testudineus   10.83    3.38       0.31
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \hypertarget{ux443ux434ux430ux43bux438ux43c-ux434ux443ux431ux43bux438ux43aux430ux442ux44b-ux438ux437-ux434ux430ux442ux430ux444ux440ux435ux439ux43cux430}{%
+\subsection{Удалим дубликаты из
+датафрейма}\label{ux443ux434ux430ux43bux438ux43c-ux434ux443ux431ux43bux438ux43aux430ux442ux44b-ux438ux437-ux434ux430ux442ux430ux444ux440ux435ux439ux43cux430}}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{72}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}\PY{o}{.}\PY{n}{duplicated}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{72}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+109
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{73}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}\PY{o}{.}\PY{n}{drop\PYZus{}duplicates}\PY{p}{(}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \hypertarget{ux443ux434ux430ux43bux438ux43c-ux441ux442ux43eux43bux431ux435ux446-ux432ux438ux434}{%
+\subsection{Удалим столбец
+Вид}\label{ux443ux434ux430ux43bux438ux43c-ux441ux442ux43eux43bux431ux435ux446-ux432ux438ux434}}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{74}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{X} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{species}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\PY{n}{y} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{species}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \hypertarget{ux43dux43eux440ux43cux430ux43bux438ux437ux430ux446ux438ux44f}{%
+\subsection{Нормализация}\label{ux43dux43eux440ux43cux430ux43bux438ux437ux430ux446ux438ux44f}}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{75}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k+kn}{import} \PY{n}{MinMaxScaler}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{76}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{scaler} \PY{o}{=} \PY{n}{MinMaxScaler}\PY{p}{(}\PY{p}{)}
+\PY{n}{X\PYZus{}scaled} \PY{o}{=} \PY{n}{scaler}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \hypertarget{ux440ux430ux437ux434ux435ux43bux435ux43dux438ux435-ux43dux430-ux442ux440ux435ux43dux438ux440ux43eux432ux43eux447ux43dux443ux44e-ux438-ux442ux435ux441ux442ux43eux432ux443ux44e-ux432ux44bux431ux43eux440ux43aux438}{%
+\section{Разделение на тренировочную и тестовую
+выборки}\label{ux440ux430ux437ux434ux435ux43bux435ux43dux438ux435-ux43dux430-ux442ux440ux435ux43dux438ux440ux43eux432ux43eux447ux43dux443ux44e-ux438-ux442ux435ux441ux442ux43eux432ux443ux44e-ux432ux44bux431ux43eux440ux43aux438}}
+
+Выделим 70\% данных для обучения и 30\% для тестирования, чтобы
+проверить модели на новых данных.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{77}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k+kn}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{78}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X\PYZus{}scaled}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\clearpage
+
+    \hypertarget{ux431ux430ux433ux433ux438ux43dux433}{%
+\section{Баггинг}\label{ux431ux430ux433ux433ux438ux43dux433}}
+
+    \hypertarget{baggingclassifier}{%
+\subsection{BaggingClassifier}\label{baggingclassifier}}
+
+    \textbf{BaggingClassifier} --- это более общий класс для алгоритмов,
+использующих метод Bagging (Bootstrap Aggregating). Суть Bagging
+заключается в том, чтобы создавать несколько моделей на случайных
+подмножествах данных и затем объединять их прогнозы для получения более
+стабильных и точных предсказаний.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{79}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k+kn}{import} \PY{n}{BaggingClassifier}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{80}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{bagging\PYZus{}model} \PY{o}{=} \PY{n}{BaggingClassifier}\PY{p}{(}\PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{)}
+\PY{n}{start\PYZus{}time} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+\PY{n}{bagging\PYZus{}model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+\PY{n}{bagging\PYZus{}time} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{start\PYZus{}time}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{81}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{y\PYZus{}pred\PYZus{}bagging} \PY{o}{=} \PY{n}{bagging\PYZus{}model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+\PY{n}{bagging\PYZus{}accuracy} \PY{o}{=} \PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred\PYZus{}bagging}\PY{p}{)}
+\PY{n}{bagging\PYZus{}report} \PY{o}{=} \PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred\PYZus{}bagging}\PY{p}{)}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Точность модели: }\PY{l+s+si}{\PYZob{}}\PY{n}{bagging\PYZus{}accuracy}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Время обучения модели: }\PY{l+s+si}{\PYZob{}}\PY{n}{bagging\PYZus{}time}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{ с.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Отчет классификации:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{bagging\PYZus{}report}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Точность модели: 0.9337248322147651
+Время обучения модели: 0.43054986000061035 с.
+Отчет классификации:
+                         precision    recall  f1-score   support
+
+    Anabas testudineus       1.00      1.00      1.00       157
+     Coilia dussumieri       1.00      1.00      1.00       124
+Otolithoides biauritus       0.72      0.70      0.71       138
+     Otolithoides pama       1.00      1.00      1.00       127
+     Pethia conchonius       1.00      1.00      1.00       134
+  Polynemus paradiseus       1.00      1.00      1.00       142
+  Puntius lateristriga       1.00      1.00      1.00       109
+        Setipinna taty       0.69      0.72      0.71       132
+ Sillaginopsis panijus       1.00      1.00      1.00       129
+
+              accuracy                           0.93      1192
+             macro avg       0.94      0.94      0.93      1192
+          weighted avg       0.93      0.93      0.93      1192
+
+    \end{Verbatim}
+
+    \hypertarget{ux432ux44bux432ux43eux434}{%
+\subsubsection*{\large Вывод}\label{ux432ux44bux432ux43eux434}}
+
+\textbf{Точность}: 93.37\%, \textbf{обучение заняло} 1.19 с.
+
+Модель идеально справляется с большинством классов, кроме Otolithoides
+biauritus (F1 = 0.71) и Setipinna taty (F1 = 0.71), где есть сложности
+из-за перекрытия признаков.
+
+\clearpage
+
+    \hypertarget{randomforestclassifier}{%
+\subsection{RandomForestClassifier}\label{randomforestclassifier}}
+
+    RandomForestClassifier --- это специализированная модель, которая также
+использует метод Bagging, но с дополнительной особенностью: она строит
+случайные деревья решений, что делает её более точной по сравнению с
+простым BaggingClassifier с обычными деревьями.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{82}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k+kn}{import} \PY{n}{RandomForestClassifier}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{83}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{bagging\PYZus{}model} \PY{o}{=} \PY{n}{RandomForestClassifier}\PY{p}{(}\PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{)}
+\PY{n}{start\PYZus{}time} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+\PY{n}{bagging\PYZus{}model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+\PY{n}{bagging\PYZus{}time} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{start\PYZus{}time}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{84}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{y\PYZus{}pred\PYZus{}bagging} \PY{o}{=} \PY{n}{bagging\PYZus{}model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+\PY{n}{bagging\PYZus{}accuracy} \PY{o}{=} \PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred\PYZus{}bagging}\PY{p}{)}
+\PY{n}{bagging\PYZus{}report} \PY{o}{=} \PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred\PYZus{}bagging}\PY{p}{)}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Точность модели: }\PY{l+s+si}{\PYZob{}}\PY{n}{bagging\PYZus{}accuracy}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Время обучения модели: }\PY{l+s+si}{\PYZob{}}\PY{n}{bagging\PYZus{}time}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{ c.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Отчет классификации:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{bagging\PYZus{}report}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Точность модели: 0.9320469798657718
+Время обучения модели: 0.24588871002197266 c.
+Отчет классификации:
+                         precision    recall  f1-score   support
+
+    Anabas testudineus       1.00      1.00      1.00       157
+     Coilia dussumieri       1.00      1.00      1.00       124
+Otolithoides biauritus       0.71      0.69      0.70       138
+     Otolithoides pama       1.00      1.00      1.00       127
+     Pethia conchonius       1.00      1.00      1.00       134
+  Polynemus paradiseus       1.00      1.00      1.00       142
+  Puntius lateristriga       1.00      1.00      1.00       109
+        Setipinna taty       0.69      0.71      0.70       132
+ Sillaginopsis panijus       1.00      1.00      1.00       129
+
+              accuracy                           0.93      1192
+             macro avg       0.93      0.93      0.93      1192
+          weighted avg       0.93      0.93      0.93      1192
+
+    \end{Verbatim}
+
+    \hypertarget{ux432ux44bux432ux43eux434}{%
+\subsubsection*{\large Вывод}\label{ux432ux44bux432ux43eux434}}
+
+\textbf{Точность}: 93.20\%, \textbf{обучение заняло} 0.41 с (значительно
+быстрее, чем BaggingClassifier).
+
+Как и у BaggingClassifier, проблемы с Otolithoides biauritus (F1 = 0.70)
+и Setipinna taty (F1 = 0.70).
+
+\clearpage
+
+    \hypertarget{randomforestclassifier-c-gridsearchcv}{%
+\subsection{RandomForestClassifier c
+GridSearchCV}\label{randomforestclassifier-c-gridsearchcv}}
+
+    Проблема заключается в том, что параметры нужно каким-то образом
+выбрать. Можно провести перебор параметров и для каждой их комбинации
+обучить модели, затем выбрать лучшую. Это можно сделать с помощью
+GridSearchCV.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{85}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k+kn}{import} \PY{n}{GridSearchCV}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{86}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{random\PYZus{}forest} \PY{o}{=} \PY{n}{RandomForestClassifier}\PY{p}{(}\PY{p}{)}
+\PY{n}{params\PYZus{}grid} \PY{o}{=} \PY{p}{\PYZob{}}
+    \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{max\PYZus{}depth}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{]}\PY{p}{,}
+    \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{min\PYZus{}samples\PYZus{}leaf}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{]}\PY{p}{,}
+    \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{min\PYZus{}samples\PYZus{}split}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{12}\PY{p}{]}\PY{p}{,}
+\PY{p}{\PYZcb{}}
+\PY{n}{grid\PYZus{}search\PYZus{}random\PYZus{}forest} \PY{o}{=} \PY{n}{GridSearchCV}\PY{p}{(}
+    \PY{n}{estimator}\PY{o}{=}\PY{n}{random\PYZus{}forest}\PY{p}{,}
+    \PY{n}{param\PYZus{}grid}\PY{o}{=}\PY{n}{params\PYZus{}grid}\PY{p}{,}
+    \PY{n}{scoring}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{f1\PYZus{}macro}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+    \PY{n}{cv} \PY{o}{=} \PY{l+m+mi}{4}
+\PY{p}{)}
+\PY{n}{start\PYZus{}time} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+\PY{n}{grid\PYZus{}search\PYZus{}random\PYZus{}forest}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+\PY{n}{bagging\PYZus{}time} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{start\PYZus{}time}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{87}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{y\PYZus{}pred\PYZus{}bagging} \PY{o}{=} \PY{n}{grid\PYZus{}search\PYZus{}random\PYZus{}forest}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+\PY{n}{bagging\PYZus{}accuracy} \PY{o}{=} \PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred\PYZus{}bagging}\PY{p}{)}
+\PY{n}{bagging\PYZus{}report} \PY{o}{=} \PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred\PYZus{}bagging}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Точность модели: }\PY{l+s+si}{\PYZob{}}\PY{n}{bagging\PYZus{}accuracy}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Время обучения модели: }\PY{l+s+si}{\PYZob{}}\PY{n}{bagging\PYZus{}time}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{ c.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Отчет классификации:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{bagging\PYZus{}report}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Точность модели: 0.9429530201342282
+Время обучения модели: 8.196993112564087 c.
+Отчет классификации:
+                         precision    recall  f1-score   support
+    Anabas testudineus       1.00      1.00      1.00       157
+     Coilia dussumieri       1.00      1.00      1.00       124
+Otolithoides biauritus       0.74      0.79      0.76       138
+     Otolithoides pama       1.00      1.00      1.00       127
+     Pethia conchonius       1.00      1.00      1.00       134
+  Polynemus paradiseus       1.00      1.00      1.00       142
+  Puntius lateristriga       1.00      1.00      1.00       109
+        Setipinna taty       0.76      0.70      0.73       132
+ Sillaginopsis panijus       1.00      1.00      1.00       129
+
+              accuracy                           0.94      1192
+             macro avg       0.94      0.94      0.94      1192
+          weighted avg       0.94      0.94      0.94      1192
+    \end{Verbatim}
+
+    \hypertarget{ux432ux44bux432ux43eux434}{%
+\subsubsection*{\large Вывод}\label{ux432ux44bux432ux43eux434}}
+
+\textbf{Точность}: 94.04\%, выше по сравнению с базовым RandomForest
+(93.20\%) и BaggingClassifier (93.37\%).
+
+\textbf{Время обучения}: 7.99 с --- значительно дольше из-за подбора
+гиперпараметров.
+
+Метрики Otolithoides biauritus (F1 = 0.75) и Setipinna taty (F1 = 0.72)
+стали лучше, но всё ещё неидеальны.
+
+GridSearchCV позволил повысить точность и F1-оценки для сложных классов,
+хотя время обучения возросло. Большинство классов, как и ранее,
+классифицируются идеально.
+
+\clearpage
+
+    \hypertarget{ux431ux443ux441ux442ux438ux43dux433}{%
+\section{Бустинг}\label{ux431ux443ux441ux442ux438ux43dux433}}
+
+    \hypertarget{gradientboostingclassifier}{%
+\subsection{GradientBoostingClassifier}\label{gradientboostingclassifier}}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{88}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k+kn}{import} \PY{n}{GradientBoostingClassifier}
+\end{Verbatim}
+\end{tcolorbox}
+
+    GradientBoostingClassifier --- это класс в рамках алгоритма градиентного
+бустинга (Gradient Boosting).
+
+Gradient Boosting --- это один из наиболее мощных и гибких архитектурных
+шаблонов в машинном обучении. Он позволяет строить ансамбли моделей,
+комбинируя слабые ученики в сильную модель, способную решать
+разнообразные задачи классификации и регрессии.
+
+Основная идея Gradient Boosting --- последовательно обучать новые
+ученики на ошибках предыдущих моделей. Это позволяет компенсировать
+слабости отдельных учеников и повышать точность предсказаний.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{89}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{boosting\PYZus{}model} \PY{o}{=} \PY{n}{GradientBoostingClassifier}\PY{p}{(}\PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{)}
+
+\PY{n}{start\PYZus{}time} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+\PY{n}{boosting\PYZus{}model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+\PY{n}{boosting\PYZus{}time} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{start\PYZus{}time}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{90}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{y\PYZus{}pred\PYZus{}boosting} \PY{o}{=} \PY{n}{boosting\PYZus{}model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+\PY{n}{boosting\PYZus{}accuracy} \PY{o}{=} \PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred\PYZus{}boosting}\PY{p}{)}
+\PY{n}{boosting\PYZus{}report} \PY{o}{=} \PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred\PYZus{}boosting}\PY{p}{)}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Точность модели: }\PY{l+s+si}{\PYZob{}}\PY{n}{boosting\PYZus{}accuracy}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Время обучения модели: }\PY{l+s+si}{\PYZob{}}\PY{n}{boosting\PYZus{}time}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{ с.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Отчет классификации:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{boosting\PYZus{}report}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Точность модели: 0.927013422818792
+Время обучения модели: 2.545854330062866 с.
+Отчет классификации:
+                         precision    recall  f1-score   support
+
+    Anabas testudineus       1.00      1.00      1.00       157
+     Coilia dussumieri       1.00      1.00      1.00       124
+Otolithoides biauritus       0.70      0.66      0.68       138
+     Otolithoides pama       1.00      0.99      1.00       127
+     Pethia conchonius       1.00      1.00      1.00       134
+  Polynemus paradiseus       1.00      1.00      1.00       142
+  Puntius lateristriga       1.00      1.00      1.00       109
+        Setipinna taty       0.66      0.70      0.68       132
+ Sillaginopsis panijus       1.00      1.00      1.00       129
+
+              accuracy                           0.93      1192
+             macro avg       0.93      0.93      0.93      1192
+          weighted avg       0.93      0.93      0.93      1192
+
+    \end{Verbatim}
+
+    \hypertarget{ux432ux44bux432ux43eux434}{%
+\subsubsection*{\large Вывод}\label{ux432ux44bux432ux43eux434}}
+
+\textbf{Точность}: 92.70\%, немного ниже, чем у RandomForest
+(93.20--94.04\%) и BaggingClassifier (93.37\%).
+
+\textbf{Время обучения}: 2.44 с --- медленнее RandomForest без
+GridSearchCV (0.41 с), но быстрее GridSearchCV (7.99 с).
+
+Otolithoides biauritus (F1 = 0.68) и Setipinna taty (F1 = 0.68) остаются
+сложными для классификации.
+
+GradientBoostingClassifier показывает чуть худшие результаты для сложных
+классов, чем RandomForest с GridSearchCV (F1: 0.75/0.72 против
+0.68/0.68). Время обучения быстрее, чем у GridSearchCV, но уступает
+простому RandomForest.
+
+\clearpage
+
+    \hypertarget{catboost}{%
+\subsection{CatBoost}\label{catboost}}
+
+    
+
+    \textbf{CatBoost} (Categorical Boosting) --- это алгоритм машинного
+обучения, разработанный компанией «Яндекс». Он предназначен для работы с
+табличными данными и особенно эффективен в задачах, где важную роль
+играют категориальные признаки.
+
+Основные особенности CatBoost:
+
+\begin{itemize}
+\tightlist
+\item
+  Работа с категориальными признаками. Алгоритм обрабатывает
+  категориальные данные без необходимости в предварительном кодировании.
+\item
+  Обработка пропусков. Алгоритм автоматически обрабатывает пропущенные
+  значения, что уменьшает вероятность возникновения ошибок, связанных с
+  отсутствием данных.
+\item
+  Борьба с переобучением. CatBoost использует несколько методов для
+  предотвращения переобучения, включая мощную регуляцию и усреднение.
+\item
+  Скорость и производительность. В CatBoost реализованы оптимизации,
+  делающие обучение и предсказания более быстрыми по сравнению с
+  аналогами.
+\item
+  Стабильность и воспроизводимость. Алгоритм предлагает методы,
+  обеспечивающие стабильные результаты даже при изменении порядка
+  входных данных.
+\end{itemize}
+
+CatBoost используется для улучшения результатов поисковой системы
+«Яндекс», ранжирования персональной ленты рекомендаций, для расчёта
+прогноза погоды и в других интернет-сервисах компании «Яндекс».
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{91}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{o}{!}pip install catboost
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{92}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{catboost} \PY{k}{as} \PY{n+nn}{cb}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{93}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{model\PYZus{}catboots\PYZus{}clf} \PY{o}{=} \PY{n}{cb}\PY{o}{.}\PY{n}{CatBoostClassifier}\PY{p}{(}
+    \PY{n}{iterations}\PY{o}{=}\PY{l+m+mi}{3000}\PY{p}{,} \PY{n}{task\PYZus{}type}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GPU}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{devices}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{model\PYZus{}catboots\PYZus{}clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Learning rate set to 0.032018
+0:      learn: 1.9977331        total: 10.7ms   remaining: 32.1s
+1:      learn: 1.8410076        total: 19.7ms   remaining: 29.5s
+2:      learn: 1.7100641        total: 28.7ms   remaining: 28.6s
+3:      learn: 1.5983858        total: 39.3ms   remaining: 29.4s
+...
+2996:   learn: 0.0647717        total: 48.4s    remaining: 48.4ms
+2997:   learn: 0.0647642        total: 48.4s    remaining: 32.3ms
+2998:   learn: 0.0647601        total: 48.4s    remaining: 16.1ms
+2999:   learn: 0.0647578        total: 48.4s    remaining: 0us
+    \end{Verbatim}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{93}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+<catboost.core.CatBoostClassifier at 0x7d3d2622e830>
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{94}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{y\PYZus{}pred\PYZus{}boosting} \PY{o}{=} \PY{n}{model\PYZus{}catboots\PYZus{}clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+\PY{n}{boosting\PYZus{}accuracy} \PY{o}{=} \PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred\PYZus{}boosting}\PY{p}{)}
+\PY{n}{boosting\PYZus{}report} \PY{o}{=} \PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred\PYZus{}boosting}\PY{p}{)}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Точность модели: }\PY{l+s+si}{\PYZob{}}\PY{n}{boosting\PYZus{}accuracy}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Время обучения модели: }\PY{l+s+si}{\PYZob{}}\PY{n}{boosting\PYZus{}time}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{ с.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Отчет классификации:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{boosting\PYZus{}report}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Точность модели: 0.9303691275167785
+Время обучения модели: 2.545854330062866 с.
+Отчет классификации:
+                         precision    recall  f1-score   support
+
+    Anabas testudineus       1.00      1.00      1.00       157
+     Coilia dussumieri       1.00      1.00      1.00       124
+Otolithoides biauritus       0.72      0.65      0.68       138
+     Otolithoides pama       1.00      1.00      1.00       127
+     Pethia conchonius       1.00      1.00      1.00       134
+  Polynemus paradiseus       1.00      1.00      1.00       142
+  Puntius lateristriga       1.00      1.00      1.00       109
+        Setipinna taty       0.67      0.73      0.70       132
+ Sillaginopsis panijus       1.00      1.00      1.00       129
+
+              accuracy                           0.93      1192
+             macro avg       0.93      0.93      0.93      1192
+          weighted avg       0.93      0.93      0.93      1192
+
+    \end{Verbatim}
+
+    \hypertarget{ux432ux44bux432ux43eux434}{%
+\subsubsection*{\large Вывод}\label{ux432ux44bux432ux43eux434}}
+
+\textbf{Точность}: 93.04\%, сопоставима с RandomForest (93.20\%) и
+BaggingClassifier (93.37\%).
+
+\textbf{Время обучения}: 2.44 с, аналогично GradientBoostingClassifier.
+
+Проблемные классы: * Otolithoides biauritus: F1 = 0.68 (лучше, чем у
+GradientBoosting, но хуже, чем у RandomForest с GridSearchCV). *
+Setipinna taty: F1 = 0.70 (на уровне лучших моделей).
+
+CatBoost сохраняет высокую точность для большинства классов, уступая
+только RandomForest с GridSearchCV (94.04\%). Быстрее GridSearchCV, но
+точность на сложных классах немного ниже.
+
+
+\clearpage
+
+    \hypertarget{ux432ux44bux99999}{%
+\section*{\Large Общий вывод}\label{ux432ux44bux99999}}
+
+Общий вывод по всем моделям классификации:
+
+\textbf{\large Точность моделей}
+
+Все модели показывают высокую точность (92.70–94.04\%),
+что свидетельствует о хорошей предсказательной способности на данном датасете.
+
+Лучший результат показал RandomForest с GridSearchCV --- 94.04\%,
+особенно для сложных классов.
+
+Остальные модели:
+
+\begin{itemize}
+	\item BaggingClassifier (93.37\%)
+	\item RandomForest (93.20\%)
+	\item CatBoost (93.04\%)
+	\item GradientBoostingClassifier (92.70\%)
+\end{itemize}
+
+\textbf{\large Проблемные классы}
+
+Классы Otolithoides biauritus и Setipinna taty
+остаются проблемными для всех моделей:
+
+Лучший F1 для Otolithoides biauritus (0.75) и Setipinna taty (0.72)
+достигнут с помощью RandomForest + GridSearchCV.
+Для остальных моделей F1-оценки варьируются в пределах 0.68–0.70.
+
+\textbf{\large Время обучения}
+
+Самая быстрая модель: RandomForest без GridSearchCV (0.41 с).
+BaggingClassifier и CatBoost демонстрируют разумное время (1.19 с и 2.44 с).
+GridSearchCV значительно увеличивает время обучения (7.99 с).
+
+\textbf{\large Заключение}
+
+RandomForest с GridSearchCV --- наиболее точный вариант.
+Однако, для задач, где критична скорость обучения,
+CatBoost или простой RandomForest являются отличным выбором.
+    
+\end{document}
+
