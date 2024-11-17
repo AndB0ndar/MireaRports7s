@@ -166,6 +166,8 @@
 \usepackage{etoolbox} % Header separator on a new page
 \usepackage{needspace} % Parameter to prevent a gap between the title and the next paragraph
 
+\setcounter{secnumdepth}{3}  % Set numbering to subsubsecton
+
 \titleformat{\chapter}[block]
   {\bfseries\fontsize{18pt}{20pt}\selectfont} % Bold, size 18pt
   {\thechapter}{1em}{\MakeUppercase} % numbering, indentation and uppercase 
@@ -199,10 +201,10 @@
 
 % Prevent title and text breaks
 % Do not break off the title from the following text
-\preto\chapter{\needspace{5\baselineskip}}
-\preto\section{\needspace{5\baselineskip}}
-\preto\subsection{\needspace{5\baselineskip}}
-\preto\subsubsection{\needspace{5\baselineskip}}
+\preto\chapter{\needspace{3\baselineskip}}
+\preto\section{\needspace{3\baselineskip}}
+\preto\subsection{\needspace{3\baselineskip}}
+\preto\subsubsection{\needspace{3\baselineskip}}
 
 % ----------------------------------------------------------------------------
 % TABLE OF CONTENTS
@@ -301,11 +303,10 @@
 	\section*{\textbf{\thesubsubsection} \raggedright #1}
 }
 
-
-%\usepackage{totcount}
-%\regtotcounter{appendixcounter} 
+\usepackage{totcount}
+\newtotcounter{appendixcount}
 \newcommand{\appendixitem}[1]{
-	%\refstepcounter{appendixcounter}
+	\stepcounter{appendixcount}
     \appendixname~\ref{chap:#1} --- #1 \par
 }
 
