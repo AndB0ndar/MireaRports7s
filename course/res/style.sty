@@ -128,7 +128,8 @@
     colorlinks=true,
     linkcolor=black,
     filecolor=magenta,      
-    urlcolor=blue,
+	%urlcolor=blue,
+	urlcolor=black,
 }
 
 % ----------------------------------------------------------------------------
@@ -292,15 +293,21 @@
 }
 \newcommand\asection[1]{
 	\refstepcounter{section}
+    \renewcommand{\thechapter}{\arabic{chapter}}
 	\section*{\textbf{\thesection} \raggedright #1}
+    \renewcommand{\thechapter}{\Asbuk{chapter}}
 }
 \newcommand\asubsection[1]{
 	\refstepcounter{subsection}
+    \renewcommand{\thechapter}{\arabic{chapter}}
 	\section*{\textbf{\thesubsection} \raggedright #1}
+    \renewcommand{\thechapter}{\Asbuk{chapter}}
 }
 \newcommand\asubsubsection[1]{
 	\refstepcounter{subsubsection}
+    \renewcommand{\thechapter}{\arabic{chapter}}
 	\section*{\textbf{\thesubsubsection} \raggedright #1}
+    \renewcommand{\thechapter}{\Asbuk{chapter}}
 }
 
 \usepackage{totcount}
